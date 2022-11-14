@@ -4,10 +4,11 @@ import { Input } from './components/Input/Input';
 import { FilterButton } from './components/FilterButton/FilterButton';
 import { DateButton } from './components/DateButton/DateButton';
 import { Task } from './components/Task/Task';
+import './globalStyles/styles.css';
 
-function App() {
+function ToDoList() {
 	return (
-		<div className="App">
+		<div className="to_do_list">
 			<Heading/>
 			<Input/>
 			<FilterButton/>
@@ -17,4 +18,4 @@ function App() {
 	);
 }
 
-export default App;
+export default ToDoList;

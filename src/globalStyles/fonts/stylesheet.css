@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'SairaCondensedMedium';
+    src: url('SairaCondensed-Medium.eot');
+    src: url('SairaCondensed-Medium.eot?#iefix') format('embedded-opentype'),
+        url('SairaCondensed-Medium.woff2') format('woff2'),
+        url('SairaCondensed-Medium.woff') format('woff'),
+        url('SairaCondensed-Medium.ttf') format('truetype'),
+        url('SairaCondensed-Medium.svg#SairaCondensed-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SairaCondensedRegular';
+    src: url('SairaCondensed-Regular.eot');
+    src: url('SairaCondensed-Regular.eot?#iefix') format('embedded-opentype'),
+        url('SairaCondensed-Regular.woff2') format('woff2'),
+        url('SairaCondensed-Regular.woff') format('woff'),
+        url('SairaCondensed-Regular.ttf') format('truetype'),
+        url('SairaCondensed-Regular.svg#SairaCondensed-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SairaCondensedBlack';
+    src: url('SairaCondensed-Black.eot');
+    src: url('SairaCondensed-Black.eot?#iefix') format('embedded-opentype'),
+        url('SairaCondensed-Black.woff2') format('woff2'),
+        url('SairaCondensed-Black.woff') format('woff'),
+        url('SairaCondensed-Black.ttf') format('truetype'),
+        url('SairaCondensed-Black.svg#SairaCondensed-Black') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SairaCondensedBold';
+    src: url('SairaCondensed-Bold.eot');
+    src: url('SairaCondensed-Bold.eot?#iefix') format('embedded-opentype'),
+        url('SairaCondensed-Bold.woff2') format('woff2'),
+        url('SairaCondensed-Bold.woff') format('woff'),
+        url('SairaCondensed-Bold.ttf') format('truetype'),
+        url('SairaCondensed-Bold.svg#SairaCondensed-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SairaCondensedLight';
+    src: url('SairaCondensed-Light.eot');
+    src: url('SairaCondensed-Light.eot?#iefix') format('embedded-opentype'),
+        url('SairaCondensed-Light.woff2') format('woff2'),
+        url('SairaCondensed-Light.woff') format('woff'),
+        url('SairaCondensed-Light.ttf') format('truetype'),
+        url('SairaCondensed-Light.svg#SairaCondensed-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+

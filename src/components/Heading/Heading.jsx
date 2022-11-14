@@ -1,5 +1,5 @@
 import React from 'react';
 
 export const Heading = () => {
-	return <div>Heading</div>;
+	return <h1>ToDo List</h1>;
 };
