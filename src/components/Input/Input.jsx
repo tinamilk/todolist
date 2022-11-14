@@ -1,5 +1,6 @@
 import React from 'react';
+import './Input.css';
 
 export const Input = () => {
-	return <div>Input</div>;
+	return <input className='input' placeholder='I want to...'/>;
 };
