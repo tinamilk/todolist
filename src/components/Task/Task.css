@@ -1,0 +1,48 @@
+.task {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70%;
+    height: 40px;
+    border: 2px solid #115055;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 20px;
+    margin: 10px;
+}
+
+.checkbox {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #D36A5F;
+    border-radius: 5px;
+}
+
+.checked_icon, .delete_icon {
+    width: 30px;
+    height: 30px;
+}
+
+.task_data {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.title, .date {
+    margin: auto 0;
+}
+
+.delete_button {
+    border: 2px solid #115055;
+    border-radius: 5px;
+    padding: 0;
+    margin: 0;
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+}
+
+.delete_button:hover {
+    background-color: #D36A5F;
+}

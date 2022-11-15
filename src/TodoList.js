@@ -5,6 +5,7 @@ import { FilterButton } from './components/FilterButton/FilterButton';
 import { DateButton } from './components/DateButton/DateButton';
 import { Task } from './components/Task/Task';
 import './globalStyles/styles.css';
+import { tasks } from './tasks';
 
 function ToDoList() {
 	return (
@@ -13,7 +14,7 @@ function ToDoList() {
 			<Input/>
 			<FilterButton/>
 			<DateButton/>
-			<Task/>
+			{tasks.map((task, index) => <Task key={index} title={task}/>)}
 		</div>
 	);
 }

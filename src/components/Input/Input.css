@@ -1,4 +1,4 @@
-.input {
+.search_input {
     width: 70%;
     height: 40px;
     border: 2px solid #197278;
@@ -7,10 +7,9 @@
     padding: 10px;
 }
 
-input.input:focus {
-    border: 2px solid #115055;
+.search_input:focus {
+    outline-color: #283D3B;
 }
-
-input.input::placeholder {
+input.search_input::placeholder {
     padding: 5px;
 }
