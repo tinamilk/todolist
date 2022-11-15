@@ -1,0 +1,25 @@
+.page_pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 60%
+}
+
+.page_number {
+    font-family: 'SairaCondensedBold', sans-serif;
+    font-size: 20px;
+    margin: auto;
+    color: #1B8188;
+    cursor: pointer;
+}
+
+.prev_button, .next_button {
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    cursor: pointer;
+}
+
+.prev_button:hover, .next_button:hover, .page_number:hover {
+    opacity: 0.8;
+}

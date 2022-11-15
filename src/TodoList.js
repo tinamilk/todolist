@@ -6,6 +6,7 @@ import { DateButton } from './components/DateButton/DateButton';
 import { Task } from './components/Task/Task';
 import './globalStyles/styles.css';
 import { tasks } from './tasks';
+import { PagePagination } from './components/PagePagination/PagePagination';
 
 function ToDoList() {
 	return (
@@ -17,6 +18,7 @@ function ToDoList() {
 				<DateButton/>
 			</div>
 			{tasks.map((task, index) => <Task key={index} title={task}/>)}
+			<PagePagination pages={5}/>
 		</div>
 	);
 }
