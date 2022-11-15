@@ -1,3 +1,7 @@
 .tasks {
-    width: 75%;
+    width: 70%;
+}
+
+.empty-message {
+    text-align: center;
 }
