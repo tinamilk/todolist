@@ -27,7 +27,7 @@
     }
 }
 
-.filter_button {
+.filter_buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

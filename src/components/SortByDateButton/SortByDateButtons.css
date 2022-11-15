@@ -1,26 +1,26 @@
 @media screen and (max-width: 1200px) {
-    .date_button_title {
+    .date-button-title {
         font-size: 15px;
     }
-    .up_icon, .down_icon {
+    .up-icon, .down-icon {
         width: 30px;
         height: 30px;
     }
 }
 @media screen and (min-width: 1201px) {
-    .date_button_title {
+    .date-button-title {
         font-size: 20px;
     }
-    .up_icon, .down_icon {
+    .up-icon, .down-icon {
         width: 40px;
         height: 40px;
     }
 }
 @media screen and (max-width: 900px) {
-    .date_button_title {
+    .date-button-title {
         font-size: 12px;
     }
-    .up_icon, .down_icon {
+    .up-icon, .down-icon {
         width: 20px;
         height: 20px;
         margin: auto 0;
@@ -28,28 +28,27 @@
 }
 
 @media screen and (max-width: 500px) {
-    .date_button {
+    .date-button {
         width: 100%;
     }
 }
 
 @media screen and (min-width: 501px) {
-    .date_button {
+    .date-button {
         width: 35%;
     }
 }
-.date_button {
+.date-buttons {
     display: flex;
     flex-direction: row;
-    /* width: 35%; */
     font-family: 'SairaCondensedBold', sans-serif;
 }
 
-.date_button_title {
+.date-button-title {
     margin: auto 0;
     color: #283D3B;
 }
 
-.up_icon:hover, .down_icon:hover {
+.up-icon:hover, .down-icon:hover {
     opacity: 0.7;
 }

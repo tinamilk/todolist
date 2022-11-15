@@ -7,12 +7,17 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #EDDDD4;
-    font-family: 'Regular', sans-serif;
+    font-family: 'SairaCondensedRegular', sans-serif;
 }
 
 h1 {
     font-family: 'SairaCondensedBold', sans-serif;
     color: #283D3B;
+}
+
+button {
+    background: none;
+    border: none
 }
 
 .to_do_list {
