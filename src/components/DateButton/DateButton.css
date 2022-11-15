@@ -1,0 +1,18 @@
+.date_button {
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+}
+
+.date_button_title {
+    margin: auto 0;
+    color: #283D3B;
+}
+
+.up_icon, .down_icon {
+    width: 40px;
+    height: 40px;
+}
+.up_icon:hover, .down_icon:hover {
+    opacity: 0.7;
+}

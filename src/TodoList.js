@@ -12,8 +12,10 @@ function ToDoList() {
 		<div className="to_do_list">
 			<Heading/>
 			<Input/>
-			<FilterButton/>
-			<DateButton/>
+			<div className='filter_buttons'>
+				<FilterButton/>
+				<DateButton/>
+			</div>
 			{tasks.map((task, index) => <Task key={index} title={task}/>)}
 		</div>
 	);

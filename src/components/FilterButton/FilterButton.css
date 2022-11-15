@@ -1,0 +1,19 @@
+.filter_button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 40%;
+}
+
+.all_filter, .done_filter, .undone_filter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #283D3B;
+    width: 30%;
+    font-size: 18px;
+    border: 2px solid #D36A5F;
+    border-radius: 5px;
+    cursor: pointer;
+}
