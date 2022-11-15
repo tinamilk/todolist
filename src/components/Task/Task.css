@@ -1,30 +1,62 @@
+@media screen and (max-width: 1000px) {
+    .task {
+        height: 20px;
+        font-size: 15px;
+    }
+    .checkbox, .delete_button {
+        width: 15px;
+        height: 15px;
+        margin: 0 5px;
+    }
+    .checked_icon, .delete_icon {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+@media screen and (min-width: 1001px) {
+    .task {
+        height: 40px;
+        font-size: 20px;
+    }
+    .checkbox, .delete_button {
+        width: 30px;
+        height: 30px;
+    }
+    .checked_icon, .delete_icon {
+        width: 30px;
+        height: 30px;
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .task {
+        font-size: 12px;
+    }
+    .checkbox, .delete_button {
+        margin: 0 5px;
+    }
+}
+
 .task {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 70%;
-    height: 40px;
     border: 2px solid #115055;
     border-radius: 20px;
     padding: 10px;
-    font-size: 20px;
     margin: 10px;
 }
 
 .checkbox {
-    width: 30px;
-    height: 30px;
     border: 2px solid #D36A5F;
     border-radius: 5px;
 }
 
 .checkbox:hover, .checkbox.checked {
     background-color: #F3E8E2;
-}
-
-.checked_icon, .delete_icon {
-    width: 30px;
-    height: 30px;
 }
 
 .task_data {
@@ -41,9 +73,6 @@
     border: 2px solid #115055;
     border-radius: 5px;
     padding: 0;
-    margin: 0;
-    width: 30px;
-    height: 30px;
     background-color: #fff;
 }
 
