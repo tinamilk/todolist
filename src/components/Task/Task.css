@@ -18,6 +18,10 @@
     border-radius: 5px;
 }
 
+.checkbox:hover, .checkbox.checked {
+    background-color: #F3E8E2;
+}
+
 .checked_icon, .delete_icon {
     width: 30px;
     height: 30px;
