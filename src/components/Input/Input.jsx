@@ -2,6 +2,7 @@ import React from 'react';
 import './Input.css';
 import { addTask } from '../../store/tasksSlice';
 import { useDispatch } from 'react-redux';
+import uuid from 'react-uuid';
 
 
 export const Input = () => {
@@ -10,7 +11,15 @@ export const Input = () => {
 
 	const handleAddTask = (e) => {
 		if (e.target.value) {
-			dispatch(addTask(e.target.value));
+
+			const taskData = {
+				id: uuid(),
+				title: e.target.value,
+				date: new Date(),
+				isDone: false
+			};
+
+			dispatch(addTask(taskData));
 			e.target.value = null;
 		}
 	};

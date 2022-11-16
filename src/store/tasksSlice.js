@@ -10,7 +10,8 @@ export const tasksSlice = createSlice({
 			state.push(action.payload);
 		},
 		removeTask: (state, action) => {
-			state.splice(state.indexOf(action.payload), 1);
+			state
+				.splice(state.findIndex(task=>task.id===action.payload), 1);
 		}
 	},
 });

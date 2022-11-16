@@ -5,7 +5,7 @@ import './Task.css';
 import { useDispatch } from 'react-redux';
 import { removeTask } from '../../store/tasksSlice';
 
-export const Task = ({title}) => {
+export const Task = ({title, id}) => {
 
 	const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ export const Task = ({title}) => {
 			<p className='date'>01/02/2022</p>
 		</div>
 		<div className='delete_button'
-			onClick={()=>dispatch(removeTask(title))}
+			onClick={()=>dispatch(removeTask(id))}
 		>
 			<img className='delete_icon' srcSet={delete_icon}/>
 		</div>

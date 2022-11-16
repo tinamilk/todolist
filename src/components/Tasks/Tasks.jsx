@@ -19,7 +19,7 @@ export const Tasks = () => {
 	return <div className='tasks'>
 		{Object.keys(sortedTasks).length !== 0 ? 
 			sortedTasks[currentPage]
-				.map((task, index) => <Task key = {index} title={task}/>) 
+				.map(task=> <Task key = {task.id} title={task.title} id={task.id}/>) 
 			: <h3 className='empty-message'>Add some task :)</h3>}
 	</div>;
 };
