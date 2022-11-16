@@ -1,5 +1,6 @@
 .tasks {
     width: 70%;
+    min-height: 50%;
 }
 
 .empty-message {

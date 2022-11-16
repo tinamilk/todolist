@@ -2,15 +2,19 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: 60%
+    margin-top: 5vh;
 }
 
-.page_number {
+.page-number {
     font-family: 'SairaCondensedBold', sans-serif;
     font-size: 20px;
     margin: auto;
     color: #1B8188;
     cursor: pointer;
+}
+
+.page-number.active {
+    color: #283D3B
 }
 
 .prev_button, .next_button {

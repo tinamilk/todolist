@@ -33,8 +33,11 @@ export const PagePagination = ({tasks}) => {
 		/>
 
 		{pages.length ? pages.map(page => {
+
+			const pageClassName = page === currentPage ?
+				'page-number active' : 'page-number';
 			return <button
-				className='page-number'
+				className={pageClassName}
 				key={page}
 				onClick={()=>handleChangePage(page)}
 			>
