@@ -21,9 +21,6 @@ export const splitTasks = (unsortedTasks) => {
 		}
 	});
 
-	console.log(unsortedTasks);
-	console.log(splitedTasks);
-
 	return splitedTasks;
 	
 };

@@ -8,9 +8,9 @@ export const Tasks = () => {
 
 	const tasks = useSelector((state) => state.tasks);
 	const currentPage = useSelector((state) => state.page.currentPage);
-	let sortedTasks = splitTasks(tasks);
+	const sortedTasks = tasks.length ? splitTasks(tasks) : [];
 
-
+	console.log(tasks);
 	console.log(sortedTasks[currentPage]);
 
 	return <div className='tasks'>

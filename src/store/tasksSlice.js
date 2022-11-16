@@ -11,7 +11,7 @@ export const tasksSlice = createSlice({
 		},
 		removeTask: (state, action) => {
 			state
-				.splice(state.findIndex(task=>task.id===action.payload), 1);
+				.splice(state.findIndex(task => task.id === action.payload), 1);
 		},
 	},
 });
