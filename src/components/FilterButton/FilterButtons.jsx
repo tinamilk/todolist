@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector  } from 'react-redux';
 import './FilterButtons.css';
+import { filters, filterTasks  } from './filterTasks';
 
+export const FilterButtons = ({setFilter}) => {
+	const tasks = useSelector((state) => state.tasks);
+	const [filter, setFilterr] = useState(filters.ALL);
 
-const filtersObj = {
-	ALL: 'all', 
-	DONE: 'done',
-	UNDONE: 'undone'
-};
+	useEffect(()=> {
+		const filtered = filterTasks(tasks, filter);
+		console.log(filtered);
+		setFilter(filtered);
+	}, [filter, tasks]);
 
-export const FilterButtons = () => {
-
-	const [filter, setFilter] = useState(filtersObj.ALL);
-
-	const handleFilterChange = (filter) => {
-		setFilter(filter);
-	};
+	function handleFilterChange(filter) {
+		setFilterr(filter);
+	}
 
 
 	return <div className='filter_buttons'>
-		{Object.values(filtersObj).map((currentFilter, index) => {
+		{Object.values(filters).map((currentFilter, index) => {
 
 			const filterClassName = filter === currentFilter ?
 				'current_filter active' :
