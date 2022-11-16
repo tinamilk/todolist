@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = [];
 
+
 export const tasksSlice = createSlice({
 	name: 'tasks',
 	initialState,
@@ -13,9 +14,15 @@ export const tasksSlice = createSlice({
 			state
 				.splice(state.findIndex(task => task.id === action.payload), 1);
 		},
+		sortTasksByDateNew: (state) => {
+			state.sort((a, b) => b.date - a.date);
+		},
+		sortTasksByDateOld: (state) => {
+			state.sort((a, b) => a.date - b.date);
+		}
 	},
 });
 
-export const { addTask, removeTask } = tasksSlice.actions;
+export const { addTask, removeTask, sortTasksByDateNew,  sortTasksByDateOld} = tasksSlice.actions;
 
 export default tasksSlice.reducer;
