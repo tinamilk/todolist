@@ -9,8 +9,10 @@ export const Input = () => {
 	const dispatch = useDispatch();
 
 	const handleAddTask = (e) => {
-		dispatch(addTask(e.target.value));
-		e.target.value = null;
+		if (e.target.value) {
+			dispatch(addTask(e.target.value));
+			e.target.value = null;
+		}
 	};
 
 	return <input

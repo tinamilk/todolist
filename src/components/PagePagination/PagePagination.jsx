@@ -10,12 +10,9 @@ export const PagePagination = () => {
 	const tasks = useSelector((state) => state.tasks);
 	const dispatch = useDispatch();
 	const lastPageNumber = Math.ceil(tasks.length / 5);
-	console.log(tasks);
-	console.log(tasks.length / 5);
 	const pages = [];
 
 	const handleChangePage = (page) => {
-		console.log(page);
 		dispatch(setPage(page));
 	};
 
