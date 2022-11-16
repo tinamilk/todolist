@@ -28,7 +28,9 @@ function ToDoList() {
 				<SortByDateButtons/>
 			</div>
 			<Tasks filtered = {filteredTasks}/>
-			<PagePagination pages={5}/>
+
+			{filteredTasks.length ? <PagePagination tasks={filteredTasks}/> : <></>}
+
 		</div>
 	);
 }
