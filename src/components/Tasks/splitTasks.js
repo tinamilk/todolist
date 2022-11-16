@@ -1,24 +1,28 @@
-const splitedTasks = [];
+const splitedTasks = {};
 
 export const splitTasks = (unsortedTasks) => {
 
-	let counter = 0;
-	let page = 0;
+	let counter = 1;
+	let page = 1;
  
 	unsortedTasks.forEach(task => {
 
-		if (counter === 0) {
+		if (counter === 1) {
 			splitedTasks[page] = [];
+			console.log(splitedTasks[page]);
 		}
 
 		splitedTasks[page].push(task);
 		counter++;
 
-		if (counter === 5) {
+		if (counter === 6) {
 			page++;
-			counter = 0;
+			counter = 1;
 		}
 	});
+
+	console.log(unsortedTasks);
+	console.log(splitedTasks);
 
 	return splitedTasks;
 	
