@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector  } from 'react-redux';
 import { Task } from '../Task/Task';
 import './Tasks.css';
@@ -10,16 +10,13 @@ export const Tasks = () => {
 	const currentPage = useSelector((state) => state.page.currentPage);
 	let sortedTasks = splitTasks(tasks);
 
-	useEffect(() => {
-		sortedTasks = splitTasks(tasks);
-	},[]);
 
 	console.log(sortedTasks[currentPage]);
 
 	return <div className='tasks'>
 		{Object.keys(sortedTasks).length !== 0 ? 
 			sortedTasks[currentPage]
-				.map(task=> <Task key = {task.id} title={task.title} id={task.id}/>) 
+				.map(task=> <Task key = {task.id} id={task.id} title={task.title} isDone={task.isDone}/>) 
 			: <h3 className='empty-message'>Add some task :)</h3>}
 	</div>;
 };

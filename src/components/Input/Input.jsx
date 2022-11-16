@@ -12,10 +12,12 @@ export const Input = () => {
 	const handleAddTask = (e) => {
 		if (e.target.value) {
 
+			const now = new Date();
+
 			const taskData = {
 				id: uuid(),
 				title: e.target.value,
-				date: new Date(),
+				date: now.getTime(),
 				isDone: false
 			};
 
