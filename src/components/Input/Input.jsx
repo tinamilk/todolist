@@ -1,6 +1,6 @@
 import React from 'react';
 import './Input.css';
-import { addTask } from '../../store/tasksSlice';
+import { addTask } from '../../store/tasks/tasksSlice';
 import { useDispatch } from 'react-redux';
 import uuid from 'react-uuid';
 
@@ -27,7 +27,7 @@ export const Input = () => {
 	};
 
 	return <input
-		className='search_input'
+		className='search-input'
 		placeholder='I want to...'
 		onKeyPress={(e) => e.key === 'Enter' && handleAddTask(e)}
 	/>;

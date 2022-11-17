@@ -7,11 +7,11 @@
 
 @media screen and (min-width: 1001px) {
 
-    .checkbox, .delete_button {
+    .checkbox, .delete-button {
         width: 30px;
         height: 30px;
     }
-    .checked_icon, .delete_icon {
+    .checked_icon, .delete-icon {
         width: 30px;
         height: 30px;
         margin: 0;
@@ -32,12 +32,12 @@
         min-height: 20px;
         font-size: 10px;
     }
-    .checkbox, .delete_button {
+    .checkbox, .delete-button {
         width: 15px;
         height: 15px;
         margin: 0 5px;
     }
-    .checked_icon, .delete_icon {
+    .checked_icon, .delete-icon {
         width: 15px;
         height: 15px;
     }
@@ -51,7 +51,7 @@
     .task {
         font-size: 10px;
     }
-    .checkbox, .delete_button {
+    .checkbox, .delete-button {
         margin: 0 5px;
     }
     .date {
@@ -103,13 +103,13 @@
     word-wrap: normal;
 }
 
-.delete_button {
+.delete-button {
     border: 2px solid #115055;
     border-radius: 5px;
     padding: 0;
     background-color: #fff;
 }
 
-.delete_button:hover {
+.delete-button:hover {
     background-color: #D36A5F;
 }

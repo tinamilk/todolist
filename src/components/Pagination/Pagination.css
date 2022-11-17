@@ -1,4 +1,4 @@
-.page_pagination {
+.page-pagination {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -17,13 +17,13 @@
     color: #283D3B
 }
 
-.prev_button, .next_button {
+.prev-button, .next_button {
     width: 20px;
     height: 20px;
     margin: auto;
     cursor: pointer;
 }
 
-.prev_button:hover, .next_button:hover, .page_number:hover {
+.prev-button:hover, .next-button:hover, .page-number:hover {
     opacity: 0.8;
 }

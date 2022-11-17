@@ -5,7 +5,7 @@ import { FilterButtons } from './components/FilterButton/FilterButtons';
 import { SortByDateButtons } from './components/SortByDateButton/SortByDateButtons';
 import { Tasks } from './components/Tasks/Tasks';
 import './globalStyles/styles.css';
-import { PagePagination } from './components/PagePagination/PagePagination';
+import { Pagination } from './components/Pagination/Pagination';
 import { useSelector } from 'react-redux';
 
 
@@ -27,7 +27,7 @@ function ToDoList() {
 			</div>
 			<Tasks filtered = {filteredTasks} unfiltered = {tasks}/>
 
-			{filteredTasks.length ? <PagePagination tasks={filteredTasks}/> : <></>}
+			{filteredTasks.length ? <Pagination tasks={filteredTasks}/> : <></>}
 
 		</div>
 	);

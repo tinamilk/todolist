@@ -1,12 +1,11 @@
-/* eslint-disable no-undef */
 import React from 'react';
-import './PagePagination.css';
-import next from './img/next_icon.svg';
-import prev from './img/prev_icon.svg';
+import './Pagination.css';
+import next from '../../assets/img/next_icon.svg';
+import prev from '../../assets/img/prev_icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPage } from '../../store/pageSlice';
+import { setPage } from '../../store/page/pageSlice';
 
-export const PagePagination = ({tasks}) => {
+export const Pagination = ({tasks}) => {
 
 	const dispatch = useDispatch();
 	const currentPage = useSelector((state) => state.page.currentPage);
@@ -25,7 +24,7 @@ export const PagePagination = ({tasks}) => {
 	}
 
 
-	return <div className='page_pagination'>
+	return <div className='page-pagination'>
 		<img
 			srcSet={prev}
 			className='prev_button'
@@ -47,7 +46,7 @@ export const PagePagination = ({tasks}) => {
 
 		<img
 			srcSet={next}
-			className='next_button'
+			className='next-button'
 			onClick={()=>handleChangePage(currentPage+1)}
 		/>
 	</div>;

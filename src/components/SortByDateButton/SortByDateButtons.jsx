@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './SortByDateButtons.css';
-import down from './img/arrow_down.svg';
-import up from './img/arrow_up.svg';
+import down from '../../assets/img/arrow_down.svg';
+import up from '../../assets/img/arrow_up.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { sortTasksByDateNew, sortTasksByDateOld  } from '../../store/tasksSlice';
+import { sortTasksByDateNew, sortTasksByDateOld  } from '../../store/tasks/tasksSlice';
 
 
 export const SortByDateButtons = () => {

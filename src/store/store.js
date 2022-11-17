@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import tasksSlice from './tasksSlice';
-import  pageSlice  from './pageSlice';
+import tasksSlice from './tasks/tasksSlice';
+import  pageSlice  from './page/pageSlice';
 
 export const store = configureStore({
 	reducer: {
