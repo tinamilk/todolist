@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import { useSelector  } from 'react-redux';
 import { Task } from '../Task/Task';
 import './Tasks.css';
@@ -8,11 +8,13 @@ export const Tasks = () => {
 
 	const currentPage = useSelector((state) => state.page.currentPage);
 	const unfiltered = useSelector((state) => state.tasks);
-	const filter = useSelector((state) => state.filter);
-	const sortedTasks = filter.filtered.length ? splitTasks(filter.filtered) : [];
+	const filter = useSelector((state) => state.filter.filtered);
+	let sortedTasks = filter.length ? splitTasks(filter) : [];
 
-	console.log(filter);
-
+	useEffect(() => {
+		sortedTasks = filter.length ? splitTasks(filter) : [];
+		console.log('kek');
+	}, [unfiltered]);
 	return <div className='tasks'>
 		{sortedTasks.length !== 0 ? 
 			sortedTasks[currentPage]

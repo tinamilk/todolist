@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState =  {
-	filtered: []
+	filtered: [],
+	currentFilter: 'ALL'
 };
 
 export const filterSlice = createSlice({
@@ -10,12 +11,15 @@ export const filterSlice = createSlice({
 	reducers: {
 		setAll: (state, action) => {
 			state.filtered = action.payload;
+			state.currentFilter = 'ALL';
 		},
 		setDone: (state, action) => {
 			state.filtered = action.payload.filter(task => task.isDone === true);
+			state.currentFilter = 'DONE';
 		},
 		setUndone: (state, action) => {
 			state.filtered = action.payload.filter(task => task.isDone === false);
+			state.currentFilter = 'UNDONE';
 		},
 
 	},

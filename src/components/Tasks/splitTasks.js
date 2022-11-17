@@ -9,7 +9,6 @@ export const splitTasks = (unsortedTasks) => {
 
 		if (counter === 1) {
 			splitedTasks[page] = [];
-			console.log(splitedTasks[page]);
 		}
 
 		splitedTasks[page].push(task);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import './FilterButtons.css';
 import { filters, filterTasks  } from './filterTasks';
@@ -8,13 +8,13 @@ import { setAll, setDone, setUndone} from '../../store/filter/filterSlice';
 export const FilterButtons = () => {
 
 	const tasks = useSelector((state) => state.tasks);
-	const [filter, setFilter] = useState(filters.ALL); //
+	const [filter, setFilter] = useState(filters.ALL);
 
 	const dispatch = useDispatch();
 
-	const isDisabled = (condition) => { // искать по индексу
+	const setIsDisabled = (condition) => {
 		const filtered = filterTasks(tasks, condition);
-		return filtered.length === 0;
+		return !filtered[0];
 	};
 
 	useEffect(()=> {
@@ -43,7 +43,7 @@ export const FilterButtons = () => {
 			break;
 		}
 
-		if (isDisabled(filter)) { //
+		if (setIsDisabled(filter)) {
 			setFilter(filters.ALL);
 		}
 
@@ -54,7 +54,7 @@ export const FilterButtons = () => {
 
 		{Object.values(filters).map((currentFilter, index) => {
 
-			const isButtonDisabled = isDisabled(currentFilter);
+			const isButtonDisabled = setIsDisabled(currentFilter);
 
 			const disabledClassName = isButtonDisabled ? ' disabled' : '';
 

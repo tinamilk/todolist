@@ -31,9 +31,11 @@ export const Input = () => {
 			isDone: false
 		};
 
-		dispatch(addTask(taskData));
-		dispatch(setAll(tasks));
-		setInputValue('');
+		if (inputValue) {
+			dispatch(addTask(taskData));
+			dispatch(setAll(tasks));
+			setInputValue('');
+		}
 
 	};
 

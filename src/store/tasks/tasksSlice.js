@@ -20,9 +20,8 @@ export const tasksSlice = createSlice({
 			state.sort((a, b) => a.date - b.date);
 		},
 		setIsDone: (state, action) => {
-			state[state.findIndex(task => task.id === action.payload)].isDone = 
-				state[state.findIndex(task => task.id === action.payload)].isDone ?
-					false : true; //
+			const index = state.findIndex(task => task.id === action.payload);
+			state[index].isDone = state[index].isDone ? false : true; 
 		}
 	},
 });
