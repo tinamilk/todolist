@@ -5,7 +5,7 @@ import up from '../../assets/img/arrow_up.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { sortTasksByDateNew, sortTasksByDateOld  } from '../../store/tasks/tasksSlice';
 
-// eslint-disable-next-line no-unused-vars
+
 const sortingValues = {
 	UP: 'up',
 	DOWN: 'down'
@@ -27,9 +27,9 @@ export const SortByDateButtons = () => {
 		setSorting(sortingValues.DOWN);
 	};
 
-	const isActiveClassName = (cond) => { // usememo
+	const isActiveClassName = (condition) => { 
 
-		return tasks.length <= 1 ? ' disabled' : cond === sorting ? ' disabled' : '';
+		return tasks.length <= 1 ? ' disabled' : condition === sorting ? ' disabled' : '';
 	};
 
 	return <div className='date-buttons'>
