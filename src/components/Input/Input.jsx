@@ -44,6 +44,7 @@ export const Input = () => {
 		placeholder='I want to...'
 		onKeyDown={(e) => e.key === 'Enter' && handleAddTask()}
 		onChange={(e) => handleAddTitle(e)}
+		maxLength={60}
 		value={inputValue}
 	/>;
 };
