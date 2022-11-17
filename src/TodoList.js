@@ -20,10 +20,10 @@ function ToDoList() {
 	};
 
 	return (
-		<div className="to_do_list">
+		<div className="to-do-list">
 			<Heading/>
 			<Input/>
-			<div className='filter_buttons'>
+			<div className='buttons'>
 				<FilterButtons setFilter={handleFiltered} />
 				<SortByDateButtons/>
 			</div>

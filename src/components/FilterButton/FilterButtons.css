@@ -5,35 +5,36 @@
 }
 
 @media screen and (max-width: 990px) {
-    .current_filter {
+    .current-filter {
         height: 28px;
+        /* width: 30%; */
     }
 }
 
 @media screen and (min-width: 1101px) {
-    .current_filter {
+    .current-filter {
         font-size: 18px;
     }
 }
-@media screen and (max-width: 500px) {
-    .filter_button  {
+@media screen and (max-width: 700px) {
+    .filter-buttons  {
         width: 100%;
     }
 }
 
-@media screen and (min-width: 501px) {
-    .filter_button  {
+@media screen and (min-width: 701px) {
+    .filter-buttons  {
         width: 60%;
     }
 }
 
-.filter_buttons {
+.filter-buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.current_filter {
+.current-filter {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,10 +46,10 @@
     cursor: pointer;
 }
 
-.current_filter:hover {
+.current-filter:hover {
     opacity: 0.8;
 }
 
-.current_filter.active {
+.current-filter.active {
     background-color: #F3E8E2;
 }

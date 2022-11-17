@@ -18,12 +18,12 @@ export const FilterButtons = ({setFilter}) => {
 	}
 
 
-	return <div className='filter_buttons'>
+	return <div className='filter-buttons'>
 		{Object.values(filters).map((currentFilter, index) => {
 
 			const filterClassName = filter === currentFilter ?
-				'current_filter active' :
-				'current_filter';
+				'current-filter active' :
+				'current-filter';
 
 			return <button
 				key={index}

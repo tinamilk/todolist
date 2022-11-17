@@ -20,7 +20,7 @@ button {
     border: none
 }
 
-.to_do_list {
+.to-do-list {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,18 +32,18 @@ button {
     box-shadow: 0px 1px 9px 0px rgba(34, 60, 80, 0.15);
 }
 
-@media screen and (max-width: 500px) {
-    .filter_buttons {
+@media screen and (max-width: 700px) {
+    .buttons {
         flex-direction: column
     }
 }
 
-@media screen and (min-width: 501px) {
-    .filter_buttons {
+@media screen and (min-width: 701px) {
+    .buttons {
         flex-direction: row
     }
 }
-.filter_buttons {
+.buttons {
     display: flex;
     justify-content: space-between;
     width: 70%;
