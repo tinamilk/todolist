@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector  } from 'react-redux';
+import { useDispatch, useSelector  } from 'react-redux';
 import './FilterButtons.css';
 import { filters, filterTasks  } from './filterTasks';
+import { setPage } from '../../store/pageSlice';
 
 export const FilterButtons = ({setFilteresTasks}) => {
 
 	const tasks = useSelector((state) => state.tasks);
 	const [filter, setFilter] = useState(filters.ALL);
 
+	const dispatch = useDispatch();
+
 	const isDisabled = (cond) => {
 		const filtered = filterTasks(tasks, cond);
 		return filtered.length === 0;
 	};
 
-	useEffect(()=> {
+	useEffect(() => {
 		const filtered = filterTasks(tasks, filter);
 		setFilteresTasks(filtered);
 
@@ -22,6 +25,10 @@ export const FilterButtons = ({setFilteresTasks}) => {
 		}
 
 	}, [filter, tasks]);
+
+	useEffect(() => {
+		dispatch(setPage(1));
+	}, [filter]);
 
 	const handleFilterChange = (filter) => {
 		setFilter(filter);
