@@ -16,7 +16,8 @@ export const Tasks = ({filtered}) => {
 					key = {task.id}
 					id={task.id}
 					title={task.title}
-					isDone={task.isDone}/>) 
+					isDone={task.isDone}
+					date={task.date}/>) 
 			: <h3 className='empty-message'>Add some task :)</h3>}
 	</div>;
 };

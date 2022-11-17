@@ -5,7 +5,7 @@ import './Task.css';
 import { useDispatch } from 'react-redux';
 import { removeTask, setIsDone } from '../../store/tasksSlice';
 
-export const Task = ({title, id, isDone}) => {
+export const Task = ({title, id, isDone, date}) => {
 
 	const dispatch = useDispatch();
 	const toggleClassName = isDone ? 'checkbox checked' : 'checkbox';
@@ -13,6 +13,8 @@ export const Task = ({title, id, isDone}) => {
 	const handleChangeIsDone = () => {
 		dispatch(setIsDone(id));
 	};
+
+	const formatedDate = new Date(date);
 
 
 	return <div className='task'>
@@ -24,7 +26,7 @@ export const Task = ({title, id, isDone}) => {
 		</div>
 		<div className='task_data'>
 			<p className='title'>{title}</p>
-			<p className='date'>01/02/2022</p>
+			<p className='date'>{formatedDate.toLocaleString()}</p>
 		</div>
 		<div className='delete_button'
 			onClick={()=>dispatch(removeTask(id))}
