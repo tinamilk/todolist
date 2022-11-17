@@ -3,28 +3,23 @@ import { useDispatch, useSelector  } from 'react-redux';
 import './FilterButtons.css';
 import { filters, filterTasks  } from './filterTasks';
 import { setPage } from '../../store/page/pageSlice';
+import { setAll, setDone, setUndone} from '../../store/filter/filterSlice';
 
-export const FilterButtons = ({setFilteresTasks}) => {
+export const FilterButtons = () => {
 
 	const tasks = useSelector((state) => state.tasks);
-	const [filter, setFilter] = useState(filters.ALL);
+	const [filter, setFilter] = useState(filters.ALL); //
 
 	const dispatch = useDispatch();
 
-	const isDisabled = (cond) => {
-		const filtered = filterTasks(tasks, cond);
+	const isDisabled = (condition) => { // искать по индексу
+		const filtered = filterTasks(tasks, condition);
 		return filtered.length === 0;
 	};
 
-	useEffect(() => {
-		const filtered = filterTasks(tasks, filter);
-		setFilteresTasks(filtered);
-
-		if (isDisabled(filter)) {
-			setFilter(filters.ALL);
-		}
-
-	}, [filter, tasks]);
+	useEffect(()=> {
+		dispatch(setAll(tasks));
+	}, []);
 
 	useEffect(() => {
 		dispatch(setPage(1));
@@ -33,6 +28,26 @@ export const FilterButtons = ({setFilteresTasks}) => {
 	const handleFilterChange = (filter) => {
 		setFilter(filter);
 	};
+
+	useEffect(() => {
+
+		switch(filter) {
+		case filters.UNDONE:
+			dispatch(setUndone(tasks));
+			break;
+		case filters.DONE:
+			dispatch(setDone(tasks));
+			break;
+		case filters.ALL:
+			dispatch(setAll(tasks));
+			break;
+		}
+
+		if (isDisabled(filter)) { //
+			setFilter(filters.ALL);
+		}
+
+	}, [filter, tasks]);
 
 
 	return <div className='filter-buttons'>

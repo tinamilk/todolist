@@ -1,13 +1,15 @@
 import React from 'react';
 import './Input.css';
 import { addTask } from '../../store/tasks/tasksSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import uuid from 'react-uuid';
+import { setAll } from '../../store/filter/filterSlice';
 
 
 export const Input = () => {
 
 	const dispatch = useDispatch();
+	const tasks = useSelector((state) => state.tasks);
 
 	const handleAddTask = (e) => {
 		if (e.target.value) {
@@ -22,7 +24,9 @@ export const Input = () => {
 			};
 
 			dispatch(addTask(taskData));
-			e.target.value = null;
+			dispatch(setAll(tasks));
+			e.target.value = null; //
+
 		}
 	};
 

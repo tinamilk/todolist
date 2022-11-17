@@ -22,7 +22,7 @@ export const SortByDateButtons = () => {
 		setSorting('down');
 	};
 
-	const isActiveClassName = (cond) => {
+	const isActiveClassName = (cond) => { //
 
 		return tasks.length <= 1 ? ' disabled' : cond === sorting ? ' disabled' : '';
 	};
@@ -31,7 +31,7 @@ export const SortByDateButtons = () => {
 		<p className='date-button-title'>Sort by date</p>
 		<button
 			className={'up-button' + isActiveClassName('up')}
-			onClick={()=>handleSortingChangeNew()}>
+			onClick={handleSortingChangeNew}>
 
 			<img className={'up-icon' + isActiveClassName('up')} srcSet={up}/>
 
@@ -39,7 +39,7 @@ export const SortByDateButtons = () => {
 
 		<button
 			className={'down-button' + isActiveClassName('down')}
-			onClick={()=>handleSortingChangeOld()}>
+			onClick={handleSortingChangeOld}>
 			
 			<img className={'down-icon' + isActiveClassName('down')} srcSet={down}/>
 

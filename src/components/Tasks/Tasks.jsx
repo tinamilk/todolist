@@ -4,13 +4,17 @@ import { Task } from '../Task/Task';
 import './Tasks.css';
 import { splitTasks } from './splitTasks';
 
-export const Tasks = ({filtered, unfiltered}) => {
+export const Tasks = () => {
 
 	const currentPage = useSelector((state) => state.page.currentPage);
-	const sortedTasks = filtered.length ? splitTasks(filtered) : [];
+	const unfiltered = useSelector((state) => state.tasks);
+	const filter = useSelector((state) => state.filter);
+	const sortedTasks = filter.filtered.length ? splitTasks(filter.filtered) : [];
+
+	console.log(filter);
 
 	return <div className='tasks'>
-		{Object.keys(sortedTasks).length !== 0 ? 
+		{sortedTasks.length !== 0 ? 
 			sortedTasks[currentPage]
 				.map(task=> <Task
 					key = {task.id}
@@ -19,6 +23,6 @@ export const Tasks = ({filtered, unfiltered}) => {
 					isDone={task.isDone}
 					date={task.date}/>) 
 			: unfiltered.length === 0 ?
-				<h3 className='empty-message'>Add some task :)</h3> : <></>}
+				<h3 className='empty-message'>Add some task :)</h3> : null}
 	</div>;
 };

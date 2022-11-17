@@ -22,7 +22,7 @@ export const tasksSlice = createSlice({
 		setIsDone: (state, action) => {
 			state[state.findIndex(task => task.id === action.payload)].isDone = 
 				state[state.findIndex(task => task.id === action.payload)].isDone ?
-					false : true;
+					false : true; //
 		}
 	},
 });

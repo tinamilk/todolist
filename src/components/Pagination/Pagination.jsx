@@ -5,10 +5,11 @@ import prev from '../../assets/img/prev_icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPage } from '../../store/page/pageSlice';
 
-export const Pagination = ({tasks}) => {
+export const Pagination = () => {
 
 	const dispatch = useDispatch();
 	const currentPage = useSelector((state) => state.page.currentPage);
+	const tasks = useSelector((state) => state.filter.filtered);
 	const lastPageNumber = Math.ceil(tasks.length / 5);
 	const pages = [];
 
@@ -21,7 +22,7 @@ export const Pagination = ({tasks}) => {
 
 	for (let pageNumber = 1; pageNumber <= lastPageNumber; pageNumber++) {
 		pages.push(pageNumber);
-	}
+	}//
 
 
 	return <div className='page-pagination'>
