@@ -1,24 +1,12 @@
-@media screen and (max-width: 1000px) {
+@media screen and (min-width: 1276px) {
     .task {
-        height: 20px;
-        font-size: 15px;
-    }
-    .checkbox, .delete_button {
-        width: 15px;
-        height: 15px;
-        margin: 0 5px;
-    }
-    .checked_icon, .delete_icon {
-        width: 15px;
-        height: 15px;
+        height: 40px;
+        font-size: 17px;
     }
 }
 
 @media screen and (min-width: 1001px) {
-    .task {
-        height: 40px;
-        font-size: 20px;
-    }
+
     .checkbox, .delete_button {
         width: 30px;
         height: 30px;
@@ -30,14 +18,50 @@
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1275px) {
+    .date {
+        font-size: 15px;
+    }
+    .title {
+        font-size: 15px;
+    }
+} 
+
+@media screen and (max-width: 1000px) {
     .task {
-        font-size: 12px;
+        min-height: 20px;
+        font-size: 10px;
+    }
+    .checkbox, .delete_button {
+        width: 15px;
+        height: 15px;
+        margin: 0 5px;
+    }
+    .checked_icon, .delete_icon {
+        width: 15px;
+        height: 15px;
+    }
+    .date {
+        font-size: 10px;
+    }
+}
+
+
+@media screen and (max-width: 700px) {
+    .task {
+        font-size: 10px;
     }
     .checkbox, .delete_button {
         margin: 0 5px;
     }
+    .date {
+        margin: auto 5px;
+    }
+
 }
+
+
+
 
 .task {
     display: flex;
@@ -58,14 +82,25 @@
     background-color: #F3E8E2;
 }
 
-.task_data {
+.task-data {
     display: flex;
     justify-content: space-between;
     width: 80%;
 }
 
-.title, .date {
+.title {
     margin: auto 0;
+    word-break: break-all;
+    max-width: 70%;
+}
+
+.title.full {
+    font-size: 13px;
+}
+
+.date {
+    margin: auto 5px;
+    word-wrap: normal;
 }
 
 .delete_button {
