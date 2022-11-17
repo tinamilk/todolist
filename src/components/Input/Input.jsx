@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Input.css';
 import { addTask } from '../../store/tasks/tasksSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,31 +8,40 @@ import { setAll } from '../../store/filter/filterSlice';
 
 export const Input = () => {
 
+	const [inputValue, setInputValue] = useState('');
+
 	const dispatch = useDispatch();
 	const tasks = useSelector((state) => state.tasks);
 
-	const handleAddTask = (e) => {
+	const handleAddTitle = (e) => {
 		if (e.target.value) {
-
-			const now = new Date();
-
-			const taskData = {
-				id: uuid(),
-				title: e.target.value,
-				date: now.getTime(),
-				isDone: false
-			};
-
-			dispatch(addTask(taskData));
-			dispatch(setAll(tasks));
-			e.target.value = null; //
-
+			setInputValue(e.target.value);
+			console.log(inputValue);
 		}
+	};
+
+	const handleAddTask = () => {
+
+		const now = new Date();
+
+		const taskData = {
+			id: uuid(),
+			title: inputValue,
+			date: now.getTime(),
+			isDone: false
+		};
+
+		dispatch(addTask(taskData));
+		dispatch(setAll(tasks));
+		setInputValue('');
+
 	};
 
 	return <input
 		className='search-input'
 		placeholder='I want to...'
-		onKeyPress={(e) => e.key === 'Enter' && handleAddTask(e)}
+		onKeyDown={(e) => e.key === 'Enter' && handleAddTask()}
+		onChange={(e) => handleAddTitle(e)}
+		value={inputValue}
 	/>;
 };
