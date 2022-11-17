@@ -3,23 +3,38 @@ import { useSelector  } from 'react-redux';
 import './FilterButtons.css';
 import { filters, filterTasks  } from './filterTasks';
 
-export const FilterButtons = ({setFilter}) => {
+export const FilterButtons = ({setFilteresTasks}) => {
+
 	const tasks = useSelector((state) => state.tasks);
-	const [filter, setFilterr] = useState(filters.ALL);
+	const [filter, setFilter] = useState(filters.ALL);
+
+	const isDisabled = (cond) => {
+		const filtered = filterTasks(tasks, cond);
+		return filtered.length === 0;
+	};
 
 	useEffect(()=> {
 		const filtered = filterTasks(tasks, filter);
-		console.log(filtered);
-		setFilter(filtered);
+		setFilteresTasks(filtered);
+
+		if (isDisabled(filter)) {
+			setFilter(filters.ALL);
+		}
+
 	}, [filter, tasks]);
 
-	function handleFilterChange(filter) {
-		setFilterr(filter);
-	}
+	const handleFilterChange = (filter) => {
+		setFilter(filter);
+	};
 
 
 	return <div className='filter-buttons'>
+
 		{Object.values(filters).map((currentFilter, index) => {
+
+			const isButtonDisabled = isDisabled(currentFilter);
+
+			const disabledClassName = isButtonDisabled ? ' disabled' : '';
 
 			const filterClassName = filter === currentFilter ?
 				'current-filter active' :
@@ -28,10 +43,12 @@ export const FilterButtons = ({setFilter}) => {
 			return <button
 				key={index}
 				onClick={()=>handleFilterChange(currentFilter)}
-				className={filterClassName}
+				className={filterClassName + disabledClassName}
+				disabled={isButtonDisabled}
 			>
 				{currentFilter}
 			</button>;
 		})}
+
 	</div>;
 };

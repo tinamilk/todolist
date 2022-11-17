@@ -24,7 +24,7 @@ function ToDoList() {
 			<Heading/>
 			<Input/>
 			<div className='buttons'>
-				<FilterButtons setFilter={handleFiltered} />
+				<FilterButtons setFilteresTasks={handleFiltered} />
 				<SortByDateButtons/>
 			</div>
 			<Tasks filtered = {filteredTasks}/>

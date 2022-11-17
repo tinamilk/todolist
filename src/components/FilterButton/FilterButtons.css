@@ -53,3 +53,13 @@
 .current-filter.active {
     background-color: #F3E8E2;
 }
+
+.current-filter.disabled {
+    cursor: default;
+    border: 2px solid #e5e5e5;
+    background-color: #F1E9E4;
+    opacity: 0.7;
+}
+.current-filter.disabled:hover {
+    opacity: 0.7;
+}
