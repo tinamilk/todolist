@@ -49,6 +49,11 @@
     color: #283D3B;
 }
 
-.up-icon:hover, .down-icon:hover {
+.up-button.disabled, .down-button.disabled,
+.up-icon.disabled, .down-icon.disabled {
     opacity: 0.7;
+    cursor: default;
+}
+.up-icon.disabled:hover, .down-icon.disabled:hover {
+    cursor: default;
 }

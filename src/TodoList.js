@@ -13,8 +13,6 @@ function ToDoList() {
 	const tasks = useSelector((state) => state.tasks);
 	const [filteredTasks, setFilteredTasks] = useState(tasks);
 
-	console.log(tasks);
-
 	const handleFiltered = (filtered) => {
 		setFilteredTasks(filtered);
 	};

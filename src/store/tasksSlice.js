@@ -7,7 +7,7 @@ export const tasksSlice = createSlice({
 	initialState,
 	reducers: {
 		addTask: (state, action) => {
-			state.push(action.payload);
+			state.unshift(action.payload);
 		},
 		removeTask: (state, action) => {
 			state
