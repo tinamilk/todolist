@@ -11,13 +11,13 @@ export const Pagination = () => {
 	const currentPage = useSelector((state) => state.page.currentPage);
 	const tasks = useSelector((state) => state.filter.filtered);
 	const lastPageNumber = Math.ceil(tasks.length / 5);
-	const pagesPartsCount = Math.ceil(lastPageNumber / 10);
+	const pagesPartsCount = Math.ceil(lastPageNumber / 5);
 
 	const [pagesPart, setPagesPart] = useState(1);
 
-	const firstTemporaryNumber = pagesPart * 10 - 9;
+	const firstTemporaryNumber = pagesPart * 5 - 4;
 	const lastTemporaryNumber = pagesPartsCount === pagesPart 
-		? lastPageNumber : pagesPart * 10; //вынести
+		? lastPageNumber : pagesPart * 5;
 
 	const pages = useMemo(() => {
 		const temporary = [];
@@ -44,24 +44,21 @@ export const Pagination = () => {
 
 	const handleChahgeNextPart = () => {
 		setPagesPart(pagesPart + 1);
-		dispatch(setPage(firstTemporaryNumber + 10));
+		dispatch(setPage(firstTemporaryNumber + 5));
 	};
 
 	const handleChahgePrevPart = () => {
 
 		setPagesPart(pagesPart - 1);
-		dispatch(setPage(pagesPart * 10 - 10));
+		dispatch(setPage(pagesPart * 5 - 5));
 	};
-
-	console.log(currentPage);
-
 
 	return <div className='page-pagination'>
 		{currentPage !== 1 &&
 		<img
 			srcSet={prev}
 			className='prev_button'
-			onClick={()=>handleChangePage(currentPage-1)}
+			onClick={()=>handleChangePage(1)}
 		/>}
 		{pagesPart !== 1 &&
 			<button
@@ -96,7 +93,7 @@ export const Pagination = () => {
 		<img
 			srcSet={next}
 			className='next-button'
-			onClick={()=>handleChangePage(currentPage+1)}
+			onClick={()=>handleChangePage(lastPageNumber)}
 		/>
 		}
 	</div>;
