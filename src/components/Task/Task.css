@@ -1,6 +1,5 @@
 @media screen and (min-width: 1276px) {
     .task {
-        /* height: 40px; */
         font-size: 17px;
     }
 }
@@ -116,4 +115,14 @@
 
 .checked-icon {
     width: 100%
+}
+
+.changing_input {
+    border: 2px solid #115055;
+    border-radius: 5px;
+    outline-color: #115055;
+}
+
+.close_button {
+    width: 30px;
 }

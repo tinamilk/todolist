@@ -11,10 +11,7 @@ export const Tasks = () => {
 	const filter = useSelector((state) => state.filter.filtered);
 	let sortedTasks = filter.length ? splitTasks(filter) : [];
 
-	// useEffect(() => {
-	// 	sortedTasks = filter.length ? splitTasks(filter) : [];
-
-	// }, [unfiltered]);
+	
 	return <div className='tasks'>
 		{sortedTasks.length !== 0 ? 
 			sortedTasks[currentPage]

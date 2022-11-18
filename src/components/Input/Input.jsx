@@ -42,5 +42,6 @@ export const Input = () => {
 		onKeyDown={(e) => e.key === 'Enter' && handleAddTask()}
 		onChange={(e) => handleAddTitle(e)}
 		value={inputValue}
+		autoFocus
 	/>;
 };

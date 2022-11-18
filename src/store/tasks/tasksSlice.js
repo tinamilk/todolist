@@ -22,10 +22,14 @@ export const tasksSlice = createSlice({
 		setIsDone: (state, action) => {
 			const index = state.findIndex(task => task.id === action.payload);
 			state[index].isDone = state[index].isDone ? false : true; 
-		}
+		}, 
+		changeTitle: ((state, action) => {
+			const index = state.findIndex(task => task.id === action.payload.id);
+			state[index].title = action.payload.newTitle;
+		})
 	},
 });
 
-export const { addTask, removeTask, sortTasksByDateNew,  sortTasksByDateOld, setIsDone} = tasksSlice.actions;
+export const { addTask, removeTask, sortTasksByDateNew,  sortTasksByDateOld, setIsDone, changeTitle} = tasksSlice.actions;
 
 export default tasksSlice.reducer;
