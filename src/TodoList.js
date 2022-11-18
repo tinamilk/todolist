@@ -10,10 +10,7 @@ import { useSelector } from 'react-redux';
 
 
 function ToDoList() {
-	const tasks = useSelector((state) => {
-		
-		return state.tasks;
-	});
+	const tasks = useSelector((state) => state.tasks);
 
 	return (
 		<div className="to-do-list">
@@ -25,7 +22,7 @@ function ToDoList() {
 			</div>
 			<Tasks/>
 
-			{tasks.length ? <Pagination/> : null}
+			{tasks[0] ? <Pagination/> : null}
 
 		</div>
 	);

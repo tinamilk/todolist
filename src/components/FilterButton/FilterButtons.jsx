@@ -39,7 +39,6 @@ export const FilterButtons = () => {
 			break;
 		}
 
-		console.log(filter);
 	};
 
 	useEffect(() => {
@@ -59,7 +58,6 @@ export const FilterButtons = () => {
 		{Object.values(filters).map((currentFilter, index) => {
 
 			const isButtonDisabled = setIsDisabled(currentFilter);
-
 			const disabledClassName = isButtonDisabled ? ' disabled' : '';
 
 			const filterClassName = filter === currentFilter ?
