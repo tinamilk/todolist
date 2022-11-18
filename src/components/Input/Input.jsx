@@ -13,12 +13,7 @@ export const Input = () => {
 	const dispatch = useDispatch();
 	const tasks = useSelector((state) => state.tasks);
 
-	const handleAddTitle = (e) => {
-		if (e.target.value) {
-			setInputValue(e.target.value);
-			console.log(inputValue);
-		}
-	};
+	const handleAddTitle = (e) => { setInputValue(e.target.value); };
 
 	const handleAddTask = () => {
 
@@ -31,11 +26,13 @@ export const Input = () => {
 			isDone: false
 		};
 
+
 		if (inputValue && inputValue.split(' ').join('')) {
 			dispatch(addTask(taskData));
 			dispatch(setAll(tasks));
-			setInputValue('');
 		}
+
+		setInputValue('');
 
 	};
 
