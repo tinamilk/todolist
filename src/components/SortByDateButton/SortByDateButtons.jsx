@@ -38,6 +38,7 @@ export const SortByDateButtons = () => {
 			onClick={handleSortingChangeNew}>
 
 			<img
+				alt='up'
 				className={'up-icon' + setIsActiveClassName(sortingValues.UP)}
 				srcSet={up}
 			/>
@@ -48,6 +49,7 @@ export const SortByDateButtons = () => {
 			onClick={handleSortingChangeOld}>
 			
 			<img
+				alt='down'
 				className={'down-icon' + setIsActiveClassName(sortingValues.DOWN)}
 				srcSet={down}
 			/>

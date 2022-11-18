@@ -1,5 +1,4 @@
 import React from 'react';
-import { Heading } from './components/Heading/Heading';
 import { Input } from './components/Input/Input';
 import { FilterButtons } from './components/FilterButton/FilterButtons';
 import { SortByDateButtons } from './components/SortByDateButton/SortByDateButtons';
@@ -14,7 +13,7 @@ function ToDoList() {
 
 	return (
 		<div className="to-do-list">
-			<Heading/>
+			<h1>ToDo List</h1>
 			<Input/>
 			<div className='buttons'>
 				<FilterButtons/>
@@ -22,7 +21,7 @@ function ToDoList() {
 			</div>
 			<Tasks/>
 
-			{tasks[0] ? <Pagination/> : null}
+			{tasks.length > 5 ? <Pagination/> : null}
 
 		</div>
 	);

@@ -56,6 +56,7 @@ export const Pagination = () => {
 	return <div className='page-pagination'>
 		{currentPage !== 1 &&
 		<img
+			alt='prev'
 			srcSet={prev}
 			className='prev_button'
 			onClick={()=>handleChangePage(1)}
@@ -91,6 +92,7 @@ export const Pagination = () => {
 
 		{currentPage !== lastPageNumber &&
 		<img
+			alt='prev'
 			srcSet={next}
 			className='next-button'
 			onClick={()=>handleChangePage(lastPageNumber)}

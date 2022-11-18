@@ -75,7 +75,7 @@ export const Task = ({title, id, isDone, date}) => {
 		</div><div className='delete-button'
 			onClick={() => dispatch(removeTask(id))}
 		>
-			<img className='delete-icon' srcSet={delete_icon} />
+			<img alt='delete' className='delete-icon' srcSet={delete_icon} />
 		</div>
 	</div>;
 };
