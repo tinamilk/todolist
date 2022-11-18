@@ -11,8 +11,6 @@ export const Tasks = () => {
 	const filter = useSelector((state) => state.filter.filtered);
 	let sortedTasks = filter.length ? splitTasks(filter) : [];
 
-	console.log(filter);
-
 	useEffect(() => {
 		sortedTasks = filter.length ? splitTasks(filter) : [];
 

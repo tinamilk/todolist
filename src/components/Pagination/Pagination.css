@@ -5,7 +5,7 @@
     margin-top: 5vh;
 }
 
-.page-number {
+.page-number, .part-number {
     font-family: 'SairaCondensedBold', sans-serif;
     font-size: 20px;
     margin: auto;
