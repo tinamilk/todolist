@@ -30,7 +30,7 @@ export const Input = () => {
 			date: now.getTime(),
 			isDone: false
 		};
-		console.log(inputValue);
+
 		if (inputValue && inputValue.split(' ').join('')) {
 			dispatch(addTask(taskData));
 			dispatch(setAll(tasks));

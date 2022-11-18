@@ -15,6 +15,7 @@ export const SortByDateButtons = () => {
 
 	const dispatch = useDispatch();
 	const [sorting, setSorting] = useState(sortingValues.UP);
+	// console.log(sorting);
 	const tasks = useSelector((state) => state.tasks);
 
 	const handleSortingChangeNew = () => {
@@ -27,26 +28,25 @@ export const SortByDateButtons = () => {
 		setSorting(sortingValues.DOWN);
 	};
 
-	const isActiveClassName = (condition) => { 
-
+	const setIsActiveClassName = (condition) => { 
+		// console.log(sorting);
+		console.log(condition === sorting);
 		return tasks.length <= 1 ? ' disabled' : condition === sorting ? ' disabled' : '';
 	};
 
 	return <div className='date-buttons'>
 		<p className='date-button-title'>Sort by date</p>
 		<button
-			className={'up-button' + isActiveClassName(sortingValues.UP)}
 			onClick={handleSortingChangeNew}>
 
-			<img className={'up-icon' + isActiveClassName(sortingValues.UP)} srcSet={up}/>
+			<img className={'up-icon' + setIsActiveClassName(sortingValues.UP)} srcSet={up}/>
 
 		</button>
 
 		<button
-			className={'down-button' + isActiveClassName(sorting.DOWN)}
 			onClick={handleSortingChangeOld}>
 			
-			<img className={'down-icon' + isActiveClassName(sorting.DOWN)} srcSet={down}/>
+			<img className={'down-icon' + setIsActiveClassName(sortingValues.DOWN)} srcSet={down}/>
 
 		</button>
 	</div>;
