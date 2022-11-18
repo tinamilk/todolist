@@ -29,14 +29,31 @@ export const Pagination = () => {
 	}, [lastPageNumber, pagesPart]);
 
 	
-	console.log(pages);
 
 	const handleChangePage = (page) => {
 
-		if (page >= 1 && page <= lastPageNumber) {
-			dispatch(setPage(page));
+		dispatch(setPage(page));
+
+		if (page < firstTemporaryNumber) {
+			setPagesPart(pagesPart - 1);
+		} else if (page > lastTemporaryNumber) {
+			setPagesPart(pagesPart + 1);
 		}
+		
 	};
+
+	const handleChahgeNextPart = () => {
+		setPagesPart(pagesPart + 1);
+		dispatch(setPage(firstTemporaryNumber + 10));
+	};
+
+	const handleChahgePrevPart = () => {
+
+		setPagesPart(pagesPart - 1);
+		dispatch(setPage(pagesPart * 10 - 10));
+	};
+
+	console.log(currentPage);
 
 
 	return <div className='page-pagination'>
@@ -48,7 +65,7 @@ export const Pagination = () => {
 		/>}
 		{pagesPart !== 1 &&
 			<button
-				onClick={()=>setPagesPart(pagesPart - 1)}
+				onClick={()=>handleChahgePrevPart()}
 				className='part-number'>
 					...
 			</button>
@@ -69,13 +86,13 @@ export const Pagination = () => {
 
 		{pagesPart !== pagesPartsCount &&
 			<button
-				onClick={()=>setPagesPart(pagesPart + 1)}
+				onClick={()=>handleChahgeNextPart()}
 				className='part-number'>
 				...
 			</button>
 		}
 
-		{currentPage !== lastPageNumber && 
+		{currentPage !== lastPageNumber &&
 		<img
 			srcSet={next}
 			className='next-button'

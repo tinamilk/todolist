@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React from 'react';
 import { useSelector  } from 'react-redux';
 import { Task } from '../Task/Task';
 import './Tasks.css';
@@ -11,10 +11,10 @@ export const Tasks = () => {
 	const filter = useSelector((state) => state.filter.filtered);
 	let sortedTasks = filter.length ? splitTasks(filter) : [];
 
-	useEffect(() => {
-		sortedTasks = filter.length ? splitTasks(filter) : [];
+	// useEffect(() => {
+	// 	sortedTasks = filter.length ? splitTasks(filter) : [];
 
-	}, [unfiltered]);
+	// }, [unfiltered]);
 	return <div className='tasks'>
 		{sortedTasks.length !== 0 ? 
 			sortedTasks[currentPage]

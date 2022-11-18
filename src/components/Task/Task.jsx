@@ -21,7 +21,7 @@ export const Task = ({title, id, isDone, date}) => {
 	return <div className='task'>
 		<div
 			className={toggleClassName}
-			onClick={() => handleChangeIsDone()}
+			onClick={handleChangeIsDone}
 		>
 			{isDone && <img className='checked-icon' srcSet={checked_icon}/>}
 		</div>
