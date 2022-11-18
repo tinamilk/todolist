@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import './FilterButtons.css';
-import { filters, filterTasks  } from './filterTasks';
+import { filters, filterTasks } from './filterTasks';
 import { setPage } from '../../store/page/pageSlice';
 import { setAll, setDone, setUndone} from '../../store/filter/filterSlice';
 
 export const FilterButtons = () => {
 
 	const tasks = useSelector((state) => state.tasks);
-	const [filter, setFilter] = useState(filters.ALL);
+	const filter = useSelector((state) => state.filter.currentFilter);
 
 	const dispatch = useDispatch();
 
 	const setIsDisabled = (condition) => {
-		const filtered = filterTasks(tasks, condition);
-		return !filtered[0];
+		const isNotEmpty = filterTasks(tasks, condition);
+		return !isNotEmpty || !tasks.length;
 	};
 
-	useEffect(()=> {
+	useEffect(() => {
 		dispatch(setAll(tasks));
 	}, []);
 
@@ -26,10 +26,6 @@ export const FilterButtons = () => {
 	}, [filter]);
 
 	const handleFilterChange = (filter) => {
-		setFilter(filter);
-	};
-
-	useEffect(() => {
 
 		switch(filter) {
 		case filters.UNDONE:
@@ -43,11 +39,19 @@ export const FilterButtons = () => {
 			break;
 		}
 
+		console.log(filter);
+	};
+
+	useEffect(() => {
+
+		handleFilterChange(filter);
+
 		if (setIsDisabled(filter)) {
-			setFilter(filters.ALL);
+			handleFilterChange(filters.ALL);
 		}
 
-	}, [filter, tasks]);
+
+	}, [ tasks, filter]);
 
 
 	return <div className='filter-buttons'>

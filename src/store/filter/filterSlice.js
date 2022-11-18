@@ -11,15 +11,15 @@ export const filterSlice = createSlice({
 	reducers: {
 		setAll: (state, action) => {
 			state.filtered = action.payload;
-			state.currentFilter = 'ALL';
+			state.currentFilter = 'all';
 		},
 		setDone: (state, action) => {
 			state.filtered = action.payload.filter(task => task.isDone === true);
-			state.currentFilter = 'DONE';
+			state.currentFilter = 'done';
 		},
 		setUndone: (state, action) => {
 			state.filtered = action.payload.filter(task => task.isDone === false);
-			state.currentFilter = 'UNDONE';
+			state.currentFilter = 'undone';
 		},
 
 	},
