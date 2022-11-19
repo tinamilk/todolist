@@ -26,8 +26,8 @@ button {
     align-items: center;
     background-color: #fff;
     width: 80vw;
-    min-height: 80vh;
-    margin: 5vh 10vw;
+    min-height: 75vh;
+    margin: 5vh auto;
     padding: 5vh 0;
     box-shadow: 0px 1px 9px 0px rgba(34, 60, 80, 0.15);
 }
