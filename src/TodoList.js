@@ -6,13 +6,11 @@ import { Tasks } from './components/Tasks/Tasks';
 import './globalStyles/styles.css';
 import { Pagination } from './components/Pagination/Pagination';
 import { useSelector } from 'react-redux';
-import { useGetTasksQuery } from './store/tasksApi/tasksApi';
 
 
 function ToDoList() {
 	const tasks = useSelector((state) => state.tasks);
-	const data = useGetTasksQuery({asc:'asc', pp:'5', page:'1'});
-	console.log(data.currentData);
+
 
 	return (
 		<div className="to-do-list">
