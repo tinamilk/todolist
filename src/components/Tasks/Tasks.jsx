@@ -20,7 +20,8 @@ export const Tasks = () => {
 					id={task.id}
 					title={task.title}
 					isDone={task.isDone}
-					date={task.date}/>) 
+					date={task.date}
+					sortedTasks={sortedTasks}/>) 
 			: unfiltered.length === 0 ?
 				<h3 className='empty-message'>Add some task :)</h3> : null}
 	</div>;
