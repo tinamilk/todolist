@@ -1,35 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './SortByDateButtons.css';
 import down from '../../assets/img/arrow_down.svg';
 import up from '../../assets/img/arrow_up.svg';
-import { useDispatch, useSelector } from 'react-redux';
-import { sortTasksByDateNew, sortTasksByDateOld  } from '../../store/tasks/tasksSlice';
+import { useDispatch } from 'react-redux';
+import { changeSorting } from '../../store/tasksQuery/tasksQuery';
 
 
 const sortingValues = {
-	UP: 'up',
-	DOWN: 'down'
+	UP: 'asc',
+	DOWN: 'desc'
 };
 
 export const SortByDateButtons = () => {
 
 	const dispatch = useDispatch();
-	const [sorting, setSorting] = useState(sortingValues.UP);
-
-	const tasks = useSelector((state) => state.tasks);
 
 	const handleSortingChangeNew = () => {
-		dispatch(sortTasksByDateNew());
-		setSorting(sortingValues.UP);
+		dispatch(changeSorting(sortingValues.UP));
 	};
 
 	const handleSortingChangeOld = () => {
-		dispatch(sortTasksByDateOld());
-		setSorting(sortingValues.DOWN);
+		dispatch(changeSorting(sortingValues.DOWN));
 	};
 
-	const setIsActiveClassName = (condition) =>
-		tasks.length <= 1 ? ' disabled' : condition === sorting ? ' disabled' : '';
 
 	return <div className='date-buttons'>
 
@@ -39,7 +32,6 @@ export const SortByDateButtons = () => {
 
 			<img
 				alt='up'
-				className={'up-icon' + setIsActiveClassName(sortingValues.UP)}
 				srcSet={up}
 			/>
 
@@ -50,7 +42,6 @@ export const SortByDateButtons = () => {
 			
 			<img
 				alt='down'
-				className={'down-icon' + setIsActiveClassName(sortingValues.DOWN)}
 				srcSet={down}
 			/>
 
