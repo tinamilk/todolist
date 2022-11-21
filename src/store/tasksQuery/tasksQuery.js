@@ -19,6 +19,6 @@ export const tasksQuerySlice = createSlice({
 	},
 });
 
-export const { changeSorting, changePage } = tasksQuerySlice.actions;
+export const { changeSorting, changePage, setMustReload } = tasksQuerySlice.actions;
 
 export default tasksQuerySlice.reducer;

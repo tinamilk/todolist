@@ -12,8 +12,8 @@ export const Task = ({title, id, isDone, date }) => {
 	const [deleteTask, deleteResponse] = useDeleteTaskMutation();
 	const [changeTask, changeResponse] = useChangeTaskMutation();
 
-	console.log(changeResponse);
 	console.log(deleteResponse);
+	console.log(changeResponse);
 
 	const handleChangeIsDone = async() => {
 

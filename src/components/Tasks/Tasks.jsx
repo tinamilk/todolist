@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector  } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Task } from '../Task/Task';
 import './Tasks.css';
 import { useGetTasksQuery } from '../../store/tasksApi/tasksApi';
@@ -9,15 +9,27 @@ export const Tasks = () => {
 
 	const {sortByDate, pp, page} = useSelector((state) => state.tasksQuery);
 	const [tasks, setTasks] = useState([]);
-	const data = useGetTasksQuery({sortByDate, pp, page});
 
-	useEffect(() => {
-		data.currentData ? setTasks(data.currentData.tasks) : null;
-	}, [data]);
+
+	const getTasks = async () => {
+
+		try {
+			const data = useGetTasksQuery({ sortByDate, pp, page });
+			if (await data.currentData) {
+				setTasks(data.currentData.tasks);
+				console.log(tasks);
+			}
+		} catch (err) {
+			console.log(err.message);
+		}
+
+	};
+
+	getTasks();
 
 	
 	return <div className='tasks'>
-		{tasks.length ?
+		{tasks && tasks.length ?
 			tasks.map(task=> <Task
 				key = {task.uuid}
 				id={task.uuid}

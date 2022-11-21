@@ -1,13 +1,13 @@
-
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-//https://todo-api-learning.herokuapp.com/v1/task/4/90b52d7a-3447-48ac-ac7d-e34085c42e23
 export const tasksApi = createApi({
 
 	reducerPath: 'tasksApi',
 	baseQuery: fetchBaseQuery({ baseUrl: 'https://todo-api-learning.herokuapp.com' }),
+	tagTypes: ['Tasks'],
 	endpoints: builder => ({
 		getTasks: builder.query({
 			query: ({sortByDate, pp, page}) => `/v1/tasks/4?order=${sortByDate}&pp=${pp}&page=${page}`,
+			providesTags: ['Tasks'],
 		}),
 		addTask: builder.mutation({
 			query: (body) => ({
@@ -15,12 +15,14 @@ export const tasksApi = createApi({
 				method: 'POST',
 				body,
 			}),
+			invalidatesTags: ['Tasks'],
 		}),
 		deleteTask: builder.mutation({
 			query: (id) => ({
 				url: `/v1/task/4/${id}`,
 				method: 'DELETE',
 			}),
+			invalidatesTags: ['Tasks'],
 		}),
 		changeTask: builder.mutation({
 			query: ({ id, patch }) => ({
@@ -28,6 +30,7 @@ export const tasksApi = createApi({
 				method: 'PATCH',
 				body: patch,
 			}),
+			invalidatesTags: ['Tasks'],
 		}),
 	})
 });
