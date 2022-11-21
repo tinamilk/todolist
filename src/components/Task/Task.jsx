@@ -2,22 +2,23 @@ import React, { useState } from 'react';
 import delete_icon from '../../assets/img/delete_icon.svg';
 import checked_icon from '../../assets/img//checked_icon.svg';
 import './Task.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { setPage } from '../../store/page/pageSlice';
-import { removeTask, setIsDone, changeTitle } from '../../store/tasks/tasksSlice';
+import { useDispatch } from 'react-redux';
+import { setIsDone, changeTitle } from '../../store/tasks/tasksSlice';
 import close from '../../assets/img/close_icon.svg';
+import { useDeleteTaskMutation } from '../../store/tasksApi/tasksApi';
 
-export const Task = ({title, id, isDone, date, sortedTasks}) => {
+export const Task = ({title, id, isDone, date }) => {
 
 	const dispatch = useDispatch();
 	const toggleClassName = isDone ? 'checkbox checked' : 'checkbox';
-	const currentPage = useSelector((state) => state.page.currentPage);
 	const [isChanging, setIsChanging] = useState(false);
+	const [deleteTask, response] = useDeleteTaskMutation();
+
+	console.log(response.status);
 
 	const handleChangeIsDone = () => {
 		dispatch(setIsDone(id));
 	};
-
 
 	const formatedDate = new Date(date);
 
@@ -49,11 +50,14 @@ export const Task = ({title, id, isDone, date, sortedTasks}) => {
 		}
 	};
 
-	const handleDeleteTask = () => {
-		if (sortedTasks[currentPage].length === 1 && currentPage !== 1) {
-			dispatch(setPage(currentPage - 1));
+	const handleDeleteTask = async() => {
+
+		try {
+			await deleteTask(id);
+		} catch (err) {
+			console.log(err.message);
 		}
-		dispatch(removeTask(id));
+
 	};
 
 

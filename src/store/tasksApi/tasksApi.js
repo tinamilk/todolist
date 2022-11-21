@@ -15,10 +15,15 @@ export const tasksApi = createApi({
 				method: 'POST',
 				body,
 			}),
-			invalidatesTags: [{ type: 'Tasks', id: 'LIST' }],
+		}),
+		deleteTask: builder.mutation({
+			query: (id) => ({
+				url: `/v1/task/4/${id}`,
+				method: 'DELETE',
+			}),
 		}),
 	}),
 });
   
 
-export const { useGetTasksQuery, useAddTaskMutation } = tasksApi;
+export const { useGetTasksQuery, useAddTaskMutation, useDeleteTaskMutation } = tasksApi;
