@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
 	sortByDate: 'asc',
 	pp: 20,
-	page: 1
+	page: 1,
+	filter: 'undone'
 };
 
 export const tasksQuerySlice = createSlice({
@@ -15,10 +16,13 @@ export const tasksQuerySlice = createSlice({
 		},
 		changePage: (state, action) => {
 			state.page = action.payload;
+		},
+		setFilter: (state, action) => {
+			state.filter = action.payload;
 		}
 	},
 });
 
-export const { changeSorting, changePage, setMustReload } = tasksQuerySlice.actions;
+export const { changeSorting, changePage, setMustReload, setFilter } = tasksQuerySlice.actions;
 
 export default tasksQuerySlice.reducer;

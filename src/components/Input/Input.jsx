@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import './Input.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,7 +31,7 @@ export const Input = () => {
 				};
 
 				await addTask(body).unwrap();
-				dispatch(setAll(tasks));
+				// dispatch(setAll(tasks));
 			} else console.log('empty');
 		} catch (err) {
 			console.log(err.message);

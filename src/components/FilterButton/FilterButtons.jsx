@@ -1,74 +1,37 @@
-import React, { useEffect } from 'react';
+/* eslint-disable no-unused-vars */
+import React from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
 import './FilterButtons.css';
 import { filters, filterTasks } from './filterTasks';
-import { setPage } from '../../store/page/pageSlice';
-import { setAll, setDone, setUndone} from '../../store/filter/filterSlice';
+import { setFilter} from '../../store/tasksQuery/tasksQuery';
 
 export const FilterButtons = () => {
 
 	const tasks = useSelector((state) => state.tasks);
-	const filter = useSelector((state) => state.filter.currentFilter);
 
 	const dispatch = useDispatch();
 
-	const setIsDisabled = (condition) => {
-		const isNotEmpty = filterTasks(tasks, condition);
-		return !isNotEmpty || !tasks.length;
-	};
 
-	useEffect(() => {
-		dispatch(setAll(tasks));
-	}, []);
-
-	useEffect(() => {
-		dispatch(setPage(1));
-	}, [filter]);
 
 	const handleFilterChange = (filter) => {
 
-		switch(filter) {
-		case filters.UNDONE:
-			dispatch(setUndone(tasks));
-			break;
-		case filters.DONE:
-			dispatch(setDone(tasks));
-			break;
-		case filters.ALL:
-			dispatch(setAll(tasks));
-			break;
-		}
+		console.log(filter);
+		dispatch(setFilter(filter));
 
 	};
-
-	useEffect(() => {
-
-		handleFilterChange(filter);
-
-		if (setIsDisabled(filter)) {
-			handleFilterChange(filters.ALL);
-		}
-
-
-	}, [ tasks, filter]);
 
 
 	return <div className='filter-buttons'>
 
 		{Object.values(filters).map((currentFilter, index) => {
 
-			const isButtonDisabled = setIsDisabled(currentFilter);
-			const disabledClassName = isButtonDisabled ? ' disabled' : '';
-
-			const filterClassName = filter === currentFilter ?
-				'current-filter active' :
-				'current-filter';
+			// const isButtonDisabled = setIsDisabled(currentFilter);
 
 			return <button
 				key={index}
 				onClick={()=>handleFilterChange(currentFilter)}
-				className={filterClassName + disabledClassName}
-				disabled={isButtonDisabled}
+				className='current-filter'
+				// disabled={isButtonDisabled}
 			>
 				{currentFilter}
 			</button>;

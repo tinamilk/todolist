@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState =  {
 	filtered: [],
-	currentFilter: 'ALL'
+	currentFilter: ''
 };
 
 export const filterSlice = createSlice({

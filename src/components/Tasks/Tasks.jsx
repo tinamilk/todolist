@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Task } from '../Task/Task';
 import './Tasks.css';
@@ -7,25 +7,17 @@ import loading from '../../assets/img/loading.svg';
 
 export const Tasks = () => {
 
-	const {sortByDate, pp, page} = useSelector((state) => state.tasksQuery);
+	const {sortByDate, pp, page, filter } = useSelector((state) => state.tasksQuery);
 	const [tasks, setTasks] = useState([]);
 
+	console.log(filter);
 
-	const getTasks = async () => {
+	const data = useGetTasksQuery({sortByDate, pp, page, filter});
 
-		try {
-			const data = useGetTasksQuery({ sortByDate, pp, page });
-			if (await data.currentData) {
-				setTasks(data.currentData.tasks);
-				console.log(tasks);
-			}
-		} catch (err) {
-			console.log(err.message);
-		}
-
-	};
-
-	getTasks();
+	useEffect(() => {
+		data.currentData ? setTasks(data.currentData.tasks) : null;
+		console.log(data);
+	}, [data]);
 
 	
 	return <div className='tasks'>

@@ -1,5 +1,5 @@
 export const filters = {
-	ALL: 'all', 
+	ALL: '', 
 	DONE: 'done',
 	UNDONE: 'undone'
 };

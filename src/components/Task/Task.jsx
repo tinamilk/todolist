@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import delete_icon from '../../assets/img/delete_icon.svg';
 import checked_icon from '../../assets/img//checked_icon.svg';
@@ -12,8 +13,8 @@ export const Task = ({title, id, isDone, date }) => {
 	const [deleteTask, deleteResponse] = useDeleteTaskMutation();
 	const [changeTask, changeResponse] = useChangeTaskMutation();
 
-	console.log(deleteResponse);
-	console.log(changeResponse);
+	// console.log(deleteResponse);
+	// console.log(changeResponse);
 
 	const handleChangeIsDone = async() => {
 

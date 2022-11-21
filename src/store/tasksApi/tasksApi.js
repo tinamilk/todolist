@@ -6,7 +6,7 @@ export const tasksApi = createApi({
 	tagTypes: ['Tasks'],
 	endpoints: builder => ({
 		getTasks: builder.query({
-			query: ({sortByDate, pp, page}) => `/v1/tasks/4?order=${sortByDate}&pp=${pp}&page=${page}`,
+			query: ({sortByDate, pp, page, filter}) => `/v1/tasks/4?filterBy=${filter}&order=${sortByDate}&pp=${pp}&page=${page}`,
 			providesTags: ['Tasks'],
 		}),
 		addTask: builder.mutation({
