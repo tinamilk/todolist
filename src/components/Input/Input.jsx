@@ -1,36 +1,38 @@
 import React, { useState } from 'react';
 import './Input.css';
-import { addTask } from '../../store/tasks/tasksSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import uuid from 'react-uuid';
 import { setAll } from '../../store/filter/filterSlice';
-
+import { useAddTaskMutation } from '../../store/tasksApi/tasksApi';
 
 export const Input = () => {
-
-	const [inputValue, setInputValue] = useState('');
+	const initialValue = {
+		'name': 'cheeeeeeck',
+		'done': false,
+		'createdAt': '2022-11-21T08:59:06.150Z',
+		'updatedAt': '2022-11-21T08:59:06.150Z'
+	};
+	const [inputValue, setInputValue] = useState(initialValue);
+	const [addTask, { isLoading } ] = useAddTaskMutation();
 
 	const dispatch = useDispatch();
 	const tasks = useSelector((state) => state.tasks);
 
 	const handleAddTitle = (e) => { setInputValue(e.target.value); };
 
-	const handleAddTask = () => {
-
-		const now = new Date();
-
-		const taskData = {
-			id: uuid(),
-			title: inputValue,
-			date: now.getTime(),
-			isDone: false
-		};
 
 
-		if (inputValue && inputValue.split(' ').join('')) {
-			dispatch(addTask(taskData));
-			dispatch(setAll(tasks));
+	const handleAddTask = async() => {
+
+		try {
+			if (inputValue.name && inputValue.name.split(' ').join('')) {
+				await addTask(inputValue).unwrap();
+				dispatch(setAll(tasks));
+			}
+		} catch (err) {
+			console.log(err.message);
 		}
+
+
 
 		setInputValue('');
 
