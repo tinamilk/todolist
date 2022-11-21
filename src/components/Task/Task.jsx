@@ -1,22 +1,19 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import delete_icon from '../../assets/img/delete_icon.svg';
 import checked_icon from '../../assets/img//checked_icon.svg';
 import './Task.css';
-import { useDispatch } from 'react-redux';
-import { changeTitle } from '../../store/tasks/tasksSlice';
 import close from '../../assets/img/close_icon.svg';
 import { useDeleteTaskMutation, useChangeTaskMutation } from '../../store/tasksApi/tasksApi';
 
 export const Task = ({title, id, isDone, date }) => {
 
-	const dispatch = useDispatch();
 	const toggleClassName = isDone ? 'checkbox checked' : 'checkbox';
 	const [isChanging, setIsChanging] = useState(false);
 	const [deleteTask, deleteResponse] = useDeleteTaskMutation();
 	const [changeTask, changeResponse] = useChangeTaskMutation();
 
 	console.log(changeResponse);
+	console.log(deleteResponse);
 
 	const handleChangeIsDone = async() => {
 
@@ -37,8 +34,6 @@ export const Task = ({title, id, isDone, date }) => {
 		
 	};
 
-	const formatedDate = new Date(date);
-
 	const handleChangeTitle = () => {
 		setIsChanging(true);
 	};
@@ -47,12 +42,23 @@ export const Task = ({title, id, isDone, date }) => {
 		setIsChanging(false);
 	};
 
-	const handleChangeTask = (e) => {
+	const handleChangeTask = async(e) => {
 		if (e.target.value && e.target.value.split(' ').join('')) {
-			dispatch(changeTitle({
-				id: id,
-				newTitle: e.target.value
-			}));
+			const now = new Date();
+
+			const patch = {
+				'name': e.target.value,
+				'done': isDone,
+				'createdAt': date,
+				'updatedAt': now.toJSON()
+			};
+
+			try {
+				await changeTask({id, patch});
+			} catch (err) {
+				console.log(err.message);
+			}
+			
 			setIsChanging(false);
 		}
 	};
@@ -101,7 +107,7 @@ export const Task = ({title, id, isDone, date }) => {
 					{title}
 				</p>
 			}
-			<p className='date'>{formatedDate.toLocaleString()}</p>
+			<p className='date'>{date}</p>
 		</div><div className='delete-button'
 			onClick={handleDeleteTask}
 		>
