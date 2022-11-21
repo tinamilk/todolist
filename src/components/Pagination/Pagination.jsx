@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import './Pagination.css';
 import next from '../../assets/img/next_icon.svg';
 import prev from '../../assets/img/prev_icon.svg';
@@ -19,16 +19,20 @@ export const Pagination = () => {
 	const lastTemporaryNumber = pagesPartsCount === pagesPart 
 		? lastPageNumber : pagesPart * 5;
 
+	useEffect(() => {
+		handleChangePage(currentPage);
+	}, [currentPage]);
+
 	const pages = useMemo(() => {
 		const temporary = [];
 
 		for (let firstNumber = firstTemporaryNumber; firstNumber <= lastTemporaryNumber; firstNumber++) {
 			temporary.push(firstNumber);
 		}
-		return temporary;
-	}, [lastPageNumber, pagesPart]);
 
-	
+		return temporary;
+	}, [pagesPart, firstTemporaryNumber, lastTemporaryNumber]);
+
 
 	const handleChangePage = (page) => {
 
@@ -50,7 +54,7 @@ export const Pagination = () => {
 	const handleChahgePrevPart = () => {
 
 		setPagesPart(pagesPart - 1);
-		dispatch(setPage(pagesPart * 5 - 5));
+		dispatch(setPage(pagesPart * 5 - 5)); //*4
 	};
 
 	return <div className='page-pagination'>
