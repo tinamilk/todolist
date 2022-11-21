@@ -1,6 +1,6 @@
 
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-
+//https://todo-api-learning.herokuapp.com/v1/task/4/90b52d7a-3447-48ac-ac7d-e34085c42e23
 export const tasksApi = createApi({
 
 	reducerPath: 'tasksApi',
@@ -22,8 +22,18 @@ export const tasksApi = createApi({
 				method: 'DELETE',
 			}),
 		}),
-	}),
+		changeTask: builder.mutation({
+			query: ({ id, patch }) => ({
+				url: `/v1/task/4/${id}`,
+				method: 'PATCH',
+				body: patch,
+			}),
+		}),
+	})
 });
   
 
-export const { useGetTasksQuery, useAddTaskMutation, useDeleteTaskMutation } = tasksApi;
+export const { useGetTasksQuery,
+	useAddTaskMutation, 
+	useDeleteTaskMutation,
+	useChangeTaskMutation} = tasksApi;

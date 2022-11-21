@@ -1,23 +1,40 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import delete_icon from '../../assets/img/delete_icon.svg';
 import checked_icon from '../../assets/img//checked_icon.svg';
 import './Task.css';
 import { useDispatch } from 'react-redux';
-import { setIsDone, changeTitle } from '../../store/tasks/tasksSlice';
+import { changeTitle } from '../../store/tasks/tasksSlice';
 import close from '../../assets/img/close_icon.svg';
-import { useDeleteTaskMutation } from '../../store/tasksApi/tasksApi';
+import { useDeleteTaskMutation, useChangeTaskMutation } from '../../store/tasksApi/tasksApi';
 
 export const Task = ({title, id, isDone, date }) => {
 
 	const dispatch = useDispatch();
 	const toggleClassName = isDone ? 'checkbox checked' : 'checkbox';
 	const [isChanging, setIsChanging] = useState(false);
-	const [deleteTask, response] = useDeleteTaskMutation();
+	const [deleteTask, deleteResponse] = useDeleteTaskMutation();
+	const [changeTask, changeResponse] = useChangeTaskMutation();
 
-	console.log(response.status);
+	console.log(changeResponse);
 
-	const handleChangeIsDone = () => {
-		dispatch(setIsDone(id));
+	const handleChangeIsDone = async() => {
+
+		const now = new Date();
+
+		const patch = {
+			'name': title,
+			'done': !isDone,
+			'createdAt': date,
+			'updatedAt': now.toJSON()
+		};
+
+		try {
+			await changeTask({id, patch});
+		} catch (err) {
+			console.log(err.message);
+		}
+		
 	};
 
 	const formatedDate = new Date(date);
