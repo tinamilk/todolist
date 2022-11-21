@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	sortByDate: 'asc',
-	pp: 5,
+	pp: 20,
 	page: 1
 };
 
