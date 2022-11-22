@@ -25,6 +25,7 @@ export const Tasks = () => {
 	};
 
 
+
 	return <div className='tasks'>
 
 		{data.isLoading && <img srcSet={loading} alt='loading'/>}

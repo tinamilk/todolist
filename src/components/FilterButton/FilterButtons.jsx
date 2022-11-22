@@ -1,42 +1,42 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import './FilterButtons.css';
-import { filters, filterTasks } from './filterTasks';
 import { changePage, setFilter} from '../../store/tasksQuery/tasksQuery';
-import { useGetTasksQuery } from '../../store/tasksApi/tasksApi';
+
+const filters = {
+	ALL: '', 
+	DONE: 'done',
+	UNDONE: 'undone'
+};
 
 export const FilterButtons = () => {
 
-	const {sortByDate, pp, page, filter } = useSelector((state) => state.tasksQuery);
-	const tasksData = useGetTasksQuery({sortByDate, pp, page, filter});
-	const [isEmpty, setIsEmpty] = useState(false);
 	const dispatch = useDispatch();
-	
+	const [currentFilter, setCurrentFilter] = useState('');
 
 	const handleFilterChange = (filter) => {
 
 		dispatch(setFilter(filter));
 		dispatch(changePage(1));
-		setIsEmpty(false);
-
+		setCurrentFilter(filter);
 	};
 
-	useEffect(() => {
-		if ( tasksData.currentData && tasksData.currentData.count === 0 ) {
-			setIsEmpty(true);
-		}
-	}, [tasksData]);
+	const setIsActiveClassName = (filter) => {
+		return filter === currentFilter;
+	};
 
 
 	return <div className='filter-buttons'>
 
 		{Object.values(filters).map((currentFilter, index) => {
 
+			const filterClassName = setIsActiveClassName(currentFilter) ?
+				'current-filter active' : 'current-filter';
+
 			return <button
 				key={index}
 				onClick={()=>handleFilterChange(currentFilter)}
-				className='current-filter'
+				className={filterClassName}
 			>
 				{currentFilter || 'all'}
 			</button>;
