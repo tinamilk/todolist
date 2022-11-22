@@ -15,9 +15,13 @@ export const Tasks = () => {
 	const data = useGetTasksQuery({sortByDate, pp, page, filter});
 
 	useEffect(() => {
-		data.currentData ? setTasks(data.currentData.tasks) : null;
-		data.currentData ? setTasksCount(data.currentData.count) : null;
-		data.currentData ? setRequestId(data.requestId) : null;
+
+		if (data.currentData ) {
+			setTasks(data.currentData.tasks);
+			setTasksCount(data.currentData.count);
+			setRequestId(data.requestId);
+		}
+
 	}, [data, filter]);
 
 	const getEmptyMessage = (filter) => {
@@ -30,8 +34,11 @@ export const Tasks = () => {
 
 		{data.isLoading && <img srcSet={loading} alt='loading'/>}
 
-		{ data.requestId === requestId && filter !== '' && tasksCount === 0 &&
-			<h3 className='empty_message'>{getEmptyMessage(filter)}</h3> }
+		{
+			data.requestId === requestId && filter !== '' && tasksCount === 0 &&
+
+			<h3 className='empty_message'>{getEmptyMessage(filter)}</h3>
+		}
 
 		{
 			!!tasksCount && 

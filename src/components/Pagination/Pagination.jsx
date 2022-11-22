@@ -20,8 +20,10 @@ export const Pagination = () => {
 	useEffect(() => {
 		if ( tasksData.currentData ) {
 			setTasksLength(tasksData.currentData.count);
-			tasksData.currentData.tasks.length === 0
-				&& currentPage !== 1 ? handleChangePage(currentPage - 1) : null;
+
+			if (tasksData.currentData.tasks.length === 0 && currentPage !== 1) {
+				handleChangePage(currentPage - 1);
+			}
 		}
 	}, [tasksData]);
 
@@ -40,8 +42,6 @@ export const Pagination = () => {
 		}
 		return temporary;
 	}, [lastPageNumber, pagesPart]);
-
-	
 
 	const handleChangePage = (page) => {
 

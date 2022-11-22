@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import './SortByDateButtons.css';
 import down from '../../assets/img/arrow_down.svg';

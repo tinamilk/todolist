@@ -1,18 +1,10 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import './Input.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { setAll } from '../../store/filter/filterSlice';
 import { useAddTaskMutation } from '../../store/tasksApi/tasksApi';
 
 export const Input = () => {
 	const [inputValue, setInputValue] = useState('');
-	const [addTask, { isLoading } ] = useAddTaskMutation();
-
-	console.log(isLoading);
-
-	const dispatch = useDispatch();
-	const tasks = useSelector((state) => state.tasks);
+	const [addTask] = useAddTaskMutation();
 
 	const handleAddTitle = (e) => { setInputValue(e.target.value);};
 	const handleAddTask = async() => {
@@ -31,7 +23,6 @@ export const Input = () => {
 				};
 
 				await addTask(body).unwrap();
-				// dispatch(setAll(tasks));
 			} else console.log('empty');
 		} catch (err) {
 			console.log(err.message);
