@@ -15,14 +15,15 @@ function ToDoList() {
 	const data = useGetTasksQuery({sortByDate, pp, page, filter});
 
 	const [tasks, setTasks] = useState([]);
+	const [tasksLength, setTasksLength] = useState(0);
 
 	useEffect(() => {
 		data.currentData ? setTasks(data.currentData.tasks) : null;
-		console.log(data);
+		data.currentData ? setTasksLength(data.currentData.count) : null;
 	}, [data]);
 
 
-
+	console.log(tasks.length);
 	return (
 		<div className="to-do-list">
 			<h1>ToDo List</h1>
@@ -33,7 +34,7 @@ function ToDoList() {
 			</div>
 			<Tasks/>
 
-			{ tasks.length ? <Pagination/> : null}
+			{ tasks.length && tasksLength > 5 ? <Pagination/> : null}
 
 		</div>
 	);
