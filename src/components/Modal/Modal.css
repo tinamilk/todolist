@@ -1,0 +1,19 @@
+.modal {
+    margin-top: 10%;
+    width: 40%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+    box-shadow: 0px 1px 9px 0px rgba(34, 60, 80, 0.15);
+}
+
+.close-modal-button {
+    width: 25px;
+}
+
+.close-modal-button:hover {
+    opacity: 0.8;
+}

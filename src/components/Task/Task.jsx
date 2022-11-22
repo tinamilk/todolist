@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import delete_icon from '../../assets/img/delete_icon.svg';
 import checked_icon from '../../assets/img//checked_icon.svg';
 import './Task.css';
 import close from '../../assets/img/close_icon.svg';
 import { useDeleteTaskMutation, useChangeTaskMutation } from '../../store/tasksApi/tasksApi';
+import { useDispatch } from 'react-redux';
+import { setModalActive } from '../../store/modal/modal';
 
 export const Task = ({title, id, isDone, date }) => {
 
@@ -11,6 +14,8 @@ export const Task = ({title, id, isDone, date }) => {
 	const [isChanging, setIsChanging] = useState(false);
 	const [deleteTask] = useDeleteTaskMutation();
 	const [changeTask] = useChangeTaskMutation();
+
+	const dispatch = useDispatch();
 
 	const handleChangeIsDone = async() => {
 
@@ -23,12 +28,8 @@ export const Task = ({title, id, isDone, date }) => {
 			'updatedAt': now.toJSON()
 		};
 
-		try {
-			await changeTask({id, patch});
-		} catch (err) {
-			console.log(err.message);
-		}
-		
+		await changeTask({id, patch}).unwrap().catch((error) => dispatch(setModalActive(error.data.message)));
+
 	};
 
 	const handleChangeTitle = () => {
@@ -50,11 +51,7 @@ export const Task = ({title, id, isDone, date }) => {
 				'updatedAt': now.toJSON()
 			};
 
-			try {
-				await changeTask({id, patch});
-			} catch (err) {
-				console.log(err.message);
-			}
+			await changeTask({id, patch}).unwrap().catch((error) => dispatch(setModalActive(error.data.message)));
 			
 			setIsChanging(false);
 		}
@@ -72,11 +69,7 @@ export const Task = ({title, id, isDone, date }) => {
 
 	const handleDeleteTask = async() => {
 
-		try {
-			await deleteTask(id);
-		} catch (err) {
-			console.log(err.message);
-		}
+		await deleteTask(id).unwrap().catch((error) => dispatch(setModalActive(error.data.message)));
 
 	};
 

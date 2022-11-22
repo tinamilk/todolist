@@ -7,12 +7,26 @@ import './globalStyles/styles.css';
 import { Pagination } from './components/Pagination/Pagination';
 import { useSelector } from 'react-redux';
 import { useGetTasksQuery } from './store/tasksApi/tasksApi';
+import { Modal } from './components/Modal/Modal';
+import { useDispatch } from 'react-redux';
+import { setInitial } from './store/modal/modal';
 
 
 function ToDoList() {
 
 	const {sortByDate, pp, page, filter } = useSelector((state) => state.tasksQuery);
 	const data = useGetTasksQuery({sortByDate, pp, page, filter});
+	const isModalActive = useSelector((state) => state.modal.isActive);
+	const modalTitle = useSelector((state) => state.modal.title);
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		setTimeout(() => {
+			dispatch(setInitial());
+		}, 30000);
+	}, [isModalActive]);
+
 
 	const [tasksLength, setTasksLength] = useState(0);
 
@@ -31,6 +45,7 @@ function ToDoList() {
 			<Tasks/>
 
 			{ tasksLength > 5 ? <Pagination/> : null}
+			{isModalActive && <Modal title={modalTitle}/>}
 
 		</div>
 	);
