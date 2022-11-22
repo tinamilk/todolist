@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	sortByDate: 'asc',
-	pp: 20,
+	pp: 5,
 	page: 1,
-	filter: 'undone'
+	filter: ''
 };
 
 export const tasksQuerySlice = createSlice({

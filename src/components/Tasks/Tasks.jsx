@@ -9,6 +9,7 @@ export const Tasks = () => {
 
 	const {sortByDate, pp, page, filter } = useSelector((state) => state.tasksQuery);
 	const [tasks, setTasks] = useState([]);
+	const [tasksCount, setTasksCount] = useState(0);
 
 	console.log(filter);
 
@@ -16,18 +17,20 @@ export const Tasks = () => {
 
 	useEffect(() => {
 		data.currentData ? setTasks(data.currentData.tasks) : null;
+		data.currentData ? setTasksCount(data.currentData.count) : null;
+		
 		console.log(data);
 	}, [data]);
 
-	
+
 	return <div className='tasks'>
-		{tasks && tasks.length ?
+		{tasksCount ?
 			tasks.map(task=> <Task
 				key = {task.uuid}
 				id={task.uuid}
 				title={task.name}
 				isDone={task.done}
-				date={task.createdAt}/>) 
-			: <img srcSet={loading} alt='loading'/>}
+				date={task.createdAt}/>)  :
+			<img srcSet={loading} alt='loading'/>} 
 	</div>;
 };

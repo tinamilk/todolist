@@ -1,19 +1,35 @@
-import React, { useMemo, useState } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useMemo, useState, useEffect } from 'react';
 import './Pagination.css';
 import next from '../../assets/img/next_icon.svg';
 import prev from '../../assets/img/prev_icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPage } from '../../store/page/pageSlice';
+import { changePage } from '../../store/tasksQuery/tasksQuery';
+import { useGetTasksQuery } from '../../store/tasksApi/tasksApi';
+
 
 export const Pagination = () => {
 
 	const dispatch = useDispatch();
-	const currentPage = useSelector((state) => state.page.currentPage);
-	const tasks = useSelector((state) => state.filter.filtered);
-	const lastPageNumber = Math.ceil(tasks.length / 5);
-	const pagesPartsCount = Math.ceil(lastPageNumber / 5);
+	const currentPage = useSelector((state) => state.tasksQuery.page);
+	const {sortByDate, pp, page, filter } = useSelector((state) => state.tasksQuery);
+	const tasksData = useGetTasksQuery({sortByDate, pp, page, filter});
 
+	const [tasksLength, setTasksLength] = useState(0);
+	const [currentPageItems, setCurrentPageItems] = useState([]);
 	const [pagesPart, setPagesPart] = useState(1);
+
+	useEffect(() => {
+		if ( tasksData.currentData ) {
+			console.log('kek');
+			setTasksLength(tasksData.currentData.count);
+			tasksData.currentData.tasks.length === 0 ? handleChangePage(currentPage - 1) : null;
+			setCurrentPageItems(tasksData.currentData.tasks);
+		}
+	}, [tasksData]);
+
+	const lastPageNumber = Math.ceil(tasksLength / 5);
+	const pagesPartsCount = Math.ceil(lastPageNumber / 5);
 
 	const firstTemporaryNumber = pagesPart * 5 - 4;
 	const lastTemporaryNumber = pagesPartsCount === pagesPart 
@@ -32,11 +48,13 @@ export const Pagination = () => {
 
 	const handleChangePage = (page) => {
 
-		dispatch(setPage(page));
+		dispatch(changePage(page));
 
 		if (page < firstTemporaryNumber) {
 			setPagesPart(pagesPart - 1);
+			console.log('first ' + firstTemporaryNumber);
 		} else if (page > lastTemporaryNumber) {
+			console.log('last' + lastTemporaryNumber);
 			setPagesPart(pagesPart + 1);
 		}
 		
@@ -44,13 +62,13 @@ export const Pagination = () => {
 
 	const handleChahgeNextPart = () => {
 		setPagesPart(pagesPart + 1);
-		dispatch(setPage(firstTemporaryNumber + 5));
+		dispatch(changePage(firstTemporaryNumber + 5));
 	};
 
 	const handleChahgePrevPart = () => {
 
 		setPagesPart(pagesPart - 1);
-		dispatch(setPage(pagesPart * 5 - 5));
+		dispatch(changePage(pagesPart * 5 - 5));
 	};
 
 	return <div className='page-pagination'>
