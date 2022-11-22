@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 import './SortByDateButtons.css';
 import down from '../../assets/img/arrow_down.svg';
 import up from '../../assets/img/arrow_up.svg';
@@ -7,27 +8,34 @@ import { changeSorting } from '../../store/tasksQuery/tasksQuery';
 
 
 const sortingValues = {
-	UP: 'asc',
-	DOWN: 'desc'
+	UP: 'desc',
+	DOWN: 'asc'
 };
 
 export const SortByDateButtons = () => {
+
+	const [sorting, setSorting] = useState(sortingValues.UP);
 
 	const dispatch = useDispatch();
 
 	const handleSortingChangeNew = () => {
 		dispatch(changeSorting(sortingValues.UP));
+		setSorting(sortingValues.UP);
 	};
 
 	const handleSortingChangeOld = () => {
 		dispatch(changeSorting(sortingValues.DOWN));
+		setSorting(sortingValues.DOWN);
 	};
+
+	const isDisabled = condition => condition === sorting ? '  disabled' : null;
 
 
 	return <div className='date-buttons'>
 
-		<p className='date-button-title'>Sort by date</p>
+		<p className={'date-button-title'}>Sort by date</p>
 		<button
+			className={'up-button' + isDisabled(sortingValues.UP)}
 			onClick={handleSortingChangeNew}>
 
 			<img
@@ -38,7 +46,9 @@ export const SortByDateButtons = () => {
 		</button>
 
 		<button
-			onClick={handleSortingChangeOld}>
+			onClick={handleSortingChangeOld}
+			className={'down-button' + isDisabled(sortingValues.DOWN)}
+		>
 			
 			<img
 				alt='down'
