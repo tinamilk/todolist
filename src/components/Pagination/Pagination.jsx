@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useMemo, useState, useEffect } from 'react';
 import './Pagination.css';
 import next from '../../assets/img/next_icon.svg';
@@ -16,15 +15,13 @@ export const Pagination = () => {
 	const tasksData = useGetTasksQuery({sortByDate, pp, page, filter});
 
 	const [tasksLength, setTasksLength] = useState(0);
-	const [currentPageItems, setCurrentPageItems] = useState([]);
 	const [pagesPart, setPagesPart] = useState(1);
 
 	useEffect(() => {
 		if ( tasksData.currentData ) {
-			console.log('kek');
 			setTasksLength(tasksData.currentData.count);
-			tasksData.currentData.tasks.length === 0 ? handleChangePage(currentPage - 1) : null;
-			setCurrentPageItems(tasksData.currentData.tasks);
+			tasksData.currentData.tasks.length === 0
+				&& currentPage !== 1 ? handleChangePage(currentPage - 1) : null;
 		}
 	}, [tasksData]);
 
@@ -52,9 +49,7 @@ export const Pagination = () => {
 
 		if (page < firstTemporaryNumber) {
 			setPagesPart(pagesPart - 1);
-			console.log('first ' + firstTemporaryNumber);
 		} else if (page > lastTemporaryNumber) {
-			console.log('last' + lastTemporaryNumber);
 			setPagesPart(pagesPart + 1);
 		}
 		

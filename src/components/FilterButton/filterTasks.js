@@ -16,6 +16,6 @@ export const filterTasks = (unfilteredTasks, filter) => {
 
 	default:
 
-		return unfilteredTasks;
+		return true;
 	}
 };
