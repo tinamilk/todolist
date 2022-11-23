@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import delete_icon from '../../assets/img/delete_icon.svg';
 import checked_icon from '../../assets/img//checked_icon.svg';
 import './Task.css';
@@ -7,12 +7,11 @@ import { setPage } from '../../store/page/pageSlice';
 import { removeTask, setIsDone, changeTitle } from '../../store/tasks/tasksSlice';
 import close from '../../assets/img/close_icon.svg';
 
-export const Task = ({title, id, isDone, date, sortedTasks}) => {
+export const Task = ({title, id, isDone, date, sortedTasks, setChanging, changingTask}) => {
 
 	const dispatch = useDispatch();
 	const toggleClassName = isDone ? 'checkbox checked' : 'checkbox';
 	const currentPage = useSelector((state) => state.page.currentPage);
-	const [isChanging, setIsChanging] = useState(false);
 
 	const handleChangeIsDone = () => {
 		dispatch(setIsDone(id));
@@ -22,11 +21,11 @@ export const Task = ({title, id, isDone, date, sortedTasks}) => {
 	const formatedDate = new Date(date);
 
 	const handleChangeTitle = () => {
-		setIsChanging(true);
+		setChanging(id);
 	};
 
 	const handleUnchangeTitle = () => {
-		setIsChanging(false);
+		setChanging('');
 	};
 
 	const handleChangeTask = (e) => {
@@ -35,14 +34,14 @@ export const Task = ({title, id, isDone, date, sortedTasks}) => {
 				id: id,
 				newTitle: e.target.value
 			}));
-			setIsChanging(false);
+			setChanging('');
 		}
 	};
 
 	const handleKeyDown= (e) => {
 
 		if (e.key === 'Escape') {
-			setIsChanging(false);
+			setChanging('');
 		}
 		if (e.key === 'Enter') {
 			handleChangeTask(e);
@@ -66,15 +65,15 @@ export const Task = ({title, id, isDone, date, sortedTasks}) => {
 			{isDone && <img className='checked-icon' srcSet={checked_icon}/>}
 		</div>
 		<div className='task-data'>
-			{isChanging ?
-				<>
+			{changingTask === id ?
+				<div className='changing_form'>
 					<input
 						autoFocus
 						className='changing_input'
 						defaultValue={title}
 						onKeyDown={(e) => handleKeyDown(e)} />
 					<img src={close} className='close_button' alt="close" srcSet="" onClick={handleUnchangeTitle}/>
-				</>
+				</div>
 				:
 				<p className={'title'}>
 					{title}

@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux';
 
 
 function ToDoList() {
-	const tasks = useSelector((state) => state.tasks);
+
+	const tasks = useSelector((state) => state.filter.filtered);
 
 	return (
 		<div className="to-do-list">

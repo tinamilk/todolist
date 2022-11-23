@@ -116,6 +116,11 @@
 .checked-icon {
     width: 100%
 }
+.changing_form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
 .changing_input {
     border: 2px solid #115055;

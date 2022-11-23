@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector  } from 'react-redux';
 import { Task } from '../Task/Task';
 import './Tasks.css';
@@ -10,6 +10,7 @@ export const Tasks = () => {
 	const unfiltered = useSelector((state) => state.tasks);
 	const filter = useSelector((state) => state.filter.filtered);
 	let sortedTasks = filter.length ? splitTasks(filter) : [];
+	const [changingTask, setChangingTask] = useState('');
 
 	
 	return <div className='tasks'>
@@ -21,7 +22,9 @@ export const Tasks = () => {
 					title={task.title}
 					isDone={task.isDone}
 					date={task.date}
-					sortedTasks={sortedTasks}/>) 
+					sortedTasks={sortedTasks}
+					setChanging={setChangingTask}
+					changingTask={changingTask}/>) 
 			: unfiltered.length === 0 ?
 				<h3 className='empty-message'>Add some task :)</h3> : null}
 	</div>;
