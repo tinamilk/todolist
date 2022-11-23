@@ -56,7 +56,7 @@ export const Task = ({title, id, isDone, date, setChanging, changingTask }) => {
 				.then(()=>setChanging(''))
 				.catch((error) => dispatch(setModalActive(error.data.message)));
 
-		}
+		} else dispatch(setModalActive('No tasks to change'));
 	};
 
 	const handleKeyDown= (e) => {
