@@ -11,6 +11,7 @@ export const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
 	const [tasksCount, setTasksCount] = useState();
 	const [requestId, setRequestId ] = useState('');
+	const [changingTask, setChangingTask] = useState('');
 
 	const data = useGetTasksQuery({sortByDate, pp, page, filter});
 
@@ -47,7 +48,9 @@ export const Tasks = () => {
 					id={task.uuid}
 					title={task.name}
 					isDone={task.done}
-					date={task.createdAt}/>)
+					date={task.createdAt}
+					setChanging={setChangingTask}
+					changingTask={changingTask}/>)
 		}
 	</div>;
 };

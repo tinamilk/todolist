@@ -91,6 +91,7 @@
     margin: auto 0;
     word-break: break-all;
     max-width: 70%;
+    cursor: pointer;
 }
 
 .title.full {

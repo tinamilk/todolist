@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React from 'react';
 import delete_icon from '../../assets/img/delete_icon.svg';
 import checked_icon from '../../assets/img//checked_icon.svg';
 import './Task.css';
@@ -8,10 +7,9 @@ import { useDeleteTaskMutation, useChangeTaskMutation } from '../../store/tasksA
 import { useDispatch } from 'react-redux';
 import { setModalActive } from '../../store/modal/modal';
 
-export const Task = ({title, id, isDone, date }) => {
+export const Task = ({title, id, isDone, date, setChanging, changingTask }) => {
 
 	const toggleClassName = isDone ? 'checkbox checked' : 'checkbox';
-	const [isChanging, setIsChanging] = useState(false);
 	const [deleteTask, {isUninitialized}] = useDeleteTaskMutation();
 	const [changeTask] = useChangeTaskMutation();
 
@@ -35,11 +33,11 @@ export const Task = ({title, id, isDone, date }) => {
 	};
 
 	const handleChangeTitle = () => {
-		setIsChanging(true);
+		setChanging(id);
 	};
 
 	const handleUnchangeTitle = () => {
-		setIsChanging(false);
+		setChanging('');
 	};
 
 	const handleChangeTask = async(e) => {
@@ -53,16 +51,18 @@ export const Task = ({title, id, isDone, date }) => {
 				'updatedAt': now.toJSON()
 			};
 
-			await changeTask({id, patch}).unwrap().catch((error) => dispatch(setModalActive(error.data.message)));
-			
-			setIsChanging(false);
+			await changeTask({id, patch})
+				.unwrap()
+				.then(()=>setChanging(''))
+				.catch((error) => dispatch(setModalActive(error.data.message)));
+
 		}
 	};
 
 	const handleKeyDown= (e) => {
 
 		if (e.key === 'Escape') {
-			setIsChanging(false);
+			setChanging(false);
 		}
 		if (e.key === 'Enter') {
 			handleChangeTask(e);
@@ -86,7 +86,7 @@ export const Task = ({title, id, isDone, date }) => {
 			{isDone && <img className='checked-icon' srcSet={checked_icon}/>}
 		</div>
 		<div className='task-data'>
-			{isChanging ?
+			{changingTask === id?
 				<>
 					<input
 						autoFocus
