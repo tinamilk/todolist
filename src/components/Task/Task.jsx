@@ -12,7 +12,7 @@ export const Task = ({title, id, isDone, date }) => {
 
 	const toggleClassName = isDone ? 'checkbox checked' : 'checkbox';
 	const [isChanging, setIsChanging] = useState(false);
-	const [deleteTask] = useDeleteTaskMutation();
+	const [deleteTask, {isUninitialized}] = useDeleteTaskMutation();
 	const [changeTask] = useChangeTaskMutation();
 
 	const dispatch = useDispatch();
@@ -28,7 +28,9 @@ export const Task = ({title, id, isDone, date }) => {
 			'updatedAt': now.toJSON()
 		};
 
-		await changeTask({id, patch}).unwrap().catch((error) => dispatch(setModalActive(error.data.message)));
+		await changeTask({id, patch})
+			.unwrap()
+			.catch((error) => dispatch(setModalActive(error.data.message)));
 
 	};
 
@@ -69,13 +71,14 @@ export const Task = ({title, id, isDone, date }) => {
 
 	const handleDeleteTask = async() => {
 
-		await deleteTask(id).unwrap().catch((error) => dispatch(setModalActive(error.data.message)));
+		await deleteTask(id)
+			.unwrap()
+			.catch((error) => dispatch(setModalActive(error.data.message)));
 
 	};
 
 
-	return <div className='task'
-		onDoubleClick={handleChangeTitle}>
+	return <div className='task'>
 		<div
 			className={toggleClassName}
 			onClick={handleChangeIsDone}
@@ -90,18 +93,19 @@ export const Task = ({title, id, isDone, date }) => {
 						className='changing_input'
 						defaultValue={title}
 						onKeyDown={(e) => handleKeyDown(e)} />
-					<img src={close} className='close_button' alt="close" srcSet="" onClick={handleUnchangeTitle}/>
+					<img className='close_button' alt="close" srcSet={close} onClick={handleUnchangeTitle}/>
 				</>
 				:
-				<p className={'title'}>
+				<p className={'title'} onDoubleClick={handleChangeTitle}>
 					{title}
 				</p>
 			}
 			<p className='date'>{date}</p>
-		</div><div className='delete-button'
+		</div><button className='delete-button'
 			onClick={handleDeleteTask}
+			disabled={!isUninitialized}
 		>
 			<img alt='delete' className='delete-icon' srcSet={delete_icon} />
-		</div>
+		</button>
 	</div>;
 };
