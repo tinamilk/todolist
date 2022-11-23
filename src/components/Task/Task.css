@@ -98,8 +98,8 @@
     cursor: pointer;
 }
 
-.title.full {
-    font-size: 13px;
+.title:hover {
+    opacity: 0.8;
 }
 
 .date {

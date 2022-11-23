@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import delete_icon from '../../assets/img/delete_icon.svg';
 import checked_icon from '../../assets/img//checked_icon.svg';
 import './Task.css';
@@ -21,9 +21,8 @@ export const Task = ({title, id, isDone, date, setChanging, changingTask }) => {
 
 	const toggleClassName = isDone ? 'checkbox checked' : 'checkbox';
 	const [deleteTask, {isUninitialized: isDeleteLoading}] = useDeleteTaskMutation();
-	const [changeTask, {isUninitialized: isChangingLoading}] = useChangeTaskMutation();
-
-	console.log(isChangingLoading);
+	const [changeTask] = useChangeTaskMutation();
+	const [currentTitle, setCurrentTitle] = useState(title);
 
 	const dispatch = useDispatch();
 
@@ -62,9 +61,10 @@ export const Task = ({title, id, isDone, date, setChanging, changingTask }) => {
 				'updatedAt': now.toJSON()
 			};
 
+
 			await changeTask({id, patch})
 				.unwrap()
-				.then(()=>setChanging(''))
+				.then(()=>{setChanging(''); setCurrentTitle(e.target.value);})
 				.catch((error) => dispatch(setModalActive(error.data.message)));
 
 		} else dispatch(setModalActive('No tasks to change'));
@@ -97,7 +97,7 @@ export const Task = ({title, id, isDone, date, setChanging, changingTask }) => {
 			{isDone && <img className='checked-icon' srcSet={checked_icon}/>}
 		</div>
 		<div className='task-data'>
-			{changingTask === id?
+			{changingTask === id ?
 				<div className='changing_form'>
 					<input
 						autoFocus
@@ -108,7 +108,7 @@ export const Task = ({title, id, isDone, date, setChanging, changingTask }) => {
 				</div>
 				:
 				<p className={'title'} onDoubleClick={handleChangeTitle}>
-					{title}
+					{currentTitle}
 				</p>
 			}
 			<p className='date'>{new Date(date).toLocaleDateString(undefined, options)}</p>

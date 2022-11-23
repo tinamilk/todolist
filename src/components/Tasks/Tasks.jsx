@@ -7,7 +7,6 @@ import loading from '../../assets/img/loading.svg';
 
 export const Tasks = () => {
 
-	// const {sortByDate, pp, page, filter } = useSelector((state) => state.tasksQuery);
 	const params = useSelector((state) => state.tasksQuery);
 	const [tasks, setTasks] = useState([]);
 	const [tasksCount, setTasksCount] = useState();
@@ -15,6 +14,7 @@ export const Tasks = () => {
 	const [changingTask, setChangingTask] = useState('');
 
 	const data = useGetTasksQuery(params);
+
 
 	useEffect(() => {
 
@@ -39,7 +39,7 @@ export const Tasks = () => {
 		{
 			data.requestId === requestId && params.filter !== '' && tasksCount === 0 &&
 
-			<h3 className='empty_message'>{getEmptyMessage(params.filter)}</h3>
+			<div className='empty_container'><h3 className='empty_message'>{getEmptyMessage(params.filter)}</h3></div>
 		}
 
 		{

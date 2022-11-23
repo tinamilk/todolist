@@ -12,9 +12,9 @@ export const Modal = ({title}) => {
 
 
 	return <div className='modal'>
-		<p>{title}</p>
-		<button onClick={()=>dispatch(setInitial())}>
-			<img className='close-modal-button' srcSet={close} alt='close'/>
+		<button onClick={()=>dispatch(setInitial())} className='close-modal-button'>
+			<img className='close-modal-icon' srcSet={close} alt='close'/>
 		</button>
+		<p className='modal-message'>{title}</p>
 	</div>;
 };
