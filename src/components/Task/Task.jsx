@@ -7,6 +7,15 @@ import { useDeleteTaskMutation, useChangeTaskMutation } from '../../store/tasksA
 import { useDispatch } from 'react-redux';
 import { setModalActive } from '../../store/modal/modal';
 
+const options = {
+	year: 'numeric',
+	month: '2-digit',
+	day: '2-digit',
+	hour: '2-digit',
+	minute: '2-digit',
+	second: '2-digit',
+};
+
 export const Task = ({title, id, isDone, date, setChanging, changingTask }) => {
 
 	const toggleClassName = isDone ? 'checkbox checked' : 'checkbox';
@@ -87,20 +96,20 @@ export const Task = ({title, id, isDone, date, setChanging, changingTask }) => {
 		</div>
 		<div className='task-data'>
 			{changingTask === id?
-				<>
+				<div className='changing_form'>
 					<input
 						autoFocus
 						className='changing_input'
 						defaultValue={title}
 						onKeyDown={(e) => handleKeyDown(e)} />
 					<img className='close_button' alt="close" srcSet={close} onClick={handleUnchangeTitle}/>
-				</>
+				</div>
 				:
 				<p className={'title'} onDoubleClick={handleChangeTitle}>
 					{title}
 				</p>
 			}
-			<p className='date'>{date}</p>
+			<p className='date'>{new Date(date).toLocaleDateString(undefined, options)}</p>
 		</div><button className='delete-button'
 			onClick={handleDeleteTask}
 			disabled={!isUninitialized}

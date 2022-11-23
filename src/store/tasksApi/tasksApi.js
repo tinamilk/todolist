@@ -3,7 +3,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 export const tasksApi = createApi({
 
 	reducerPath: 'tasksApi',
-	baseQuery: fetchBaseQuery({ baseUrl: 'https://todo-api-learning.herokuapp.com' }),
+	baseQuery: fetchBaseQuery({ baseUrl: window.env.URL}),
 	tagTypes: ['Tasks'],
 	endpoints: builder => ({
 		getTasks: builder.query({
@@ -12,7 +12,7 @@ export const tasksApi = createApi({
 		}),
 		addTask: builder.mutation({
 			query: (body) => ({
-				url: '/v1/task/4',
+				url: `/v1/task/${window.env.USER_ID}`,
 				method: 'POST',
 				body,
 			}),
