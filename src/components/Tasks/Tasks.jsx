@@ -7,13 +7,14 @@ import loading from '../../assets/img/loading.svg';
 
 export const Tasks = () => {
 
-	const {sortByDate, pp, page, filter } = useSelector((state) => state.tasksQuery);
+	// const {sortByDate, pp, page, filter } = useSelector((state) => state.tasksQuery);
+	const params = useSelector((state) => state.tasksQuery);
 	const [tasks, setTasks] = useState([]);
 	const [tasksCount, setTasksCount] = useState();
 	const [requestId, setRequestId ] = useState('');
 	const [changingTask, setChangingTask] = useState('');
 
-	const data = useGetTasksQuery({sortByDate, pp, page, filter});
+	const data = useGetTasksQuery(params);
 
 	useEffect(() => {
 
@@ -23,7 +24,7 @@ export const Tasks = () => {
 			setRequestId(data.requestId);
 		}
 
-	}, [data, filter]);
+	}, [data, params.filter]);
 
 	const getEmptyMessage = (filter) => {
 		return `${filter} is empty :)`;
@@ -36,9 +37,9 @@ export const Tasks = () => {
 		{data.isLoading && <img srcSet={loading} alt='loading'/>}
 
 		{
-			data.requestId === requestId && filter !== '' && tasksCount === 0 &&
+			data.requestId === requestId && params.filter !== '' && tasksCount === 0 &&
 
-			<h3 className='empty_message'>{getEmptyMessage(filter)}</h3>
+			<h3 className='empty_message'>{getEmptyMessage(params.filter)}</h3>
 		}
 
 		{

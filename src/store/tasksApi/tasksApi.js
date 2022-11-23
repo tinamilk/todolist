@@ -1,5 +1,6 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
+
 export const tasksApi = createApi({
 
 	reducerPath: 'tasksApi',
@@ -7,7 +8,7 @@ export const tasksApi = createApi({
 	tagTypes: ['Tasks'],
 	endpoints: builder => ({
 		getTasks: builder.query({
-			query: ({sortByDate, pp, page, filter}) => `/v1/tasks/4?filterBy=${filter}&order=${sortByDate}&pp=${pp}&page=${page}`,
+			query: (params) => `/v1/tasks/4?filterBy=${params.filter}&order=${params.sortByDate}&pp=${params.pp}&page=${params.page}`,
 			providesTags: ['Tasks'],
 		}),
 		addTask: builder.mutation({
@@ -20,14 +21,14 @@ export const tasksApi = createApi({
 		}),
 		deleteTask: builder.mutation({
 			query: (id) => ({
-				url: `/v1/task/4/${id}`,
+				url: `/v1/task/${window.env.USER_ID}/${id}`,
 				method: 'DELETE',
 			}),
 			invalidatesTags: ['Tasks'],
 		}),
 		changeTask: builder.mutation({
 			query: ({ id, patch }) => ({
-				url: `/v1/task/4/${id}`,
+				url: `/v1/task/${window.env.USER_ID}/${id}`,
 				method: 'PATCH',
 				body: patch,
 			}),

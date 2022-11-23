@@ -27,7 +27,7 @@ export const SortByDateButtons = () => {
 		setSorting(sortingValues.DOWN);
 	};
 
-	const isDisabled = condition => condition === sorting ? '  disabled' : null;
+	const isDisabled = condition => condition === sorting ? '  disabled' : ' active';
 
 
 	return <div className='date-buttons'>

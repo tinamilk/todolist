@@ -6,6 +6,7 @@ import close from '../../assets/img/close_icon.svg';
 import { useDeleteTaskMutation, useChangeTaskMutation } from '../../store/tasksApi/tasksApi';
 import { useDispatch } from 'react-redux';
 import { setModalActive } from '../../store/modal/modal';
+import { validateInput  } from '../../helpers/validateInput';
 
 const options = {
 	year: 'numeric',
@@ -19,8 +20,10 @@ const options = {
 export const Task = ({title, id, isDone, date, setChanging, changingTask }) => {
 
 	const toggleClassName = isDone ? 'checkbox checked' : 'checkbox';
-	const [deleteTask, {isUninitialized}] = useDeleteTaskMutation();
-	const [changeTask] = useChangeTaskMutation();
+	const [deleteTask, {isUninitialized: isDeleteLoading}] = useDeleteTaskMutation();
+	const [changeTask, {isUninitialized: isChangingLoading}] = useChangeTaskMutation();
+
+	console.log(isChangingLoading);
 
 	const dispatch = useDispatch();
 
@@ -38,7 +41,6 @@ export const Task = ({title, id, isDone, date, setChanging, changingTask }) => {
 		await changeTask({id, patch})
 			.unwrap()
 			.catch((error) => dispatch(setModalActive(error.data.message)));
-
 	};
 
 	const handleChangeTitle = () => {
@@ -50,7 +52,7 @@ export const Task = ({title, id, isDone, date, setChanging, changingTask }) => {
 	};
 
 	const handleChangeTask = async(e) => {
-		if (e.target.value && e.target.value.split(' ').join('')) {
+		if (validateInput(e.target.value)) {
 			const now = new Date();
 
 			const patch = {
@@ -112,7 +114,7 @@ export const Task = ({title, id, isDone, date, setChanging, changingTask }) => {
 			<p className='date'>{new Date(date).toLocaleDateString(undefined, options)}</p>
 		</div><button className='delete-button'
 			onClick={handleDeleteTask}
-			disabled={!isUninitialized}
+			disabled={!isDeleteLoading}
 		>
 			<img alt='delete' className='delete-icon' srcSet={delete_icon} />
 		</button>

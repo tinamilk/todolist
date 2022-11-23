@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import './Input.css';
 import { useAddTaskMutation } from '../../store/tasksApi/tasksApi';
 import { setModalActive } from '../../store/modal/modal';
+import { validateInput } from '../../helpers/validateInput';
 
 export const Input = () => {
 	const [inputValue, setInputValue] = useState('');
@@ -16,7 +17,7 @@ export const Input = () => {
 		const now = new Date();
 		const formatedDate = now.toJSON();
 
-		if (inputValue && inputValue.split(' ').join('')) {
+		if (validateInput(inputValue)) {
 
 			const body = {
 				'name': inputValue,
