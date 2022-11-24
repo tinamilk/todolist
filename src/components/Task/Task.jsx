@@ -87,14 +87,6 @@ export const Task = ({
 		setIsEditing(true);
 	};
 
-	// const ref = React.useRef();
-	// useOutsideClick({
-	// 	ref: ref,
-	// 	handler: () => toggleEditInputDisabled(false),
-	// });
-
-
-	console.log(isDeleteLoading);
 	return (
 		<div className="task">
 			<div className={toggleClassName} onClick={handleChangeIsDone}>
