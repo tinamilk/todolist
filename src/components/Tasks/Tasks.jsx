@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Task } from '../Task/Task';
 import './Tasks.css';
 import { useGetTasksQuery } from '../../store/tasksApi/tasksApi';
-import loading from '../../assets/img/loading.svg';
+import { Spinner } from '@chakra-ui/react';
 
 export const Tasks = () => {
 
@@ -11,7 +11,9 @@ export const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
 	const [tasksCount, setTasksCount] = useState();
 	const [requestId, setRequestId ] = useState('');
-	const [changingTask, setChangingTask] = useState('');
+
+	const [isEditInputDisabled, setIsEditInputDisabled] = useState(false);
+	const toggleEditInputDisabled = () => setIsEditInputDisabled(!isEditInputDisabled);
 
 	const data = useGetTasksQuery(params);
 
@@ -30,11 +32,19 @@ export const Tasks = () => {
 		return `${filter} is empty :)`;
 	};
 
-
-
 	return <div className='tasks'>
 
-		{data.isLoading && <img srcSet={loading} alt='loading'/>}
+		{data.isLoading &&
+			<div className='empty_container'>
+				<Spinner
+					thickness='4px'
+					speed='0.65s'
+					emptyColor='gray.200'
+					color='#115055'
+					size='xl'
+				/>
+			</div>
+		}
 
 		{
 			data.requestId === requestId && params.filter !== '' && tasksCount === 0 &&
@@ -50,8 +60,9 @@ export const Tasks = () => {
 					title={task.name}
 					isDone={task.done}
 					date={task.createdAt}
-					setChanging={setChangingTask}
-					changingTask={changingTask}/>)
+					toggleEditInputDisabled={toggleEditInputDisabled}
+					isEditInputDisabled={isEditInputDisabled}
+				/>)
 		}
 	</div>;
 };
