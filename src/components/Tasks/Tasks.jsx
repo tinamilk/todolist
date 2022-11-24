@@ -13,7 +13,7 @@ export const Tasks = () => {
 	const [requestId, setRequestId ] = useState('');
 
 	const [isEditInputDisabled, setIsEditInputDisabled] = useState(false);
-	const toggleEditInputDisabled = () => setIsEditInputDisabled(!isEditInputDisabled);
+	const toggleEditInputDisabled = (condition) => setIsEditInputDisabled(condition);
 
 	const data = useGetTasksQuery(params);
 

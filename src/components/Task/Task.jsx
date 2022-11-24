@@ -51,7 +51,7 @@ export const Task = ({
 			.unwrap()
 			.then(() => {
 				handleIsEditingChange();
-				toggleEditInputDisabled();
+				toggleEditInputDisabled(false);
 			})
 			.catch((error) => dispatch(setModalActive(error.data.message)));
 
@@ -75,6 +75,7 @@ export const Task = ({
 	};
 
 	const handleDeleteTask = async () => {
+		toggleEditInputDisabled(false);
 		await deleteTask(id)
 			.unwrap()
 			.catch((error) => dispatch(setModalActive(error.data.message)));
@@ -82,22 +83,24 @@ export const Task = ({
 
 	const handleDBClick = () => {
 		if (isEditInputDisabled) return;
-		toggleEditInputDisabled();
+		toggleEditInputDisabled(true);
 		setIsEditing(true);
 	};
 
-	const ref = React.useRef();
-	useOutsideClick({
-		ref: ref,
-		handler: () => toggleEditInputDisabled(),
-	});
+	// const ref = React.useRef();
+	// useOutsideClick({
+	// 	ref: ref,
+	// 	handler: () => toggleEditInputDisabled(false),
+	// });
 
+
+	console.log(isDeleteLoading);
 	return (
 		<div className="task">
 			<div className={toggleClassName} onClick={handleChangeIsDone}>
 				{isDone && <img className="checked-icon" srcSet={checked_icon} />}
 			</div>
-			<div ref={ref} className="task-data" onClick={() => handleDBClick(id)}>
+			<div className="task-data" onClick={() => handleDBClick(id)}>
 				<ChangeTitleInput
 					title={title}
 					isDone={isDone}

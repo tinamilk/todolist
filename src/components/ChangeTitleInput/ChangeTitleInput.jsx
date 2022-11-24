@@ -1,9 +1,7 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import { setModalActive } from '../../store/modal/modal';
 import { validateInput } from '../../helpers/validateInput';
-import { useChangeTaskMutation } from '../../store/tasksApi/tasksApi';
 
 import {
 	Input,
@@ -27,14 +25,20 @@ export const ChangeTitleInput = ({
 	const [isSmallerThan600] = useMediaQuery('(max-width: 600px)');
 
 	const handleUnchangeTitle = () => {
+		console.log(1);
+		toggleEditInputDisabled(false);
+		console.log(2);
 		setCurrentTitle(title);
-		toggleEditInputDisabled();
-		handleIsEditingChange();
+		console.log(3);
+		handleIsEditingChange(false);
+		console.log(4);
+
 	};
 
 
 	const handleChangeTitle = () => {
 		if (validateInput(currentTitle)) {
+			toggleEditInputDisabled(false);
 			handleTitleSubmit(currentTitle);
 		} else {
 			setModalActive('No task to add :(');
@@ -45,7 +49,7 @@ export const ChangeTitleInput = ({
 		if (e.key === 'Escape') {
 			handleUnchangeTitle();
 		} else if (e.key === 'Enter') {
-			toggleEditInputDisabled();
+			toggleEditInputDisabled(false);
 			handleTitleSubmit(currentTitle);
 		}
 	};
