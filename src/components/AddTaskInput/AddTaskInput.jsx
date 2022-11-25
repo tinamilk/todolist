@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import './Input.css';
 import { useAddTaskMutation } from '../../store/tasksApi/tasksApi';
 import { setModalActive } from '../../store/modal/modal';
 import { validateInput } from '../../helpers/validateInput';
+import { Input, InputLeftElement, InputGroup, Stack } from '@chakra-ui/react';
+import {BiAddToQueue} from 'react-icons/bi';
 
-export const Input = () => {
+
+export const AddTaskInput = () => {
 	const [inputValue, setInputValue] = useState('');
 	const [addTask] = useAddTaskMutation();
 
@@ -34,12 +36,31 @@ export const Input = () => {
 
 	};
 
-	return <input
-		className='search-input'
-		placeholder='I want to...'
-		onKeyDown={(e) => e.key === 'Enter' && handleAddTask()}
-		onChange={(e) => handleAddTitle(e)}
-		value={inputValue}
-		autoFocus
-	/>;
+	return <Stack width='70%' height='40px'><InputGroup height='40px'>
+		<InputLeftElement
+			pointerEvents='none'
+			height='40px'
+			// eslint-disable-next-line react/no-children-prop
+			children={<BiAddToQueue color='gray.300'/>}
+		/>
+		<Input
+			className='search-input'
+			placeholder='I want to...'
+			onKeyDown={(e) => e.key === 'Enter' && handleAddTask()}
+			onChange={(e) => handleAddTitle(e)}
+			value={inputValue}
+			autoFocus
+			size='lg'
+			border='2px solid #197278'
+			borderRadius ='10px'
+			height='40px'
+			_focus={{
+				border: '3px solid #197278',
+				boxShadow: 'none'
+			}}
+			_hover={{
+				border: '2px solid #197278'
+			}}
+		/>;</InputGroup>
+	</Stack>;
 };

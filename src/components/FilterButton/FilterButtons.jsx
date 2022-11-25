@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './FilterButtons.css';
 import { changePage, setFilter} from '../../store/tasksQuery/tasksQuery';
+import { Button, Box } from '@chakra-ui/react';
 
 const filters = {
 	ALL: '', 
@@ -26,21 +27,22 @@ export const FilterButtons = () => {
 	};
 
 
-	return <div className='filter-buttons'>
+	return <Box className='filter-buttons'
+		display='flex' flexDirection='row' justifyContent='space-between'>
 
 		{Object.values(filters).map((currentFilter, index) => {
 
 			const filterClassName = setIsActiveClassName(currentFilter) ?
 				'current-filter active' : 'current-filter';
 
-			return <button
+			return <Button
 				key={index}
 				onClick={()=>handleFilterChange(currentFilter)}
 				className={filterClassName}
 			>
 				{currentFilter || 'all'}
-			</button>;
+			</Button>;
 		})}
 
-	</div>;
+	</Box>;
 };

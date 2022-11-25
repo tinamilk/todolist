@@ -27,12 +27,6 @@
     }
 }
 
-.filter-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
 .current-filter {
     display: flex;
     flex-direction: column;

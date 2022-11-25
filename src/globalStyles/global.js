@@ -10,11 +10,21 @@ export const global = {
 				flexDirection: 'column',
 				justifyContent: 'center',
 				alignItems: 'center',
-				fontFamily: 'SairaCondensedRegular'
+				fontFamily: 'SairaCondensedRegular',
 			},
-			a: {
-				color: 'teal.500',
+			h1: {
+				fontFamily: 'SairaCondensedBold',
+				color: '#283D3B',
+				fontSize: '40px'
 			},
+			button: {
+				background: 'none',
+				border: 'none'
+			},
+			p: {
+				color: '#283D3B',
+				fontFamily: 'SairaCondensedRegular',
+			}
 		},
 	},
 };

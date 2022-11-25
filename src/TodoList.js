@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input } from './components/Input/Input';
+import { AddTaskInput } from './components/AddTaskInput/AddTaskInput';
 import { FilterButtons } from './components/FilterButton/FilterButtons';
 import { SortByDateButtons } from './components/SortByDateButton/SortByDateButtons';
 import { Tasks } from './components/Tasks/Tasks';
@@ -22,7 +22,7 @@ function ToDoList() {
 	return (
 		<div className="to-do-list">
 			<h1>ToDo List</h1>
-			<Input/>
+			<AddTaskInput/>
 			<div className='buttons'>
 				<FilterButtons/>
 				<SortByDateButtons/>

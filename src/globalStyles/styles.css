@@ -1,14 +1,5 @@
 @import './fonts/stylesheet.css';
 
-/* body {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #EDDDD4;
-    font-family: 'SairaCondensedRegular', sans-serif;
-} */
 
 h1 {
     font-family: 'SairaCondensedBold', sans-serif;
