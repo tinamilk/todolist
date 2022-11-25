@@ -2,7 +2,7 @@ export const global = {
 	styles: {
 		global: {
 			'html, body': {
-				color: 'gray.600',
+				color: '#115055',
 				backgroundColor: '#EDDDD4',
 				lineHeight: 'tall',
 				margin: '0',
@@ -24,7 +24,7 @@ export const global = {
 			p: {
 				color: '#283D3B',
 				fontFamily: 'SairaCondensedRegular',
-			}
+			},
 		},
 	},
 };

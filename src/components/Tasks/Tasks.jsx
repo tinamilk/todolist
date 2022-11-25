@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Task } from '../Task/Task';
-import './Tasks.css';
 import { useGetTasksQuery } from '../../store/tasksApi/tasksApi';
-import { Spinner } from '@chakra-ui/react';
+import { Spinner, Box, Heading } from '@chakra-ui/react';
 
 export const Tasks = () => {
 
@@ -32,10 +31,10 @@ export const Tasks = () => {
 		return `${filter} is empty :)`;
 	};
 
-	return <div className='tasks'>
+	return <Box width='75%' minHeight='50%'>
 
 		{data.isLoading &&
-			<div className='empty_container'>
+			<Box className='empty_container'>
 				<Spinner
 					thickness='4px'
 					speed='0.65s'
@@ -43,13 +42,22 @@ export const Tasks = () => {
 					color='#115055'
 					size='xl'
 				/>
-			</div>
+			</Box>
 		}
 
 		{
 			data.requestId === requestId && params.filter !== '' && tasksCount === 0 &&
 
-			<div className='empty_container'><h3 className='empty_message'>{getEmptyMessage(params.filter)}</h3></div>
+			<Box
+				display='flex'
+				flexDirection='column'
+				justifyContent='center'
+				alignItems='center'
+			>
+				<Heading className='empty_message' as='h4' size='md' color='#197278'>
+					{getEmptyMessage(params.filter)}
+				</Heading>
+			</Box>
 		}
 
 		{
@@ -64,5 +72,5 @@ export const Tasks = () => {
 					isEditInputDisabled={isEditInputDisabled}
 				/>)
 		}
-	</div>;
+	</Box>;
 };

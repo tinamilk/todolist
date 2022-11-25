@@ -1,8 +1,4 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import delete_icon from '../../assets/img/delete_icon.svg';
-import checked_icon from '../../assets/img//checked_icon.svg';
-import './Task.css';
 import {
 	useDeleteTaskMutation,
 	useChangeTaskMutation,
@@ -10,7 +6,9 @@ import {
 import { useDispatch } from 'react-redux';
 import { setModalActive } from '../../store/modal/modal';
 import { ChangeTitleInput } from '../ChangeTitleInput/ChangeTitleInput';
-import { useOutsideClick } from '@chakra-ui/react';
+import { MdDone } from 'react-icons/md';
+import { TiDeleteOutline } from 'react-icons/ti';
+import { Box, Text, useMediaQuery, IconButton} from '@chakra-ui/react';
 
 const options = {
 	year: 'numeric',
@@ -29,13 +27,16 @@ export const Task = ({
 	isEditInputDisabled,
 	toggleEditInputDisabled,
 }) => {
-	const toggleClassName = isDone ? 'checkbox checked' : 'checkbox';
+
 	const [deleteTask, { isUninitialized: isDeleteLoading }] =
 		useDeleteTaskMutation();
 	const [changeTask] = useChangeTaskMutation();
-
 	const [isEditing, setIsEditing] = useState(false);
 	const handleIsEditingChange = (value) => setIsEditing(value);
+	const [isLargerThan800] = useMediaQuery('(min-width: 800px)');
+	const [isLargerThan1000] = useMediaQuery('(min-width: 1000px)');
+
+
 	const handleTitleSubmit = async(title) => {
 
 		const now = new Date();
@@ -88,11 +89,31 @@ export const Task = ({
 	};
 
 	return (
-		<div className="task">
-			<div className={toggleClassName} onClick={handleChangeIsDone}>
-				{isDone && <img className="checked-icon" srcSet={checked_icon} />}
-			</div>
-			<div className="task-data" onClick={() => handleDBClick(id)}>
+		<Box 
+			display='flex'
+			flexDirection='row'
+			justifyContent='space-between'
+			border='2px solid #115055'
+			borderRadius='20px'
+			padding='10px'
+			margin='10px'>
+			<IconButton
+				colorScheme='blue'
+				aria-label='Search database'
+				icon={isDone && <MdDone/>}
+				onClick={handleChangeIsDone}
+				background={isDone ? '#e5989b' : '#edede9'}
+				_hover={{
+					background: '#FFCEC2'
+				}}
+				size={isLargerThan800 ? 'md' : 'xs'}
+				marginRight='5px'
+			/>
+			
+			<Box onClick={() => handleDBClick(id)}
+				display='flex'
+				justifyContent='space-between'
+				minWidth='80%'>
 				<ChangeTitleInput
 					title={title}
 					isDone={isDone}
@@ -103,17 +124,19 @@ export const Task = ({
 					handleTitleSubmit={handleTitleSubmit}
 					handleIsEditingChange={handleIsEditingChange}
 				/>
-				<p className="date">
+				<Text fontSize={isLargerThan1000 ? 'lg' : 'xs'} marginRight='3px'>
 					{new Date(date).toLocaleDateString(undefined, options)}
-				</p>
-			</div>
-			<button
-				className="delete-button"
+				</Text>
+			</Box>
+			<IconButton
+				fontSize='lg'
 				onClick={handleDeleteTask}
 				disabled={!isDeleteLoading}
-			>
-				<img alt="delete" className="delete-icon" srcSet={delete_icon} />
-			</button>
-		</div>
+				icon={<TiDeleteOutline/>}
+				size={isLargerThan800 ? 'md' : 'xs'}
+				marginRight='5px'
+			/>
+
+		</Box>
 	);
 };
