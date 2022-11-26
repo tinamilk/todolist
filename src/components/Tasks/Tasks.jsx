@@ -7,7 +7,6 @@ import loading from '../../assets/img/loading.svg';
 
 export const Tasks = () => {
 
-	// const {sortByDate, pp, page, filter } = useSelector((state) => state.tasksQuery);
 	const params = useSelector((state) => state.tasksQuery);
 	const [tasks, setTasks] = useState([]);
 	const [tasksCount, setTasksCount] = useState();

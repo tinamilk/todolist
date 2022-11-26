@@ -21,9 +21,7 @@ export const Task = ({title, id, isDone, date, setChanging, changingTask }) => {
 
 	const toggleClassName = isDone ? 'checkbox checked' : 'checkbox';
 	const [deleteTask, {isUninitialized: isDeleteLoading}] = useDeleteTaskMutation();
-	const [changeTask, {isUninitialized: isChangingLoading}] = useChangeTaskMutation();
-
-	console.log(isChangingLoading);
+	const [changeTask] = useChangeTaskMutation();
 
 	const dispatch = useDispatch();
 

@@ -17,6 +17,41 @@ export const Pagination = () => {
 	const [tasksLength, setTasksLength] = useState(0);
 	const [pagesPart, setPagesPart] = useState(1);
 
+	const lastPageNumber = Math.ceil(tasksLength / 5);
+	const pagesPartsCount = Math.ceil(lastPageNumber / 5);
+	const firstTemporaryNumber = pagesPart * 5 - 4;
+	const lastTemporaryNumber = pagesPartsCount === pagesPart 
+		? lastPageNumber : pagesPart * 5;
+
+
+	const handleChangePage = (page) => {
+		console.log(page + ' page');
+		dispatch(changePage(page));
+			
+	};
+
+	const changePart = () => {
+		if (currentPage === lastPageNumber) {
+			setPagesPart(pagesPartsCount);
+		} else if (currentPage <= 5) {
+			console.log('kek');
+			setPagesPart(1);
+		} else if (currentPage < firstTemporaryNumber) {
+			setPagesPart(pagesPart - 1);
+		} else if (currentPage > lastTemporaryNumber) {
+			setPagesPart(pagesPart + 1);
+		}
+	};
+
+	const pages = useMemo(() => {
+		changePart();
+		const temporary = [];
+		for (let firstNumber = firstTemporaryNumber; firstNumber <= lastTemporaryNumber; firstNumber++) {
+			temporary.push(firstNumber);
+		}
+		return temporary;
+	}, [lastPageNumber, pagesPart, currentPage]);
+
 	useEffect(() => {
 		if ( tasksData.currentData ) {
 			setTasksLength(tasksData.currentData.count);
@@ -26,34 +61,6 @@ export const Pagination = () => {
 			}
 		}
 	}, [tasksData]);
-
-	const lastPageNumber = Math.ceil(tasksLength / 5);
-	const pagesPartsCount = Math.ceil(lastPageNumber / 5);
-
-	const firstTemporaryNumber = pagesPart * 5 - 4;
-	const lastTemporaryNumber = pagesPartsCount === pagesPart 
-		? lastPageNumber : pagesPart * 5;
-
-	const pages = useMemo(() => {
-		const temporary = [];
-
-		for (let firstNumber = firstTemporaryNumber; firstNumber <= lastTemporaryNumber; firstNumber++) {
-			temporary.push(firstNumber);
-		}
-		return temporary;
-	}, [lastPageNumber, pagesPart]);
-
-	const handleChangePage = (page) => {
-
-		dispatch(changePage(page));
-
-		if (page < firstTemporaryNumber) {
-			setPagesPart(pagesPart - 1);
-		} else if (page > lastTemporaryNumber) {
-			setPagesPart(pagesPart + 1);
-		}
-		
-	};
 
 	const handleChahgeNextPart = () => {
 		setPagesPart(pagesPart + 1);
