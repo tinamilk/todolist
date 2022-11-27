@@ -1,20 +1,23 @@
-import React from 'react';
-import './Modal.css';
-import close from '../../assets/img/close_icon.svg';
-import { useDispatch } from 'react-redux';
+import { useToast } from '@chakra-ui/react';
+import { useSelector, useDispatch } from 'react-redux';
 import { setInitial } from '../../store/modal/modal';
 
-
-
-export const Modal = ({title}) => {
+export const Modal = () => {
+	const isModalActive = useSelector((state) => state.modal.isActive);
+	const modalTitle = useSelector((state) => state.modal.title);
+	const toast = useToast();
 
 	const dispatch = useDispatch();
 
+	if (isModalActive) {
+		toast.closeAll();
+		dispatch(setInitial());
+		return toast({
+			title: modalTitle,
+			status: 'error',
+			isClosable: true,
+			duration: 9000
+		});
+	}
 
-	return <div className='modal'>
-		<button onClick={()=>dispatch(setInitial())} className='close-modal-button'>
-			<img className='close-modal-icon' srcSet={close} alt='close'/>
-		</button>
-		<p className='modal-message'>{title}</p>
-	</div>;
 };
