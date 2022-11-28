@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import './SortByDateButtons.css';
-import down from '../../assets/img/arrow_down.svg';
-import up from '../../assets/img/arrow_up.svg';
 import { useDispatch } from 'react-redux';
 import { changeSorting } from '../../store/tasksQuery/tasksQuery';
-import { IconButton } from '@chakra-ui/react';
+import { IconButton, Box, Button } from '@chakra-ui/react';
+import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
 
 
 const sortingValues = {
@@ -28,33 +26,20 @@ export const SortByDateButtons = () => {
 		setSorting(sortingValues.DOWN);
 	};
 
-	const isDisabled = condition => condition === sorting ? '  disabled' : ' active';
 
+	return <Box display='flex' flexDirection='row'>
 
-	return <div className='date-buttons'>
-
-		<p className={'date-button-title'}>Sort by date</p>
-		<IconButton
-			className={'up-button' + isDisabled(sortingValues.UP)}
-			onClick={handleSortingChangeNew}>
-
-			<img
-				alt='up'
-				srcSet={up}
-			/>
-
-		</IconButton>
+		<Button margin='auto 5px' color='#283D3B' fontSize='xl'
+			cursor='pointer' variant='ghost'
+			onClick={sorting === sortingValues.UP ? handleSortingChangeOld : handleSortingChangeNew}>
+				Sort by date
+		</Button>
 
 		<IconButton
-			onClick={handleSortingChangeOld}
-			className={'down-button' + isDisabled(sortingValues.DOWN)}
-		>
-			
-			<img
-				alt='down'
-				srcSet={down}
-			/>
+			variant='ghost'
+			onClick={sorting === sortingValues.UP ? handleSortingChangeOld : handleSortingChangeNew}
+			icon={sorting === sortingValues.UP ? <AiOutlineArrowDown/> : <AiOutlineArrowUp/>}>
 
 		</IconButton>
-	</div>;
+	</Box>;
 };
