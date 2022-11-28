@@ -6,8 +6,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { setModalActive } from '../../store/modal/modal';
 import { ChangeTitleInput } from '../ChangeTitleInput/ChangeTitleInput';
-import { MdDone } from 'react-icons/md';
-import { TiDeleteOutline } from 'react-icons/ti';
+import { DeleteIcon, CheckIcon } from '@chakra-ui/icons';
 import { Box, Text, useMediaQuery, IconButton} from '@chakra-ui/react';
 
 const options = {
@@ -100,7 +99,7 @@ export const Task = ({
 			<IconButton
 				colorScheme='blue'
 				aria-label='Search database'
-				icon={isDone && <MdDone/>}
+				icon={isDone && <CheckIcon/>}
 				onClick={handleChangeIsDone}
 				background={isDone ? '#e5989b' : '#edede9'}
 				_hover={{
@@ -132,7 +131,7 @@ export const Task = ({
 				fontSize='lg'
 				onClick={handleDeleteTask}
 				disabled={!isDeleteLoading}
-				icon={<TiDeleteOutline/>}
+				icon={<DeleteIcon/>}
 				size={isLargerThan800 ? 'md' : 'xs'}
 				marginRight='5px'
 			/>

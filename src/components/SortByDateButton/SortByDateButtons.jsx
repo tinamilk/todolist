@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changeSorting } from '../../store/tasksQuery/tasksQuery';
 import { IconButton, Box, Button } from '@chakra-ui/react';
-import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
+import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
 
 
 const sortingValues = {
@@ -31,15 +31,15 @@ export const SortByDateButtons = () => {
 
 		<Button margin='auto 5px' color='#283D3B' fontSize='xl'
 			cursor='pointer' variant='ghost'
-			onClick={sorting === sortingValues.UP ? handleSortingChangeOld : handleSortingChangeNew}>
+			onClick={sorting === sortingValues.UP ? handleSortingChangeOld : handleSortingChangeNew}
+		>
 				Sort by date
 		</Button>
 
 		<IconButton
 			variant='ghost'
 			onClick={sorting === sortingValues.UP ? handleSortingChangeOld : handleSortingChangeNew}
-			icon={sorting === sortingValues.UP ? <AiOutlineArrowDown/> : <AiOutlineArrowUp/>}>
-
-		</IconButton>
+			icon={sorting === sortingValues.UP ? <ArrowDownIcon/> : <ArrowUpIcon/>}
+		/>
 	</Box>;
 };

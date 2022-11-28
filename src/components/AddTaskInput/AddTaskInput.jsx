@@ -4,7 +4,7 @@ import { useAddTaskMutation } from '../../store/tasksApi/tasksApi';
 import { setModalActive } from '../../store/modal/modal';
 import { validateInput } from '../../helpers/validateInput';
 import { Input, InputLeftElement, InputGroup, Stack } from '@chakra-ui/react';
-import {BiAddToQueue} from 'react-icons/bi';
+import { AddIcon } from '@chakra-ui/icons';
 
 
 export const AddTaskInput = () => {
@@ -41,7 +41,7 @@ export const AddTaskInput = () => {
 			pointerEvents='none'
 			height='40px'
 			// eslint-disable-next-line react/no-children-prop
-			children={<BiAddToQueue color='gray.300'/>}
+			children={<AddIcon/>}
 		/>
 		<Input
 			className='search-input'

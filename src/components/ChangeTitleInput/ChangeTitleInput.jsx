@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { setModalActive } from '../../store/modal/modal';
 import { validateInput } from '../../helpers/validateInput';
@@ -12,7 +11,7 @@ import {
 	useMediaQuery,
 } from '@chakra-ui/react';
 
-import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai';
+import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 
 export const ChangeTitleInput = ({
 	title,
@@ -74,11 +73,11 @@ export const ChangeTitleInput = ({
 						onKeyDown={(e) => handleKeyPress(e)}
 					/>
 					<ButtonGroup>
-						<IconButton height='30px' icon={<AiOutlineCheck />} onClick={handleChangeTitle} />
+						<IconButton height='30px' icon={<CheckIcon />} onClick={handleChangeTitle} />
 						<IconButton
 							height='30px'
 							onClick={handleUnchangeTitle}
-							icon={<AiOutlineClose />}
+							icon={<CloseIcon />}
 						/>
 					</ButtonGroup>
 				</>

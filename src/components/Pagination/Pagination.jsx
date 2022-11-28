@@ -1,10 +1,9 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import next from '../../assets/img/next_icon.svg';
-import prev from '../../assets/img/prev_icon.svg';
+import { ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { changePage } from '../../store/tasksQuery/tasksQuery';
 import { useGetTasksQuery } from '../../store/tasksApi/tasksApi';
-import { Button, Box } from '@chakra-ui/react';
+import { Button, Box, IconButton } from '@chakra-ui/react';
 
 
 export const Pagination = () => {
@@ -25,12 +24,11 @@ export const Pagination = () => {
 
 
 	const handleChangePage = (page) => {
-		console.log(page + ' page');
 		dispatch(changePage(page));
-			
 	};
 
 	const changePart = () => {
+
 		if (currentPage === lastPageNumber) {
 			setPagesPart(pagesPartsCount);
 		} else if (currentPage <= 5) {
@@ -54,10 +52,6 @@ export const Pagination = () => {
 	useEffect(() => {
 		if ( tasksData.currentData ) {
 			setTasksLength(tasksData.currentData.count);
-
-			if (tasksData.currentData.tasks.length === 0 && currentPage !== 1) {
-				handleChangePage(currentPage - 1);
-			}
 		}
 	}, [tasksData]);
 
@@ -79,12 +73,8 @@ export const Pagination = () => {
 		marginTop='5vh'
 	>
 		{currentPage !== 1 &&
-		<Button onClick={()=>handleChangePage(1)} variant='ghost'>
-			<img
-				alt='prev'
-				srcSet={prev}
-			/>
-		</Button>}
+		<IconButton onClick={()=>handleChangePage(1)} variant='ghost'
+			icon={<ArrowLeftIcon/>}/>}
 		{pagesPart !== 1 &&
 			<Button
 				variant='ghost'
@@ -94,7 +84,7 @@ export const Pagination = () => {
 			</Button>
 		}
 
-		{pages.length ? pages.map(page => {
+		{pages.map(page => {
 			return <Button
 				color={page === currentPage ? '#1B8188' : '#283D3B'}
 				variant='ghost'
@@ -103,23 +93,23 @@ export const Pagination = () => {
 			>
 				{page}
 			</Button>;
-		}) : 0}
+		})}
 
 		{pagesPart !== pagesPartsCount &&
-			<Button variant='ghost'
+			<Button
+				variant='ghost'
 				onClick={()=>handleChahgeNextPart()}
 			>
 				...
 			</Button>
 		}
 
-		{currentPage !== lastPageNumber &&
-		<Button variant='ghost' onClick={()=>handleChangePage(lastPageNumber)}>
-			<img
-				alt='prev'
-				srcSet={next}
-			/>
-		</Button>
+		{
+			currentPage !== lastPageNumber &&
+				<IconButton
+					variant='ghost' onClick={()=>handleChangePage(lastPageNumber)}
+					icon={<ArrowRightIcon/>}
+				/>
 		}
 	</Box>;
 };

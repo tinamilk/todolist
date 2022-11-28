@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Task } from '../Task/Task';
 import { useGetTasksQuery } from '../../store/tasksApi/tasksApi';
 import { Spinner, Box, Heading } from '@chakra-ui/react';
+import { changePage } from '../../store/tasksQuery/tasksQuery';
 
 export const Tasks = () => {
 
 	const params = useSelector((state) => state.tasksQuery);
+	const currentPage = useSelector((state) => state.tasksQuery.page);
 	const [tasks, setTasks] = useState([]);
 	const [tasksCount, setTasksCount] = useState();
 	const [requestId, setRequestId ] = useState('');
@@ -15,6 +17,7 @@ export const Tasks = () => {
 	const toggleEditInputDisabled = (condition) => setIsEditInputDisabled(condition);
 
 	const data = useGetTasksQuery(params);
+	const dispatch = useDispatch();
 
 
 	useEffect(() => {
@@ -23,6 +26,11 @@ export const Tasks = () => {
 			setTasks(data.currentData.tasks);
 			setTasksCount(data.currentData.count);
 			setRequestId(data.requestId);
+			
+			if (data.currentData.tasks.length === 0 && currentPage !== 1) {
+				dispatch(changePage(currentPage - 1));
+				
+			}
 		}
 
 	}, [data, params.filter]);
