@@ -4,6 +4,7 @@ import down from '../../assets/img/arrow_down.svg';
 import up from '../../assets/img/arrow_up.svg';
 import { useDispatch } from 'react-redux';
 import { changeSorting } from '../../store/tasksQuery/tasksQuery';
+import { IconButton } from '@chakra-ui/react';
 
 
 const sortingValues = {
@@ -33,7 +34,7 @@ export const SortByDateButtons = () => {
 	return <div className='date-buttons'>
 
 		<p className={'date-button-title'}>Sort by date</p>
-		<button
+		<IconButton
 			className={'up-button' + isDisabled(sortingValues.UP)}
 			onClick={handleSortingChangeNew}>
 
@@ -42,9 +43,9 @@ export const SortByDateButtons = () => {
 				srcSet={up}
 			/>
 
-		</button>
+		</IconButton>
 
-		<button
+		<IconButton
 			onClick={handleSortingChangeOld}
 			className={'down-button' + isDisabled(sortingValues.DOWN)}
 		>
@@ -54,6 +55,6 @@ export const SortByDateButtons = () => {
 				srcSet={down}
 			/>
 
-		</button>
+		</IconButton>
 	</div>;
 };

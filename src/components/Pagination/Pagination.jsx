@@ -34,7 +34,6 @@ export const Pagination = () => {
 		if (currentPage === lastPageNumber) {
 			setPagesPart(pagesPartsCount);
 		} else if (currentPage <= 5) {
-			console.log('kek');
 			setPagesPart(1);
 		} else if (currentPage < firstTemporaryNumber) {
 			setPagesPart(pagesPart - 1);
