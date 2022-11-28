@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { setModalActive } from '../../store/modal/modal';
 import { ChangeTitleInput } from '../ChangeTitleInput/ChangeTitleInput';
 import { DeleteIcon, CheckIcon } from '@chakra-ui/icons';
-import { Box, Text, useMediaQuery, IconButton} from '@chakra-ui/react';
+import { Box, Text, useMediaQuery, IconButton } from '@chakra-ui/react';
 
 const options = {
 	year: 'numeric',
@@ -26,7 +26,6 @@ export const Task = ({
 	isEditInputDisabled,
 	toggleEditInputDisabled,
 }) => {
-
 	const [deleteTask, { isUninitialized: isDeleteLoading }] =
 		useDeleteTaskMutation();
 	const [changeTask] = useChangeTaskMutation();
@@ -35,9 +34,7 @@ export const Task = ({
 	const [isLargerThan800] = useMediaQuery('(min-width: 800px)');
 	const [isLargerThan1000] = useMediaQuery('(min-width: 1000px)');
 
-
-	const handleTitleSubmit = async(title) => {
-
+	const handleTitleSubmit = async (title) => {
 		const now = new Date();
 
 		const patch = {
@@ -54,7 +51,6 @@ export const Task = ({
 				toggleEditInputDisabled(false);
 			})
 			.catch((error) => dispatch(setModalActive(error.data.message)));
-
 	};
 
 	const dispatch = useDispatch();
@@ -88,31 +84,34 @@ export const Task = ({
 	};
 
 	return (
-		<Box 
-			display='flex'
-			flexDirection='row'
-			justifyContent='space-between'
-			border='2px solid #115055'
-			borderRadius='20px'
-			padding='10px'
-			margin='10px'>
+		<Box
+			display="flex"
+			flexDirection="row"
+			justifyContent="space-between"
+			border="2px solid #115055"
+			borderRadius="20px"
+			padding="10px"
+			margin="10px"
+		>
 			<IconButton
-				colorScheme='blue'
-				aria-label='Search database'
-				icon={isDone && <CheckIcon/>}
+				colorScheme="blue"
+				aria-label="Search database"
+				icon={isDone && <CheckIcon />}
 				onClick={handleChangeIsDone}
 				background={isDone ? '#e5989b' : '#edede9'}
 				_hover={{
-					background: '#FFCEC2'
+					background: '#FFCEC2',
 				}}
 				size={isLargerThan800 ? 'md' : 'xs'}
-				marginRight='5px'
+				marginRight="5px"
 			/>
-			
-			<Box onClick={() => handleDBClick(id)}
-				display='flex'
-				justifyContent='space-between'
-				minWidth='80%'>
+
+			<Box
+				onClick={() => handleDBClick(id)}
+				display="flex"
+				justifyContent="space-between"
+				minWidth="80%"
+			>
 				<ChangeTitleInput
 					title={title}
 					isDone={isDone}
@@ -123,19 +122,18 @@ export const Task = ({
 					handleTitleSubmit={handleTitleSubmit}
 					handleIsEditingChange={handleIsEditingChange}
 				/>
-				<Text fontSize={isLargerThan1000 ? 'lg' : 'xs'} marginRight='3px'>
+				<Text fontSize={isLargerThan1000 ? 'lg' : 'xs'} marginRight="3px">
 					{new Date(date).toLocaleDateString(undefined, options)}
 				</Text>
 			</Box>
 			<IconButton
-				fontSize='lg'
+				fontSize="lg"
 				onClick={handleDeleteTask}
 				disabled={!isDeleteLoading}
-				icon={<DeleteIcon/>}
+				icon={<DeleteIcon />}
 				size={isLargerThan800 ? 'md' : 'xs'}
-				marginRight='5px'
+				marginRight="5px"
 			/>
-
 		</Box>
 	);
 };

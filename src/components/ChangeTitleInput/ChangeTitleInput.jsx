@@ -31,9 +31,7 @@ export const ChangeTitleInput = ({
 		console.log(3);
 		handleIsEditingChange(false);
 		console.log(4);
-
 	};
-
 
 	const handleChangeTitle = () => {
 		if (validateInput(currentTitle)) {
@@ -69,13 +67,17 @@ export const ChangeTitleInput = ({
 						onChange={(e) => setCurrentTitle(e.target.value)}
 						width="50%"
 						value={currentTitle}
-						height='30px'
+						height="30px"
 						onKeyDown={(e) => handleKeyPress(e)}
 					/>
 					<ButtonGroup>
-						<IconButton height='30px' icon={<CheckIcon />} onClick={handleChangeTitle} />
 						<IconButton
-							height='30px'
+							height="30px"
+							icon={<CheckIcon />}
+							onClick={handleChangeTitle}
+						/>
+						<IconButton
+							height="30px"
 							onClick={handleUnchangeTitle}
 							icon={<CloseIcon />}
 						/>

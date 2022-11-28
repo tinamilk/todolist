@@ -4,7 +4,7 @@ const initialState = {
 	sortByDate: 'desc',
 	pp: 5,
 	page: 1,
-	filter: ''
+	filter: '',
 };
 
 export const tasksQuerySlice = createSlice({
@@ -19,10 +19,11 @@ export const tasksQuerySlice = createSlice({
 		},
 		setFilter: (state, action) => {
 			state.filter = action.payload;
-		}
+		},
 	},
 });
 
-export const { changeSorting, changePage, setMustReload, setFilter } = tasksQuerySlice.actions;
+export const { changeSorting, changePage, setMustReload, setFilter } =
+	tasksQuerySlice.actions;
 
 export default tasksQuerySlice.reducer;

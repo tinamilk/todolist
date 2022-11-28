@@ -16,8 +16,7 @@ export const Modal = () => {
 			title: modalTitle,
 			status: 'error',
 			isClosable: true,
-			duration: 9000
+			duration: 9000,
 		});
 	}
-
 };

@@ -7,9 +7,8 @@ export const store = configureStore({
 	reducer: {
 		[tasksApi.reducerPath]: tasksApi.reducer,
 		tasksQuery: tasksQuery,
-		modal: modal
+		modal: modal,
 	},
-	middleware: (getDefaultMiddleware) => 
-		getDefaultMiddleware()
-			.concat(tasksApi.middleware)
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware().concat(tasksApi.middleware),
 });

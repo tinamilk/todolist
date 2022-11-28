@@ -4,14 +4,12 @@ import { changeSorting } from '../../store/tasksQuery/tasksQuery';
 import { IconButton, Box, Button } from '@chakra-ui/react';
 import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
 
-
 const sortingValues = {
 	UP: 'desc',
-	DOWN: 'asc'
+	DOWN: 'asc',
 };
 
 export const SortByDateButtons = () => {
-
 	const [sorting, setSorting] = useState(sortingValues.UP);
 
 	const dispatch = useDispatch();
@@ -26,20 +24,34 @@ export const SortByDateButtons = () => {
 		setSorting(sortingValues.DOWN);
 	};
 
-
-	return <Box display='flex' flexDirection='row'>
-
-		<Button margin='auto 5px' color='#283D3B' fontSize='xl'
-			cursor='pointer' variant='ghost'
-			onClick={sorting === sortingValues.UP ? handleSortingChangeOld : handleSortingChangeNew}
-		>
+	return (
+		<Box display="flex" flexDirection="row">
+			<Button
+				margin="auto 5px"
+				color="#283D3B"
+				fontSize="xl"
+				cursor="pointer"
+				variant="ghost"
+				onClick={
+					sorting === sortingValues.UP
+						? handleSortingChangeOld
+						: handleSortingChangeNew
+				}
+			>
 				Sort by date
-		</Button>
+			</Button>
 
-		<IconButton
-			variant='ghost'
-			onClick={sorting === sortingValues.UP ? handleSortingChangeOld : handleSortingChangeNew}
-			icon={sorting === sortingValues.UP ? <ArrowDownIcon/> : <ArrowUpIcon/>}
-		/>
-	</Box>;
+			<IconButton
+				variant="ghost"
+				onClick={
+					sorting === sortingValues.UP
+						? handleSortingChangeOld
+						: handleSortingChangeNew
+				}
+				icon={
+					sorting === sortingValues.UP ? <ArrowDownIcon /> : <ArrowUpIcon />
+				}
+			/>
+		</Box>
+	);
 };
