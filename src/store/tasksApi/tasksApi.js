@@ -1,18 +1,22 @@
+/* eslint-disable no-undef */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
+
+const url = process.env.REACT_APP_NODE_ENV === 'live' ? process.env.REACT_APP_EXT_URL : process.env.REACT_APP_LOCAL_URL;
 
 export const tasksApi = createApi({
 	reducerPath: 'tasksApi',
-	baseQuery: fetchBaseQuery({ baseUrl: window.env.URL }),
+	baseQuery: fetchBaseQuery({ baseUrl: url }),
 	tagTypes: ['Tasks'],
 	endpoints: (builder) => ({
 		getTasks: builder.query({
 			query: (params) =>
-				`/v1/tasks/4?filterBy=${params.filter}&order=${params.sortByDate}&pp=${params.pp}&page=${params.page}`,
+				`?filterBy=${params.filter}&order=${params.sortByDate}&pp=${params.pp}&page=${params.page}`,
 			providesTags: ['Tasks'],
 		}),
 		addTask: builder.mutation({
 			query: (body) => ({
-				url: `/v1/task/${window.env.USER_ID}`,
+				url: '/',
 				method: 'POST',
 				body,
 			}),
@@ -20,14 +24,14 @@ export const tasksApi = createApi({
 		}),
 		deleteTask: builder.mutation({
 			query: (id) => ({
-				url: `/v1/task/${window.env.USER_ID}/${id}`,
+				url: id,
 				method: 'DELETE',
 			}),
 			invalidatesTags: ['Tasks'],
 		}),
 		changeTask: builder.mutation({
 			query: ({ id, patch }) => ({
-				url: `/v1/task/${window.env.USER_ID}/${id}`,
+				url: id,
 				method: 'PATCH',
 				body: patch,
 			}),

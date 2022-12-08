@@ -12,6 +12,7 @@ export const Tasks = () => {
 	const [tasksCount, setTasksCount] = useState();
 	const [requestId, setRequestId] = useState('');
 
+
 	const [isEditInputDisabled, setIsEditInputDisabled] = useState(false);
 	const toggleEditInputDisabled = (condition) =>
 		setIsEditInputDisabled(condition);
@@ -75,10 +76,10 @@ export const Tasks = () => {
 			{!!tasksCount &&
 				tasks.map((task) => (
 					<Task
-						key={task.uuid}
-						id={task.uuid}
-						title={task.name}
-						isDone={task.done}
+						key={task.id}
+						id={task.id}
+						title={task.title}
+						done={task.isDone}
 						date={task.createdAt}
 						toggleEditInputDisabled={toggleEditInputDisabled}
 						isEditInputDisabled={isEditInputDisabled}

@@ -24,13 +24,9 @@ export const ChangeTitleInput = ({
 	const [isSmallerThan600] = useMediaQuery('(max-width: 600px)');
 
 	const handleUnchangeTitle = () => {
-		console.log(1);
 		toggleEditInputDisabled(false);
-		console.log(2);
 		setCurrentTitle(title);
-		console.log(3);
 		handleIsEditingChange(false);
-		console.log(4);
 	};
 
 	const handleChangeTitle = () => {

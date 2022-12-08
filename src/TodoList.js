@@ -3,7 +3,6 @@ import { AddTaskInput } from './components/AddTaskInput/AddTaskInput';
 import { FilterButtons } from './components/FilterButton/FilterButtons';
 import { SortByDateButtons } from './components/SortByDateButton/SortByDateButtons';
 import { Tasks } from './components/Tasks/Tasks';
-// import './globalStyles/styles.css';
 import './globalStyles/fonts/stylesheet.css';
 import { Pagination } from './components/Pagination/Pagination';
 import { useSelector } from 'react-redux';

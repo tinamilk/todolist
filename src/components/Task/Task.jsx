@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import {
 	useDeleteTaskMutation,
@@ -21,7 +22,7 @@ const options = {
 export const Task = ({
 	title,
 	id,
-	isDone,
+	done,
 	date,
 	isEditInputDisabled,
 	toggleEditInputDisabled,
@@ -35,13 +36,9 @@ export const Task = ({
 	const [isLargerThan1000] = useMediaQuery('(min-width: 1000px)');
 
 	const handleTitleSubmit = async (title) => {
-		const now = new Date();
 
 		const patch = {
-			name: title,
-			done: isDone,
-			createdAt: date,
-			updatedAt: now.toJSON(),
+			title: title,
 		};
 
 		await changeTask({ id, patch })
@@ -56,13 +53,10 @@ export const Task = ({
 	const dispatch = useDispatch();
 
 	const handleChangeIsDone = async () => {
-		const now = new Date();
 
 		const patch = {
-			name: title,
-			done: !isDone,
-			createdAt: date,
-			updatedAt: now.toJSON(),
+			title: title,
+			isDone: !done
 		};
 
 		await changeTask({ id, patch })
@@ -96,9 +90,9 @@ export const Task = ({
 			<IconButton
 				colorScheme="blue"
 				aria-label="Search database"
-				icon={isDone && <CheckIcon />}
+				icon={done && <CheckIcon />}
 				onClick={handleChangeIsDone}
-				background={isDone ? '#e5989b' : '#edede9'}
+				background={done ? '#e5989b' : '#edede9'}
 				_hover={{
 					background: '#FFCEC2',
 				}}
@@ -114,7 +108,7 @@ export const Task = ({
 			>
 				<ChangeTitleInput
 					title={title}
-					isDone={isDone}
+					isDone={done}
 					date={date}
 					id={id}
 					toggleEditInputDisabled={toggleEditInputDisabled}

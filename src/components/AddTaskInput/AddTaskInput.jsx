@@ -16,15 +16,12 @@ export const AddTaskInput = () => {
 		setInputValue(e.target.value);
 	};
 	const handleAddTask = async () => {
-		const now = new Date();
-		const formatedDate = now.toJSON();
+		// const now = new Date();
+		// const formatedDate = now.toJSON();
 
 		if (validateInput(inputValue)) {
 			const body = {
-				name: inputValue,
-				done: false,
-				createdAt: formatedDate,
-				updatedAt: formatedDate,
+				title: inputValue,
 			};
 
 			await addTask(body)
