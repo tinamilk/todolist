@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/todolist/static/css/main.1a3e63fd.css",
+    "main.js": "/todolist/static/js/main.d3f7eebd.js",
+    "static/media/SairaCondensed-Light.svg": "/todolist/static/media/SairaCondensed-Light.006183394f7e56c3f96f.svg",
+    "static/media/SairaCondensed-Medium.svg": "/todolist/static/media/SairaCondensed-Medium.6ac16c17ac0a9776dfc0.svg",
+    "static/media/SairaCondensed-Regular.svg": "/todolist/static/media/SairaCondensed-Regular.53b042d444ded8de8ab1.svg",
+    "static/media/SairaCondensed-Black.svg": "/todolist/static/media/SairaCondensed-Black.8a0f4f70f4e7726a0981.svg",
+    "static/media/SairaCondensed-Bold.svg": "/todolist/static/media/SairaCondensed-Bold.9f594733191aea8bba4f.svg",
+    "static/media/SairaCondensed-Black.eot": "/todolist/static/media/SairaCondensed-Black.38ba2417aae512569df9.eot",
+    "static/media/SairaCondensed-Black.ttf": "/todolist/static/media/SairaCondensed-Black.b6f86cb61e90e96729ab.ttf",
+    "static/media/SairaCondensed-Medium.eot": "/todolist/static/media/SairaCondensed-Medium.f634e7822a080f60ad44.eot",
+    "static/media/SairaCondensed-Medium.ttf": "/todolist/static/media/SairaCondensed-Medium.bf00ac2dff3e48e4affa.ttf",
+    "static/media/SairaCondensed-Bold.eot": "/todolist/static/media/SairaCondensed-Bold.ca8720f0f9c89f1473e2.eot",
+    "static/media/SairaCondensed-Light.eot": "/todolist/static/media/SairaCondensed-Light.163c4d573657fade7419.eot",
+    "static/media/SairaCondensed-Bold.ttf": "/todolist/static/media/SairaCondensed-Bold.d5a081b51035bde4966c.ttf",
+    "static/media/SairaCondensed-Light.ttf": "/todolist/static/media/SairaCondensed-Light.36cc36d4f9e805448c88.ttf",
+    "static/media/SairaCondensed-Regular.eot": "/todolist/static/media/SairaCondensed-Regular.8e0b363c71d0d609b477.eot",
+    "static/media/SairaCondensed-Regular.ttf": "/todolist/static/media/SairaCondensed-Regular.c9d0abedb22bcff302fe.ttf",
+    "static/media/SairaCondensed-Medium.woff": "/todolist/static/media/SairaCondensed-Medium.6bc60344dd350b20428f.woff",
+    "static/media/SairaCondensed-Bold.woff": "/todolist/static/media/SairaCondensed-Bold.97fe4380d15d03dc2aa3.woff",
+    "static/media/SairaCondensed-Regular.woff": "/todolist/static/media/SairaCondensed-Regular.d2acf311192d0e872d8f.woff",
+    "static/media/SairaCondensed-Light.woff": "/todolist/static/media/SairaCondensed-Light.9ca7d473b86a54e7d14b.woff",
+    "static/media/SairaCondensed-Black.woff": "/todolist/static/media/SairaCondensed-Black.7ae5c1d4a39618fa8c0c.woff",
+    "static/media/SairaCondensed-Medium.woff2": "/todolist/static/media/SairaCondensed-Medium.1c3eef4bee7cfa2fad07.woff2",
+    "static/media/SairaCondensed-Bold.woff2": "/todolist/static/media/SairaCondensed-Bold.9566e218048fd3315c20.woff2",
+    "static/media/SairaCondensed-Black.woff2": "/todolist/static/media/SairaCondensed-Black.1233758d73d6f21354ca.woff2",
+    "static/media/SairaCondensed-Regular.woff2": "/todolist/static/media/SairaCondensed-Regular.8dd1d4dd121ce8859b57.woff2",
+    "static/media/SairaCondensed-Light.woff2": "/todolist/static/media/SairaCondensed-Light.62ded2318de1a74490de.woff2",
+    "index.html": "/todolist/index.html",
+    "main.1a3e63fd.css.map": "/todolist/static/css/main.1a3e63fd.css.map",
+    "main.d3f7eebd.js.map": "/todolist/static/js/main.d3f7eebd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1a3e63fd.css",
+    "static/js/main.d3f7eebd.js"
+  ]
+}
