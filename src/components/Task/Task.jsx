@@ -47,7 +47,7 @@ export const Task = ({
 				handleIsEditingChange();
 				toggleEditInputDisabled(false);
 			})
-			.catch((error) => dispatch(setModalActive(error.data.message)));
+			.catch((error) => dispatch(setModalActive(error.data.errors[0].msg)));
 	};
 
 	const dispatch = useDispatch();
@@ -81,7 +81,7 @@ export const Task = ({
 		<Box
 			display="flex"
 			flexDirection="row"
-			justifyContent="space-between"
+			justifyContent="space-evenly"
 			border="2px solid #115055"
 			borderRadius="20px"
 			padding="10px"
