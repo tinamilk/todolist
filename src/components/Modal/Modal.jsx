@@ -13,6 +13,7 @@ export const Modal = () => {
 		toast.closeAll();
 		dispatch(setInitial());
 		return toast({
+			position: 'top',
 			title: modalTitle,
 			status: 'error',
 			isClosable: true,

@@ -5,7 +5,7 @@ const url =
 	process.env.REACT_APP_NODE_ENV === 'development'
 		? process.env.REACT_APP_LOCAL_URL
 		: process.env.REACT_APP_EXT_URL;
-console.log(url);
+
 export const tasksApi = createApi({
 	reducerPath: 'tasksApi',
 	baseQuery: fetchBaseQuery({ baseUrl: url }),

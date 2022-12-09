@@ -33,7 +33,7 @@ export const Tasks = () => {
 	}, [data, params.filter]);
 
 	const getEmptyMessage = (filter) => {
-		return `${filter} is empty :)`;
+		return filter ? `${filter} is empty :)` : 'Add some task';
 	};
 
 	return (
@@ -56,14 +56,13 @@ export const Tasks = () => {
 				</Box>
 			)}
 
-			{data.requestId === requestId &&
-				params.filter !== '' &&
-				tasksCount === 0 && (
+			{data.requestId === requestId && tasksCount === 0 && (
 				<Box
 					display="flex"
 					flexDirection="column"
 					justifyContent="center"
 					alignItems="center"
+					minHeight="30vh"
 				>
 					<Heading as="h4" size="md" color="#197278">
 						{getEmptyMessage(params.filter)}
