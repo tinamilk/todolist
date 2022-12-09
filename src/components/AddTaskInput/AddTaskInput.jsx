@@ -16,9 +16,6 @@ export const AddTaskInput = () => {
 		setInputValue(e.target.value);
 	};
 	const handleAddTask = async () => {
-		// const now = new Date();
-		// const formatedDate = now.toJSON();
-
 		if (validateInput(inputValue)) {
 			const body = {
 				title: inputValue,
@@ -27,7 +24,7 @@ export const AddTaskInput = () => {
 			await addTask(body)
 				.unwrap()
 				.catch((error) => dispatch(setModalActive(error.data.message)));
-		} else dispatch(setModalActive('No task to add :('));
+		} else dispatch(setModalActive('Title is empty'));
 
 		setInputValue('');
 	};

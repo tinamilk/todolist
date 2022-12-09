@@ -34,7 +34,7 @@ export const ChangeTitleInput = ({
 			toggleEditInputDisabled(false);
 			handleTitleSubmit(currentTitle);
 		} else {
-			setModalActive('No task to add :(');
+			setModalActive('Title is empty');
 		}
 	};
 
