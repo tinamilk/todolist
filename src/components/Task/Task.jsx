@@ -9,6 +9,7 @@ import { setModalActive } from '../../store/modal/modal';
 import { ChangeTitleInput } from '../ChangeTitleInput/ChangeTitleInput';
 import { DeleteIcon, CheckIcon } from '@chakra-ui/icons';
 import { Box, Text, useMediaQuery, IconButton } from '@chakra-ui/react';
+import { validateInput } from '../../helpers/validateInput';
 
 
 
@@ -42,7 +43,12 @@ export const Task = ({
 			title: title,
 		};
 
-		await changeTask({ id, patch })
+		if (!validateInput(title)) {
+			dispatch(setModalActive('No task to change :('));
+			return;
+		}
+
+		validateInput(title) && await changeTask({ id, patch })
 			.unwrap()
 			.then(() => {
 				handleIsEditingChange();
