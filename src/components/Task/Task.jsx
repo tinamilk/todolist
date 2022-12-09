@@ -55,7 +55,6 @@ export const Task = ({
 				toggleEditInputDisabled(false);
 			})
 			.catch((error) => {
-				console.log(error.message);
 				dispatch(setModalActive(error.data.message));
 			});
 	};
