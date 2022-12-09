@@ -19,6 +19,6 @@ Fullstack [Demo](https://tinamilk.github.io/todolist/)
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`REACT_APP_LOCAL_URL`
+`REACT_APP_LOCAL_URL` - local url where backend runs
 
-`REACT_APP_EXT_URL`
+`REACT_APP_EXT_URL` - external url where backend runs
