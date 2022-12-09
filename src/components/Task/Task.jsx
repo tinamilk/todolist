@@ -7,11 +7,9 @@ import {
 import { useDispatch } from 'react-redux';
 import { setModalActive } from '../../store/modal/modal';
 import { ChangeTitleInput } from '../ChangeTitleInput/ChangeTitleInput';
-import { DeleteIcon, CheckIcon } from '@chakra-ui/icons';
+import { DeleteIcon, CheckIcon, SpinnerIcon } from '@chakra-ui/icons';
 import { Box, Text, useMediaQuery, IconButton } from '@chakra-ui/react';
 import { validateInput } from '../../helpers/validateInput';
-
-
 
 const options = {
 	year: 'numeric',
@@ -32,7 +30,8 @@ export const Task = ({
 }) => {
 	const [deleteTask, { isUninitialized: isDeleteLoading }] =
 		useDeleteTaskMutation();
-	const [changeTask] = useChangeTaskMutation();
+	const [changeTask, { isUninitialized: isChangeLoading }] =
+		useChangeTaskMutation();
 	const [isEditing, setIsEditing] = useState(false);
 	const handleIsEditingChange = (value) => setIsEditing(value);
 	const [isLargerThan800] = useMediaQuery('(min-width: 800px)');
@@ -44,19 +43,20 @@ export const Task = ({
 		};
 
 		if (!validateInput(title)) {
-			dispatch(setModalActive('No task to change :('));
+			dispatch(setModalActive('Title is empty'));
 			return;
 		}
 
-		validateInput(title) && await changeTask({ id, patch })
-			.unwrap()
-			.then(() => {
-				handleIsEditingChange();
-				toggleEditInputDisabled(false);
-			})
-			.catch((error) => {
-				dispatch(setModalActive(error.data.message));
-			});
+		validateInput(title) &&
+			(await changeTask({ id, patch })
+				.unwrap()
+				.then(() => {
+					handleIsEditingChange();
+					toggleEditInputDisabled(false);
+				})
+				.catch((error) => {
+					dispatch(setModalActive(error.data.message));
+				}));
 	};
 
 	const dispatch = useDispatch();
@@ -101,7 +101,7 @@ export const Task = ({
 				icon={done && <CheckIcon />}
 				onClick={handleChangeIsDone}
 				background={done ? '#e5989b' : '#edede9'}
-				marginLeft='5px'
+				marginLeft="5px"
 				_hover={{
 					background: '#FFCEC2',
 				}}
@@ -125,7 +125,11 @@ export const Task = ({
 					handleTitleSubmit={handleTitleSubmit}
 					handleIsEditingChange={handleIsEditingChange}
 				/>
-				<Text width='30%' fontSize={isLargerThan1000 ? 'lg' : 'xs'} marginRight="3px">
+				<Text
+					width="30%"
+					fontSize={isLargerThan1000 ? 'lg' : 'xs'}
+					marginRight="3px"
+				>
 					{new Date(date).toLocaleDateString(undefined, options)}
 				</Text>
 			</Box>
@@ -133,7 +137,9 @@ export const Task = ({
 				fontSize="lg"
 				onClick={handleDeleteTask}
 				disabled={!isDeleteLoading}
-				icon={<DeleteIcon />}
+				icon={
+					isDeleteLoading || isChangeLoading ? <DeleteIcon /> : <SpinnerIcon />
+				}
 				size={isLargerThan800 ? 'md' : 'xs'}
 				marginRight="5px"
 			/>
