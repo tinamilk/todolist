@@ -43,7 +43,6 @@ function ToDoList() {
 				<SortByDateButtons />
 			</Box>
 			<Tasks />
-
 			{tasksLength > 5 ? <Pagination /> : null}
 			<Modal />
 		</Box>

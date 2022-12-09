@@ -1,9 +1,11 @@
 /* eslint-disable no-undef */
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-
-const url = process.env.REACT_APP_NODE_ENV === 'live' ? process.env.REACT_APP_EXT_URL : process.env.REACT_APP_LOCAL_URL;
-
+const url =
+	process.env.REACT_APP_NODE_ENV === 'development'
+		? process.env.REACT_APP_LOCAL_URL
+		: process.env.REACT_APP_EXT_URL;
+console.log(url);
 export const tasksApi = createApi({
 	reducerPath: 'tasksApi',
 	baseQuery: fetchBaseQuery({ baseUrl: url }),

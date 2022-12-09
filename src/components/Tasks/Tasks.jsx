@@ -4,6 +4,7 @@ import { Task } from '../Task/Task';
 import { useGetTasksQuery } from '../../store/tasksApi/tasksApi';
 import { Spinner, Box, Heading } from '@chakra-ui/react';
 import { changePage } from '../../store/tasksQuery/tasksQuery';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 export const Tasks = () => {
 	const params = useSelector((state) => state.tasksQuery);
@@ -11,7 +12,6 @@ export const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
 	const [tasksCount, setTasksCount] = useState();
 	const [requestId, setRequestId] = useState('');
-
 
 	const [isEditInputDisabled, setIsEditInputDisabled] = useState(false);
 	const toggleEditInputDisabled = (condition) =>
@@ -21,7 +21,7 @@ export const Tasks = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		if (data.currentData) {
+		if (data.currentData && !data.isFetching) {
 			setTasks(data.currentData.tasks);
 			setTasksCount(data.currentData.count);
 			setRequestId(data.requestId);
@@ -37,19 +37,21 @@ export const Tasks = () => {
 	};
 
 	return (
-		<Box width="75%" minHeight="50%">
+		<Box width="75%" minHeight="40vh">
 			{data.isLoading && (
-				<Box 
-					display='flex'
-					flexDirection='column'
-					justifyContent='center'>
+				<Box
+					display="flex"
+					flexDirection="column"
+					justifyContent="center"
+					minWidth="20vh"
+				>
 					<Spinner
 						thickness="4px"
 						speed="0.65s"
 						emptyColor="gray.200"
 						color="#115055"
 						size="xl"
-						alignSelf='center'
+						alignSelf="center"
 					/>
 				</Box>
 			)}
@@ -63,28 +65,28 @@ export const Tasks = () => {
 					justifyContent="center"
 					alignItems="center"
 				>
-					<Heading
-						as="h4"
-						size="md"
-						color="#197278"
-					>
+					<Heading as="h4" size="md" color="#197278">
 						{getEmptyMessage(params.filter)}
 					</Heading>
 				</Box>
 			)}
 
-			{!!tasksCount &&
-				tasks.map((task) => (
-					<Task
-						key={task.id}
-						id={task.id}
-						title={task.title}
-						done={task.isDone}
-						date={task.createdAt}
-						toggleEditInputDisabled={toggleEditInputDisabled}
-						isEditInputDisabled={isEditInputDisabled}
-					/>
-				))}
+			<TransitionGroup className="todo-list" exit={false} timeout={500}>
+				{!!tasks.length &&
+					tasks.map((task) => (
+						<CSSTransition key={task.id} timeout={500} classNames="item">
+							<Task
+								key={task.id}
+								id={task.id}
+								title={task.title}
+								done={task.isDone}
+								date={task.createdAt}
+								toggleEditInputDisabled={toggleEditInputDisabled}
+								isEditInputDisabled={isEditInputDisabled}
+							/>
+						</CSSTransition>
+					))}
+			</TransitionGroup>
 		</Box>
 	);
 };

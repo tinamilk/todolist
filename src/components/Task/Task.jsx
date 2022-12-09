@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
+import React, { useState, lazy } from 'react';
 import {
 	useDeleteTaskMutation,
 	useChangeTaskMutation,
@@ -9,6 +9,8 @@ import { setModalActive } from '../../store/modal/modal';
 import { ChangeTitleInput } from '../ChangeTitleInput/ChangeTitleInput';
 import { DeleteIcon, CheckIcon } from '@chakra-ui/icons';
 import { Box, Text, useMediaQuery, IconButton } from '@chakra-ui/react';
+
+
 
 const options = {
 	year: 'numeric',
@@ -36,7 +38,6 @@ export const Task = ({
 	const [isLargerThan1000] = useMediaQuery('(min-width: 1000px)');
 
 	const handleTitleSubmit = async (title) => {
-
 		const patch = {
 			title: title,
 		};
@@ -47,16 +48,18 @@ export const Task = ({
 				handleIsEditingChange();
 				toggleEditInputDisabled(false);
 			})
-			.catch((error) => dispatch(setModalActive(error.data.errors[0].msg)));
+			.catch((error) => {
+				console.log(error.message);
+				dispatch(setModalActive(error.data.message));
+			});
 	};
 
 	const dispatch = useDispatch();
 
 	const handleChangeIsDone = async () => {
-
 		const patch = {
 			title: title,
-			isDone: !done
+			isDone: !done,
 		};
 
 		await changeTask({ id, patch })
@@ -93,6 +96,7 @@ export const Task = ({
 				icon={done && <CheckIcon />}
 				onClick={handleChangeIsDone}
 				background={done ? '#e5989b' : '#edede9'}
+				marginLeft='5px'
 				_hover={{
 					background: '#FFCEC2',
 				}}
@@ -103,7 +107,7 @@ export const Task = ({
 			<Box
 				onClick={() => handleDBClick(id)}
 				display="flex"
-				justifyContent="space-between"
+				justifyContent="space-evenly"
 				minWidth="80%"
 			>
 				<ChangeTitleInput
@@ -116,7 +120,7 @@ export const Task = ({
 					handleTitleSubmit={handleTitleSubmit}
 					handleIsEditingChange={handleIsEditingChange}
 				/>
-				<Text fontSize={isLargerThan1000 ? 'lg' : 'xs'} marginRight="3px">
+				<Text width='30%' fontSize={isLargerThan1000 ? 'lg' : 'xs'} marginRight="3px">
 					{new Date(date).toLocaleDateString(undefined, options)}
 				</Text>
 			</Box>
