@@ -1,79 +1,32 @@
 import React, { useState } from 'react';
-import {
-	FormControl,
-	FormLabel,
-	Input,
-	FormHelperText,
-	FormErrorMessage,
-	Button,
-} from '@chakra-ui/react';
+import { Button, Box } from '@chakra-ui/react';
+import { SigninForm } from '../components/SignInForm/SignInForm';
+import { SignUpForm } from '../components/SignUpForm/SignUpForm';
 
 export const Registration = () => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [isEmailEmpty, setisEmailEmpty] = useState(false);
-	const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
+	const [authType, setAuthType] = useState('signin');
 
-	const handleEmailChange = (e) => setEmail(e.target.value);
-	const handlePasswordChange = (e) => setPassword(e.target.value);
-
-	const handleSignIn = () => {
-		setIsPasswordEmpty(!password);
-		setisEmailEmpty(!email);
-	};
 	return (
-		<FormControl width="70%" isInvalid={isEmailEmpty || isPasswordEmpty}>
-			<FormLabel>Email</FormLabel>
-			<Input
-				autoFocus
-				size="lg"
-				border="2px solid #197278"
-				borderRadius="10px"
-				height="40px"
-				_focus={{
-					border: '3px solid #197278',
-					boxShadow: 'none',
-				}}
-				_hover={{
-					border: '2px solid #197278',
-				}}
-				type="email"
-				value={email}
-				onChange={handleEmailChange}
-			/>
-			{!isEmailEmpty ? (
-				<FormHelperText>
-					Enter the email youd like to receive the newsletter on.
-				</FormHelperText>
-			) : (
-				<FormErrorMessage>Email is required.</FormErrorMessage>
-			)}
-			<FormLabel>Password</FormLabel>
-			<Input
-				size="lg"
-				border="2px solid #197278"
-				borderRadius="10px"
-				height="40px"
-				_focus={{
-					border: '3px solid #197278',
-					boxShadow: 'none',
-				}}
-				_hover={{
-					border: '2px solid #197278',
-				}}
-				type="password"
-				value={password}
-				onChange={handlePasswordChange}
-			/>
-			{!isPasswordEmpty ? (
-				<FormHelperText>
-					Enter the email youd like to receive the newsletter on.
-				</FormHelperText>
-			) : (
-				<FormErrorMessage>Password is required.</FormErrorMessage>
-			)}
+		<>
+			<Box display="flex" width="70%" justifyContent="space-evenly">
+				<Button
+					width="30%"
+					backgroundColor={authType === 'signin' && '#B9929F'}
+					onClick={() => setAuthType('signin')}
+				>
+					Signin
+				</Button>
 
-			<Button onClick={handleSignIn}>Signin</Button>
-		</FormControl>
+				<Button
+					width="30%"
+					backgroundColor={authType === 'signup' && '#B9929F'}
+					onClick={() => setAuthType('signup')}
+				>
+					Signup
+				</Button>
+			</Box>
+			{authType === 'signin' && <SigninForm />}
+			{authType === 'signup' && <SignUpForm />}
+		</>
 	);
 };
