@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import React, { useState, lazy } from 'react';
+import React, { useState } from 'react';
 import {
 	useDeleteTaskMutation,
 	useChangeTaskMutation,
