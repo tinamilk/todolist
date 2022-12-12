@@ -23,7 +23,7 @@ export const SigninForm = () => {
 	useEffect(() => {
 		if (token) {
 			token && localStorage.setItem('token', token);
-			navigate('/');
+			navigate('/todolist');
 		}
 	}, [token]);
 

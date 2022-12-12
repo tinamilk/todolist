@@ -21,7 +21,7 @@ function ToDoList() {
 		>
 			<Text as="h1">ToDo List</Text>
 			<Routes>
-				<Route path="/" element={<TasksPage />} />
+				<Route path="/todolist" element={<TasksPage />} />
 				<Route path="/auth" element={<Registration />} />
 			</Routes>
 			<Modal />

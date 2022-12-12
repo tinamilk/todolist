@@ -25,6 +25,7 @@ export const Tasks = () => {
 
 	const handleLogout = () => {
 		localStorage.removeItem('token');
+		console.log(localStorage.getItem('token'));
 		navigate('/auth');
 	};
 
@@ -44,7 +45,7 @@ export const Tasks = () => {
 				dispatch(changePage(currentPage - 1));
 			}
 		}
-	}, [data, params.filter]);
+	}, [data, params.filter, localStorage.getItem('token')]);
 
 	const getEmptyMessage = (filter) => {
 		return filter ? `${filter} is empty :)` : 'Add some task';

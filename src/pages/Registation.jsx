@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Box } from '@chakra-ui/react';
 import { SigninForm } from '../components/SignInForm/SignInForm';
 import { SignUpForm } from '../components/SignUpForm/SignUpForm';
+import { useNavigate } from 'react-router-dom';
+
 
 export const Registration = () => {
 	const [authType, setAuthType] = useState('signin');
+	const navigate = useNavigate();
+
+
+	useEffect(() => {
+		if (localStorage.getItem('token')) {
+			navigate('/todolist');
+		}
+	}, []);
 
 	return (
 		<>
