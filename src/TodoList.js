@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import './globalStyles/fonts/stylesheet.css';
 import { Modal } from './components/Modal/Modal';
@@ -8,8 +7,6 @@ import { Routes, Route } from 'react-router-dom';
 import { TasksPage } from './pages/TasksPage';
 
 function ToDoList() {
-
-
 	return (
 		<Box
 			display="flex"
@@ -24,8 +21,8 @@ function ToDoList() {
 		>
 			<Text as="h1">ToDo List</Text>
 			<Routes>
-				<Route path='/' element={<TasksPage/>} />
-				<Route path='/auth' element={<Registration/>} />
+				<Route path="/" element={<TasksPage />} />
+				<Route path="/auth" element={<Registration />} />
 			</Routes>
 			<Modal />
 		</Box>

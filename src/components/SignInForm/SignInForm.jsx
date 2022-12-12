@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import {
 	FormControl,
@@ -10,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { useSigninMutation } from '../../store/userApi/userApi';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export const SigninForm = () => {
 	const [email, setEmail] = useState('');
@@ -20,28 +20,30 @@ export const SigninForm = () => {
 	const [signin] = useSigninMutation();
 	const navigate = useNavigate();
 
+	useEffect(() => {
+		if (token) {
+			token && localStorage.setItem('token', token);
+			navigate('/');
+		}
+	}, [token]);
+
 	const handleEmailChange = (e) => setEmail(e.target.value);
 	const handlePasswordChange = (e) => setPassword(e.target.value);
 
-	const handleSignIn = async() => {
+	const handleSignIn = async () => {
 		setIsPasswordEmpty(!password);
 		setisEmailEmpty(!email);
 
 		if (password && email) {
 			const body = {
 				email: email,
-				password: password
+				password: password,
 			};
 
-			try {
-				const token = await signin(body);
-				token && setToken(token);
-				token && navigate('/');
-				localStorage.setItem('token', token);
-			} catch (err) {
-				console.log(err);
-			}
-
+			await signin(body)
+				.unwrap()
+				.then((res) => setToken(res.accessToken))
+				.catch((err) => console.log(err));
 		}
 	};
 

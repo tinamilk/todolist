@@ -5,6 +5,8 @@ import { useGetTasksQuery } from '../../store/tasksApi/tasksApi';
 import { Spinner, Box, Heading } from '@chakra-ui/react';
 import { changePage } from '../../store/tasksQuery/tasksQuery';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '@chakra-ui/react';
 
 export const Tasks = () => {
 	const params = useSelector((state) => state.tasksQuery);
@@ -19,9 +21,21 @@ export const Tasks = () => {
 
 	const data = useGetTasksQuery(params);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const handleLogout = () => {
+		localStorage.removeItem('token');
+		navigate('/auth');
+	};
 
 	useEffect(() => {
-		if (data.currentData && !data.isFetching) {
+		if (!localStorage.getItem('token')) {
+			navigate('/auth');
+		}
+	}, []);
+
+	useEffect(() => {
+		if (data.currentData && !data.isFetching && localStorage.getItem('token')) {
 			setTasks(data.currentData.tasks);
 			setTasksCount(data.currentData.count);
 			setRequestId(data.requestId);
@@ -86,6 +100,7 @@ export const Tasks = () => {
 						</CSSTransition>
 					))}
 			</TransitionGroup>
+			<Button onClick={handleLogout}>Logout</Button>
 		</Box>
 	);
 };
