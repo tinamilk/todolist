@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import {
 	FormControl,
@@ -7,19 +8,41 @@ import {
 	FormErrorMessage,
 	Button,
 } from '@chakra-ui/react';
+import { useSigninMutation } from '../../store/userApi/userApi';
+import { useNavigate } from 'react-router-dom';
 
 export const SigninForm = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [isEmailEmpty, setisEmailEmpty] = useState(false);
 	const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
+	const [token, setToken] = useState('');
+	const [signin] = useSigninMutation();
+	const navigate = useNavigate();
 
 	const handleEmailChange = (e) => setEmail(e.target.value);
 	const handlePasswordChange = (e) => setPassword(e.target.value);
 
-	const handleSignIn = () => {
+	const handleSignIn = async() => {
 		setIsPasswordEmpty(!password);
 		setisEmailEmpty(!email);
+
+		if (password && email) {
+			const body = {
+				email: email,
+				password: password
+			};
+
+			try {
+				const token = await signin(body);
+				token && setToken(token);
+				token && navigate('/');
+				localStorage.setItem('token', token);
+			} catch (err) {
+				console.log(err);
+			}
+
+		}
 	};
 
 	return (

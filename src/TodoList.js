@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import './globalStyles/fonts/stylesheet.css';
 import { Modal } from './components/Modal/Modal';

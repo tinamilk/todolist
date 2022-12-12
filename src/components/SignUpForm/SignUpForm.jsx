@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
 	FormControl,
 	FormLabel,
@@ -7,6 +8,8 @@ import {
 	FormErrorMessage,
 	Button,
 } from '@chakra-ui/react';
+import { useSignupMutation } from '../../store/userApi/userApi';
+
 
 export const SignUpForm = () => {
 	const [email, setEmail] = useState('');
@@ -15,15 +18,36 @@ export const SignUpForm = () => {
 	const [isEmailEmpty, setisEmailEmpty] = useState(false);
 	const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
 	const [isUserNameEmpty, setIsUserNameEmpty] = useState(false);
+	const [token, setToken] = useState('');
+	const [signup] = useSignupMutation();
+	const navigate = useNavigate();
+
+	token && localStorage.setItem('token', token);
 
 	const handleEmailChange = (e) => setEmail(e.target.value);
 	const handlePasswordChange = (e) => setPassword(e.target.value);
 	const handleUserNameChange = (e) => setUserName(e.target.value);
 
-	const handleSignIn = () => {
+	const handleSignUp = async () => {
 		setIsPasswordEmpty(!password);
 		setisEmailEmpty(!email);
 		setIsUserNameEmpty(!userName);
+
+		if (password && email) {
+			const body = {
+				userName: userName,
+				email: email,
+				password: password,
+			};
+
+			try {
+				const token = await signup(body).unwrap();
+				token && setToken(token);
+				token && navigate('/');
+			} catch (err) {
+				console.log(err);
+			}
+		}
 	};
 
 	return (
@@ -45,7 +69,7 @@ export const SignUpForm = () => {
 				_hover={{
 					border: '2px solid #197278',
 				}}
-				type="password"
+				type="text"
 				value={userName}
 				onChange={handleUserNameChange}
 			/>
@@ -105,7 +129,7 @@ export const SignUpForm = () => {
 				<FormErrorMessage>Password is required.</FormErrorMessage>
 			)}
 
-			<Button width="40%" onClick={handleSignIn}>
+			<Button width="40%" onClick={handleSignUp}>
 				Signup
 			</Button>
 		</FormControl>
