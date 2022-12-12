@@ -6,23 +6,20 @@ const url =
 		? process.env.REACT_APP_LOCAL_URL
 		: process.env.REACT_APP_EXT_URL;
 
-// const baseQuery = fetchBaseQuery({
-// 	baseUrl: '/',
-// 	prepareHeaders: (headers, { getState }) => {
-// 		const token = getState().auth.token;
-
-// 		// If we have a token set in state, let's assume that we should be passing it.
-// 		if (token) {
-// 			headers.set('authorization', `Bearer ${token}`);
-// 		}
-
-// 		return headers;
-// 	},
-// });
-
 export const tasksApi = createApi({
 	reducerPath: 'tasksApi',
-	baseQuery: fetchBaseQuery({ baseUrl: `${url}/tasks/` }),
+	baseQuery: fetchBaseQuery({
+		baseUrl: `${url}/tasks/`,
+		prepareHeaders: (headers) => {
+			const token = localStorage.getItem('token');
+
+			if (token) {
+				headers.set('authorization', `Bearer ${token}`);
+			}
+
+			return headers;
+		},
+	}),
 	tagTypes: ['Tasks'],
 	endpoints: (builder) => ({
 		getTasks: builder.query({

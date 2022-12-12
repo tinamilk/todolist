@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -9,7 +10,7 @@ import {
 	Button,
 } from '@chakra-ui/react';
 import { useSignupMutation } from '../../store/userApi/userApi';
-
+import { useEffect } from 'react';
 
 export const SignUpForm = () => {
 	const [email, setEmail] = useState('');
@@ -22,7 +23,12 @@ export const SignUpForm = () => {
 	const [signup] = useSignupMutation();
 	const navigate = useNavigate();
 
-	token && localStorage.setItem('token', token);
+	useEffect(() => {
+		if (token) {
+			token && localStorage.setItem('token', token);
+			navigate('/');
+		}
+	}, [token]);
 
 	const handleEmailChange = (e) => setEmail(e.target.value);
 	const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -40,13 +46,10 @@ export const SignUpForm = () => {
 				password: password,
 			};
 
-			try {
-				const token = await signup(body).unwrap();
-				token && setToken(token);
-				token && navigate('/');
-			} catch (err) {
-				console.log(err);
-			}
+			await signup(body)
+				.unwrap()
+				.then((res) => setToken(res.accessToken))
+				.catch((err) => console.log(err));
 		}
 	};
 
