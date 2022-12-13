@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Task } from '../Task/Task';
 import { useGetTasksQuery } from '../../store/tasksApi/tasksApi';
 import { Spinner, Box, Heading } from '@chakra-ui/react';
-import { changePage } from '../../store/tasksQuery/tasksQuery';
+import {
+	changePage,
+	changeSorting,
+	setFilter,
+} from '../../store/tasksQuery/tasksQuery';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
@@ -25,7 +29,9 @@ export const Tasks = () => {
 
 	const handleLogout = () => {
 		localStorage.removeItem('token');
-		console.log(localStorage.getItem('token'));
+		dispatch(changeSorting('asc'));
+		dispatch(changePage(1));
+		dispatch(setFilter(''));
 		navigate('/auth');
 	};
 
@@ -45,7 +51,7 @@ export const Tasks = () => {
 				dispatch(changePage(currentPage - 1));
 			}
 		}
-	}, [data, params.filter, localStorage.getItem('token')]);
+	}, [data, params.filter]);
 
 	const getEmptyMessage = (filter) => {
 		return filter ? `${filter} is empty :)` : 'Add some task';

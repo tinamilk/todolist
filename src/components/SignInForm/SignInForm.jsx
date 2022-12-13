@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import {
 	FormControl,
@@ -10,6 +11,8 @@ import {
 import { useSigninMutation } from '../../store/userApi/userApi';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setModalActive } from '../../store/modal/modal';
 
 export const SigninForm = () => {
 	const [email, setEmail] = useState('');
@@ -19,10 +22,11 @@ export const SigninForm = () => {
 	const [token, setToken] = useState('');
 	const [signin] = useSigninMutation();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (token) {
-			token && localStorage.setItem('token', token);
+			localStorage.setItem('token', token);
 			navigate('/todolist');
 		}
 	}, [token]);
@@ -43,7 +47,7 @@ export const SigninForm = () => {
 			await signin(body)
 				.unwrap()
 				.then((res) => setToken(res.accessToken))
-				.catch((err) => console.log(err));
+				.catch(() => dispatch(setModalActive('Invalid password or email')));
 		}
 	};
 

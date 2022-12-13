@@ -11,6 +11,8 @@ import {
 } from '@chakra-ui/react';
 import { useSignupMutation } from '../../store/userApi/userApi';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setModalActive } from '../../store/modal/modal';
 
 export const SignUpForm = () => {
 	const [email, setEmail] = useState('');
@@ -22,10 +24,11 @@ export const SignUpForm = () => {
 	const [token, setToken] = useState('');
 	const [signup] = useSignupMutation();
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (token) {
-			token && localStorage.setItem('token', token);
+			localStorage.setItem('token', token);
 			navigate('/todolist');
 		}
 	}, [token]);
@@ -49,7 +52,7 @@ export const SignUpForm = () => {
 			await signup(body)
 				.unwrap()
 				.then((res) => setToken(res.accessToken))
-				.catch((err) => console.log(err));
+				.catch(() => dispatch(setModalActive('Email is already in use ')));
 		}
 	};
 
