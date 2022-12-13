@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Task } from '../Task/Task';
 import { useGetTasksQuery } from '../../store/tasksApi/tasksApi';
-import { Spinner, Box, Heading } from '@chakra-ui/react';
+import { Spinner, Box, Heading, Text } from '@chakra-ui/react';
 import {
 	changePage,
 	changeSorting,
@@ -15,6 +16,7 @@ import { Button } from '@chakra-ui/react';
 export const Tasks = () => {
 	const params = useSelector((state) => state.tasksQuery);
 	const currentPage = useSelector((state) => state.tasksQuery.page);
+	const userName = useSelector((state)=>state.tasksQuery.userName);
 	const [tasks, setTasks] = useState([]);
 	const [tasksCount, setTasksCount] = useState();
 	const [requestId, setRequestId] = useState('');
@@ -39,10 +41,11 @@ export const Tasks = () => {
 		if (!localStorage.getItem('token')) {
 			navigate('/auth');
 		}
+		data.refetch();
 	}, []);
 
 	useEffect(() => {
-		if (data.currentData && !data.isFetching && localStorage.getItem('token')) {
+		if (data.currentData && !data.isFetching) {
 			setTasks(data.currentData.tasks);
 			setTasksCount(data.currentData.count);
 			setRequestId(data.requestId);
@@ -58,7 +61,7 @@ export const Tasks = () => {
 	};
 
 	return (
-		<Box width="75%" minHeight="40vh">
+		<><Box width="75%" minHeight="40vh">
 			{data.isLoading && (
 				<Box
 					display="flex"
@@ -107,7 +110,9 @@ export const Tasks = () => {
 						</CSSTransition>
 					))}
 			</TransitionGroup>
-			<Button onClick={handleLogout}>Logout</Button>
 		</Box>
+		<Button onClick={handleLogout}>Logout</Button>
+		<Text>{userName}</Text>
+		</>
 	);
 };

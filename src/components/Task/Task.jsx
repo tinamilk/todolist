@@ -62,7 +62,6 @@ export const Task = ({
 
 	const handleChangeIsDone = async () => {
 		const patch = {
-			title: title,
 			isDone: !done,
 		};
 

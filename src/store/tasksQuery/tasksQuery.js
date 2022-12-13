@@ -5,6 +5,7 @@ const initialState = {
 	pp: 5,
 	page: 1,
 	filter: '',
+	userName: ''
 };
 
 export const tasksQuerySlice = createSlice({
@@ -19,11 +20,14 @@ export const tasksQuerySlice = createSlice({
 		},
 		setFilter: (state, action) => {
 			state.filter = action.payload;
+		},
+		setUser: (state, action) => {
+			state.userName = action.payload;
 		}
 	},
 });
 
-export const { changeSorting, changePage, setFilter } =
+export const { changeSorting, changePage, setFilter, setUser } =
 	tasksQuerySlice.actions;
 
 export default tasksQuerySlice.reducer;

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import {
 	FormControl,
@@ -13,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setModalActive } from '../../store/modal/modal';
+import { setUser } from '../../store/tasksQuery/tasksQuery';
 
 export const SigninForm = () => {
 	const [email, setEmail] = useState('');
@@ -46,7 +46,10 @@ export const SigninForm = () => {
 
 			await signin(body)
 				.unwrap()
-				.then((res) => setToken(res.accessToken))
+				.then((res) => {
+					setToken(res.accessToken);
+					dispatch(setUser(res.name));
+				})
 				.catch(() => dispatch(setModalActive('Invalid password or email')));
 		}
 	};
@@ -72,9 +75,7 @@ export const SigninForm = () => {
 				onChange={handleEmailChange}
 			/>
 			{!isEmailEmpty ? (
-				<FormHelperText>
-					Enter the email youd like to receive the newsletter on.
-				</FormHelperText>
+				<FormHelperText>Enter the email.</FormHelperText>
 			) : (
 				<FormErrorMessage>Email is required.</FormErrorMessage>
 			)}
@@ -96,9 +97,7 @@ export const SigninForm = () => {
 				onChange={handlePasswordChange}
 			/>
 			{!isPasswordEmpty ? (
-				<FormHelperText>
-					Enter the email youd like to receive the newsletter on.
-				</FormHelperText>
+				<FormHelperText>Enter the password.</FormHelperText>
 			) : (
 				<FormErrorMessage>Password is required.</FormErrorMessage>
 			)}

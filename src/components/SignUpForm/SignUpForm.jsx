@@ -13,6 +13,7 @@ import { useSignupMutation } from '../../store/userApi/userApi';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setModalActive } from '../../store/modal/modal';
+import { setUser } from '../../store/tasksQuery/tasksQuery';
 
 export const SignUpForm = () => {
 	const [email, setEmail] = useState('');
@@ -31,6 +32,9 @@ export const SignUpForm = () => {
 			localStorage.setItem('token', token);
 			navigate('/todolist');
 		}
+		setEmail('');
+		setPassword('');
+		setUserName('');
 	}, [token]);
 
 	const handleEmailChange = (e) => setEmail(e.target.value);
@@ -42,17 +46,22 @@ export const SignUpForm = () => {
 		setisEmailEmpty(!email);
 		setIsUserNameEmpty(!userName);
 
-		if (password && email) {
+		console.log(userName);
+
+		if (password && email && userName) {
 			const body = {
-				userName: userName,
-				email: email,
-				password: password,
+				userName,
+				email,
+				password,
 			};
 
 			await signup(body)
 				.unwrap()
-				.then((res) => setToken(res.accessToken))
-				.catch(() => dispatch(setModalActive('Email is already in use ')));
+				.then((res) => {
+					setToken(res.accessToken);
+					dispatch(setUser(res.name));
+				})
+				.catch(() => dispatch(setModalActive('Email is already in use')));
 		}
 	};
 
@@ -65,7 +74,7 @@ export const SignUpForm = () => {
 			<Input
 				autoFocus
 				size="lg"
-				border="2px solid #197278"
+				border={isUserNameEmpty ? '2px solid red' : '2px solid #197278'}
 				borderRadius="10px"
 				height="40px"
 				_focus={{
@@ -80,16 +89,14 @@ export const SignUpForm = () => {
 				onChange={handleUserNameChange}
 			/>
 			{!isPasswordEmpty ? (
-				<FormHelperText>
-					Enter the email youd like to receive the newsletter on.
-				</FormHelperText>
+				<FormHelperText>Enter the name.</FormHelperText>
 			) : (
-				<FormErrorMessage>Password is required.</FormErrorMessage>
+				<FormErrorMessage>Name is required.</FormErrorMessage>
 			)}
 			<FormLabel>Email</FormLabel>
 			<Input
 				size="lg"
-				border="2px solid #197278"
+				border={isEmailEmpty ? '2px solid red' : '2px solid #197278'}
 				borderRadius="10px"
 				height="40px"
 				_focus={{
@@ -104,16 +111,14 @@ export const SignUpForm = () => {
 				onChange={handleEmailChange}
 			/>
 			{!isEmailEmpty ? (
-				<FormHelperText>
-					Enter the email youd like to receive the newsletter on.
-				</FormHelperText>
+				<FormHelperText>Enter the email.</FormHelperText>
 			) : (
 				<FormErrorMessage>Email is required.</FormErrorMessage>
 			)}
 			<FormLabel>Password</FormLabel>
 			<Input
 				size="lg"
-				border="2px solid #197278"
+				border={isPasswordEmpty ? '2px solid red' : '2px solid #197278'}
 				borderRadius="10px"
 				height="40px"
 				_focus={{
@@ -128,9 +133,7 @@ export const SignUpForm = () => {
 				onChange={handlePasswordChange}
 			/>
 			{!isPasswordEmpty ? (
-				<FormHelperText>
-					Enter the email youd like to receive the newsletter on.
-				</FormHelperText>
+				<FormHelperText>Enter the passsword.</FormHelperText>
 			) : (
 				<FormErrorMessage>Password is required.</FormErrorMessage>
 			)}
