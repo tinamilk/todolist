@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setModalActive } from '../../store/modal/modal';
-import { setUser } from '../../store/tasksQuery/tasksQuery';
+import { login } from '../../store/authSlice/authSlice';
 
 export const SigninForm = () => {
 	const [email, setEmail] = useState('');
@@ -26,8 +26,8 @@ export const SigninForm = () => {
 	useEffect(() => {
 		if (token) {
 			localStorage.setItem('token', token);
-			navigate('/todolist');
 		}
+		navigate('/todolist');
 	}, [token]);
 
 	const handleEmailChange = (e) => setEmail(e.target.value);
@@ -47,7 +47,7 @@ export const SigninForm = () => {
 				.unwrap()
 				.then((res) => {
 					setToken(res.accessToken);
-					dispatch(setUser(res.name));
+					dispatch(login(res.name));
 				})
 				.catch(() => dispatch(setModalActive('Invalid password or email')));
 		}

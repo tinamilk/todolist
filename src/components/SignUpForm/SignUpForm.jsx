@@ -5,14 +5,13 @@ import {
 	FormLabel,
 	Input,
 	FormHelperText,
-	// FormErrorMessage,
 	Button,
 } from '@chakra-ui/react';
 import { useSignupMutation } from '../../store/userApi/userApi';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setModalActive } from '../../store/modal/modal';
-import { setUser } from '../../store/tasksQuery/tasksQuery';
+import { login } from '../../store/authSlice/authSlice';
 
 export const SignUpForm = () => {
 	const [email, setEmail] = useState('');
@@ -56,7 +55,7 @@ export const SignUpForm = () => {
 				.unwrap()
 				.then((res) => {
 					setToken(res.accessToken);
-					dispatch(setUser(res.name));
+					dispatch(login(res.name));
 				})
 				.catch((err) => {
 					const message =

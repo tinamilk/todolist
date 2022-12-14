@@ -10,7 +10,7 @@ const sortingValues = {
 };
 
 export const SortByDateButtons = () => {
-	const [sorting, setSorting] = useState(sortingValues.UP);
+	const [sorting, setSorting] = useState(sortingValues.DOWN);
 
 	const dispatch = useDispatch();
 

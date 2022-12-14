@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Task } from '../Task/Task';
@@ -12,11 +11,12 @@ import {
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@chakra-ui/react';
+import { logout } from '../../store/authSlice/authSlice';
 
 export const Tasks = () => {
 	const params = useSelector((state) => state.tasksQuery);
 	const currentPage = useSelector((state) => state.tasksQuery.page);
-	const userName = useSelector((state) => state.tasksQuery.userName);
+	const userName = useSelector((state) => state.auth.userName);
 	const [tasks, setTasks] = useState([]);
 	const [tasksCount, setTasksCount] = useState();
 	const [requestId, setRequestId] = useState('');
@@ -34,6 +34,7 @@ export const Tasks = () => {
 		dispatch(changeSorting('asc'));
 		dispatch(changePage(1));
 		dispatch(setFilter(''));
+		dispatch(logout());
 		navigate('/auth');
 	};
 

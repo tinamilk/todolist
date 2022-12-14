@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changePage, setFilter } from '../../store/tasksQuery/tasksQuery';
 import { Button, Box, useMediaQuery } from '@chakra-ui/react';
 
@@ -11,7 +11,8 @@ const filters = {
 
 export const FilterButtons = () => {
 	const dispatch = useDispatch();
-	const [currentFilter, setCurrentFilter] = useState('');
+	const filter = useSelector((state) => state.tasksQuery.filter);
+	const [currentFilter, setCurrentFilter] = useState(filter);
 	const [isLargerThan700] = useMediaQuery('(min-width: 700px)');
 
 	const handleFilterChange = (filter) => {
