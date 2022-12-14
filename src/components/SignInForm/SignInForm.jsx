@@ -4,7 +4,6 @@ import {
 	FormLabel,
 	Input,
 	FormHelperText,
-	FormErrorMessage,
 	Button,
 } from '@chakra-ui/react';
 import { useSigninMutation } from '../../store/userApi/userApi';
@@ -55,7 +54,7 @@ export const SigninForm = () => {
 	};
 
 	return (
-		<FormControl width="70%" isInvalid={isEmailEmpty || isPasswordEmpty}>
+		<FormControl width="70%">
 			<FormLabel>Email</FormLabel>
 			<Input
 				autoFocus
@@ -73,11 +72,12 @@ export const SigninForm = () => {
 				type="email"
 				value={email}
 				onChange={handleEmailChange}
+				isInvalid={isEmailEmpty}
 			/>
 			{!isEmailEmpty ? (
 				<FormHelperText>Enter the email.</FormHelperText>
 			) : (
-				<FormErrorMessage>Email is required.</FormErrorMessage>
+				<FormHelperText color="red">Email is required.</FormHelperText>
 			)}
 			<FormLabel>Password</FormLabel>
 			<Input
@@ -95,11 +95,12 @@ export const SigninForm = () => {
 				type="password"
 				value={password}
 				onChange={handlePasswordChange}
+				isInvalid={isPasswordEmpty}
 			/>
 			{!isPasswordEmpty ? (
 				<FormHelperText>Enter the password.</FormHelperText>
 			) : (
-				<FormErrorMessage>Password is required.</FormErrorMessage>
+				<FormHelperText color="red">Password is required.</FormHelperText>
 			)}
 
 			<Button width="40%" onClick={handleSignIn}>

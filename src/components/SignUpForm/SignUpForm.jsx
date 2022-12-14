@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -6,7 +5,7 @@ import {
 	FormLabel,
 	Input,
 	FormHelperText,
-	FormErrorMessage,
+	// FormErrorMessage,
 	Button,
 } from '@chakra-ui/react';
 import { useSignupMutation } from '../../store/userApi/userApi';
@@ -66,10 +65,7 @@ export const SignUpForm = () => {
 	};
 
 	return (
-		<FormControl
-			width="70%"
-			isInvalid={isEmailEmpty || isPasswordEmpty || isUserNameEmpty}
-		>
+		<FormControl width="70%">
 			<FormLabel>Your name</FormLabel>
 			<Input
 				autoFocus
@@ -87,11 +83,12 @@ export const SignUpForm = () => {
 				type="text"
 				value={userName}
 				onChange={handleUserNameChange}
+				isInvalid={isUserNameEmpty}
 			/>
-			{!isPasswordEmpty ? (
+			{!isUserNameEmpty ? (
 				<FormHelperText>Enter the name.</FormHelperText>
 			) : (
-				<FormErrorMessage>Name is required.</FormErrorMessage>
+				<FormHelperText color="red">Name is required.</FormHelperText>
 			)}
 			<FormLabel>Email</FormLabel>
 			<Input
@@ -109,11 +106,12 @@ export const SignUpForm = () => {
 				type="email"
 				value={email}
 				onChange={handleEmailChange}
+				isInvalid={isEmailEmpty}
 			/>
 			{!isEmailEmpty ? (
 				<FormHelperText>Enter the email.</FormHelperText>
 			) : (
-				<FormErrorMessage>Email is required.</FormErrorMessage>
+				<FormHelperText color="red">Email is required.</FormHelperText>
 			)}
 			<FormLabel>Password</FormLabel>
 			<Input
@@ -131,11 +129,12 @@ export const SignUpForm = () => {
 				type="password"
 				value={password}
 				onChange={handlePasswordChange}
+				isInvalid={isPasswordEmpty}
 			/>
 			{!isPasswordEmpty ? (
 				<FormHelperText>Enter the passsword.</FormHelperText>
 			) : (
-				<FormErrorMessage>Password is required.</FormErrorMessage>
+				<FormHelperText color="red">Password is required.</FormHelperText>
 			)}
 
 			<Button width="40%" onClick={handleSignUp}>
