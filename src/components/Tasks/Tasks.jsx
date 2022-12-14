@@ -16,7 +16,7 @@ import { Button } from '@chakra-ui/react';
 export const Tasks = () => {
 	const params = useSelector((state) => state.tasksQuery);
 	const currentPage = useSelector((state) => state.tasksQuery.page);
-	const userName = useSelector((state)=>state.tasksQuery.userName);
+	const userName = useSelector((state) => state.tasksQuery.userName);
 	const [tasks, setTasks] = useState([]);
 	const [tasksCount, setTasksCount] = useState();
 	const [requestId, setRequestId] = useState('');
@@ -61,58 +61,63 @@ export const Tasks = () => {
 	};
 
 	return (
-		<><Box width="75%" minHeight="40vh">
-			{data.isLoading && (
-				<Box
-					display="flex"
-					flexDirection="column"
-					justifyContent="center"
-					minWidth="20vh"
-				>
-					<Spinner
-						thickness="4px"
-						speed="0.65s"
-						emptyColor="gray.200"
-						color="#115055"
-						size="xl"
-						alignSelf="center"
-					/>
-				</Box>
-			)}
+		<>
+			<Box width="75%" minHeight="40vh">
+				{data.isLoading && (
+					<Box
+						display="flex"
+						flexDirection="column"
+						justifyContent="center"
+						minWidth="20vh"
+					>
+						<Spinner
+							thickness="4px"
+							speed="0.65s"
+							emptyColor="gray.200"
+							color="#115055"
+							size="xl"
+							alignSelf="center"
+						/>
+					</Box>
+				)}
 
-			{data.requestId === requestId && tasksCount === 0 && (
-				<Box
-					display="flex"
-					flexDirection="column"
-					justifyContent="center"
-					alignItems="center"
-					minHeight="30vh"
-				>
-					<Heading as="h4" size="md" color="#197278">
-						{getEmptyMessage(params.filter)}
-					</Heading>
-				</Box>
-			)}
+				{data.requestId === requestId && tasksCount === 0 && (
+					<Box
+						display="flex"
+						flexDirection="column"
+						justifyContent="center"
+						alignItems="center"
+						minHeight="30vh"
+					>
+						<Heading as="h4" size="md" color="#197278">
+							{getEmptyMessage(params.filter)}
+						</Heading>
+					</Box>
+				)}
 
-			<TransitionGroup className="todo-list" exit={false} timeout={500}>
-				{!!tasks.length &&
-					tasks.map((task) => (
-						<CSSTransition key={task.id} timeout={500} classNames="item">
-							<Task
-								key={task.id}
-								id={task.id}
-								title={task.title}
-								done={task.isDone}
-								date={task.createdAt}
-								toggleEditInputDisabled={toggleEditInputDisabled}
-								isEditInputDisabled={isEditInputDisabled}
-							/>
-						</CSSTransition>
-					))}
-			</TransitionGroup>
-		</Box>
-		<Button onClick={handleLogout}>Logout</Button>
-		<Text>{userName}</Text>
+				<TransitionGroup className="todo-list" exit={false} timeout={500}>
+					{!!tasks.length &&
+						tasks.map((task) => (
+							<CSSTransition key={task.id} timeout={500} classNames="item">
+								<Task
+									key={task.id}
+									id={task.id}
+									title={task.title}
+									done={task.isDone}
+									date={task.createdAt}
+									toggleEditInputDisabled={toggleEditInputDisabled}
+									isEditInputDisabled={isEditInputDisabled}
+								/>
+							</CSSTransition>
+						))}
+				</TransitionGroup>
+			</Box>
+			<Button onClick={handleLogout} width="20%">
+				Logout
+			</Button>
+			<Text fontSize="xl" margin="0">
+				{userName}
+			</Text>
 		</>
 	);
 };

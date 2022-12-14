@@ -45,8 +45,6 @@ export const SignUpForm = () => {
 		setisEmailEmpty(!email);
 		setIsUserNameEmpty(!userName);
 
-		console.log(userName);
-
 		if (password && email && userName) {
 			const body = {
 				userName,
@@ -60,7 +58,11 @@ export const SignUpForm = () => {
 					setToken(res.accessToken);
 					dispatch(setUser(res.name));
 				})
-				.catch(() => dispatch(setModalActive('Email is already in use')));
+				.catch((err) => {
+					const message =
+						err.data.errors?.map((e) => e.msg) || err.data.message;
+					dispatch(setModalActive(message));
+				});
 		}
 	};
 
